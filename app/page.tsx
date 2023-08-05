@@ -2,6 +2,8 @@ import Image from 'next/image'
 import { Prisma, PrismaClient } from '@prisma/client'
 import Form from './Form';
 
+export const revalidate = 0;
+
 export default async function Home() {
   const prisma = new PrismaClient()
   let note: Prisma.NoteCreateInput;
