@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import { Prisma, PrismaClient } from '@prisma/client'
+import { Button, Container, Grid, SimpleGrid } from '@mantine/core'
+import { Card, Text, Badge, Group } from '@mantine/core'
 
 export const revalidate = 0
 
@@ -8,19 +10,41 @@ export default async function Home() {
   const materii = await prisma.materie.findMany()
   return (
     <main className="">
-      <section className="container mx-auto py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {materii.map((materie) => (
-            <div key={materie.id} className="border rounded-md shadow p-6">
-              <div className="flex items-center gap-3">
-                <div className="text-xl font-bold text-uvt-blue">
-                  {materie.title}
-                </div>
-              </div>
-              <div className="mt-4 text-gray-700">{materie.description}</div>
-            </div>
-          ))}
-        </div>
+      <section className="py-14">
+        <Container size={'lg'}>
+          <SimpleGrid cols={3}>
+            {materii.map((materie) => (
+              <Card
+                shadow="sm"
+                padding="lg"
+                radius="md"
+                withBorder
+                key={materie.id}
+              >
+                <Group justify="space-between" mt="md" mb="xs">
+                  <Text fw={500}>{materie.title}</Text>
+                  <Badge color="yellow" variant="light">
+                    FMI
+                  </Badge>
+                </Group>
+
+                <Text size="sm" c="dimmed">
+                  {materie.description}
+                </Text>
+
+                <Button
+                  variant="light"
+                  color="blue"
+                  fullWidth
+                  mt="md"
+                  radius="md"
+                >
+                  Join
+                </Button>
+              </Card>
+            ))}
+          </SimpleGrid>
+        </Container>
       </section>
     </main>
   )
