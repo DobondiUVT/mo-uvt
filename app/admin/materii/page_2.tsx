@@ -1,3 +1,5 @@
+"use client"
+
 import { PrismaClient } from '@prisma/client';
 import React, { useEffect } from 'react'
 import type { Materie } from '@prisma/client';
@@ -5,14 +7,17 @@ import {useReactTable} from '@tanstack/react-table';
 import MateriiTable from '@/components/Materii/MateriiTable';
 import { Container, Loader } from '@mantine/core';
 
-export const revalidate = 0
-
-const MateriiAdmin = async () => {
-  const prisma = new PrismaClient();
-  const materii = await prisma.materie.findMany()
-
-  console.log('server')
-
+const MateriiAdmin = () => {
+  const [materii, setMaterii] = React.useState<Materie[]>([])
+  useEffect(() => {
+    const getMaterii = async () => {
+      const res = await fetch('/api/materii')
+      const materii = await res.json()
+      console.log(materii)
+      setMaterii(materii)
+    }
+    getMaterii()
+  }, [])
 
   if (!materii || materii.length === 0) {
     return <>
@@ -23,7 +28,6 @@ const MateriiAdmin = async () => {
       </Container>
     </>
   }
-
   return (
     <MateriiTable materii={materii}/>
   )

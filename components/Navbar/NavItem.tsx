@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 type NavItemProps = {
@@ -8,9 +9,9 @@ type NavItemProps = {
 const NavItem = ({ link, title }: NavItemProps) => {
   return (
     <li>
-      <a className="text-white hover:text-gray-300 text-lg px-3 py-4" href={link}>
+      <Link href={link} className="px-4 hover:bg-gray-100 h-full flex items-center">
         {title}
-      </a>
+      </Link>
     </li>
   )
 }

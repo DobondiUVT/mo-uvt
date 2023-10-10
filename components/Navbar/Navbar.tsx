@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   Group,
@@ -10,36 +10,53 @@ import {
   ScrollArea,
   rem,
   Container,
-} from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import Link from 'next/link';
+  List,
+} from '@mantine/core'
+import { useDisclosure } from '@mantine/hooks'
+import Link from 'next/link'
+import NavItem from './NavItem'
 
 const HeaderMegaMenu = () => {
-  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false)
+
+  const navItems = [
+    { title: 'Home', link: '/' },
+    { title: 'Learn', link: '/learn' },
+    { title: 'Academy', link: '/academy' },
+  ]
 
   return (
     <Box>
-      <header className='h-16 border-b border-gray-300'>
-        <Container size={'lg'} className='h-full'>
+      <header className="h-16 border-b border-gray-300">
+        <Container size={'lg'} className="h-full">
           <Group justify="space-between" h="100%">
             MO-UVT
-            <Group h="100%" gap={0} visibleFrom="sm">
-              <a href="#" className='px-4 hover:bg-gray-100 h-full flex items-center'>
-                Home
-              </a>
-          
-              <a href="#" className='px-4 hover:bg-gray-100 h-full flex items-center'>
-                Learn
-              </a>
-              <a href="#" className='px-4 hover:bg-gray-100 h-full flex items-center'>
-                Academy
-              </a>
-            </Group>
+            <nav className="h-full">
+              <ul className="h-full hidden sm:flex">
+                {navItems.map((item) => (
+                  <NavItem
+                    key={item.title}
+                    title={item.title}
+                    link={item.link}
+                  />
+                ))}
+              </ul>
+            </nav>
             <Group visibleFrom="sm">
               <Button variant="default">Log in</Button>
-              <Button component={Link} href="/signup" color="#2E71B8">Sign up</Button>
+              <Button component={Link} href="/signup" color="#2E71B8">
+                Sign up
+              </Button>
+              <Button component={Link} href="/admin" color="#2E71B8">
+                Admin
+              </Button>
             </Group>
-            <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
+            <Burger
+              opened={drawerOpened}
+              onClick={toggleDrawer}
+              hiddenFrom="sm"
+            />
           </Group>
         </Container>
       </header>
@@ -56,15 +73,9 @@ const HeaderMegaMenu = () => {
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm" />
 
-          <a href="#">
-            Home
-          </a>
-          <a href="#">
-            Learn
-          </a>
-          <a href="#">
-            Academy
-          </a>
+          <a href="#">Home</a>
+          <a href="#">Learn</a>
+          <a href="#">Academy</a>
 
           <Divider my="sm" />
 
@@ -75,7 +86,7 @@ const HeaderMegaMenu = () => {
         </ScrollArea>
       </Drawer>
     </Box>
-  );
+  )
 }
 
-export default HeaderMegaMenu;
+export default HeaderMegaMenu
