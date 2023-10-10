@@ -19,7 +19,7 @@ let columns: Array<ColumnDef<Materie, any>> = []
 const MateriiTable = ({ materii }: { materii: Materie[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
   const [materiiData, setMateriiData] = useState<Materie[]>(materii)
-  const keys = Object.keys(materiiData[0]) as (keyof Materie)[]
+  const keys = Object.keys(materiiData[0] ?? []) as (keyof Materie)[]
 
   keys.forEach((key) => {
     columns.push(
@@ -41,10 +41,7 @@ const MateriiTable = ({ materii }: { materii: Materie[] }) => {
   })
 
   return (
-    <Container className='py-16' size={'xl'}>
-      <h1 className='text-gray-700 font-bold text-3xl mb-4'>Materii</h1>
-      <Table table={table}/>
-    </Container>
+    <Table table={table}/>
   )
 }
 

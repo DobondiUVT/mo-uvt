@@ -29,7 +29,7 @@ const HeaderMegaMenu = () => {
   return (
     <Box>
       <header className="h-16 border-b border-gray-300">
-        <Container size={'lg'} className="h-full">
+        <Container fluid className="h-full">
           <Group justify="space-between" h="100%">
             MO-UVT
             <nav className="h-full">

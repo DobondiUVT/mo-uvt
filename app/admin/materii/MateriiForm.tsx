@@ -16,7 +16,7 @@ const MateriiForm = () => {
         'Content-Type': 'application/json',
       },
     })
-    window.location.href = '/'
+    window.location.href = '/admin/materii'
   }
 
   return (
