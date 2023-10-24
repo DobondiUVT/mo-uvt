@@ -1,15 +1,15 @@
 import React from 'react'
 
 type InputGroupProps = {
-  label: string,
+  label: string
   children: React.ReactNode
 }
 
-const InputGroup = ({label, children}: InputGroupProps) => {
+const InputGroup = ({ label, children }: InputGroupProps) => {
   return (
     <div className="mb-4">
       <label
-        className="block text-gray-700 text-sm font-bold mb-2"
+        className="mb-2 block text-sm font-bold text-gray-700"
         htmlFor="title"
       >
         {label}

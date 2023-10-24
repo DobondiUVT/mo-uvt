@@ -8,9 +8,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        "uvt-blue": "#2E71B8",
-        "uvt-yellow": "#FDB813"
-      }
+        'uvt-blue': '#3471B8',
+        'uvt-dark-blue': '#084371',
+        'uvt-yellow': '#FBB900',
+      },
     },
   },
   plugins: [],

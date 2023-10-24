@@ -3,16 +3,36 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
-model Materie {
+model Faculty {
+  id           Int       @id @default(autoincrement())
+  name         String    @db.VarChar(255)
+  abbreviation String?   @db.VarChar(10)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  subjects     Subject[]
+}
+
+enum Semester {
+  ONE
+  TWO
+}
+
+model Subject {
   id           Int      @id @default(autoincrement())
-  title        String   @db.VarChar(255)
+  title        String?  @db.VarChar(255)
   description  String?
+  semester     Semester @default(ONE)
+  faculty      Faculty? @relation(fields: [facultyId], references: [id])
+  facultyId    Int?
   abbreviation String?  @db.VarChar(10)
   published    Boolean  @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+
+  @@index([facultyId])
 }

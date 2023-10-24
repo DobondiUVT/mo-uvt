@@ -3,33 +3,36 @@ import InputText from '@/components/Form/InputText'
 import InputTextArea from '@/components/Form/InputTextArea'
 import { useState } from 'react'
 
-const MateriiForm = () => {
+const SubjectsForm = () => {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await fetch('/api/materii/new', {
+    await fetch('/api/subjects/new', {
       method: 'POST',
       body: JSON.stringify({ title, description }),
-    headers: {
+      headers: {
         'Content-Type': 'application/json',
       },
-    })
-    window.location.href = '/admin/materii'
+    }).then((res) => res.json()).catch((err) => console.log(err))
+
+    
+
+    // window.location.href = '/admin/subjects'
   }
 
   return (
-    <form id="materii-form" onSubmit={handleSubmit}>
+    <form id="subjects-form" onSubmit={handleSubmit}>
       <InputText
-        label="Numele materiei"
+        label="Numele subjecti"
         name="title"
         id="title"
         value={title}
         setValue={setTitle}
       />
       <InputTextArea
-        label="Descrierea materiei"
+        label="Descrierea subjecti"
         name="description"
         id="description"
         value={description}
@@ -40,4 +43,4 @@ const MateriiForm = () => {
   )
 }
 
-export default MateriiForm
+export default SubjectsForm

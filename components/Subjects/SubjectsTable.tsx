@@ -1,7 +1,6 @@
 'use client'
 
-import { Container } from '@mantine/core'
-import type { Materie } from '@prisma/client'
+import type { Subject } from '@prisma/client'
 import {
   ColumnDef,
   SortingState,
@@ -13,13 +12,13 @@ import {
 import { useState } from 'react'
 import Table from '../Tables/Table'
 
-const columnHelper = createColumnHelper<Materie>()
-let columns: Array<ColumnDef<Materie, any>> = []
+const columnHelper = createColumnHelper<Subject>()
+let columns: Array<ColumnDef<Subject, any>> = []
 
-const MateriiTable = ({ materii }: { materii: Materie[] }) => {
+const SubjectsTable = ({ subjects }: { subjects: Subject[] }) => {
   const [sorting, setSorting] = useState<SortingState>([])
-  const [materiiData, setMateriiData] = useState<Materie[]>(materii)
-  const keys = Object.keys(materiiData[0] ?? []) as (keyof Materie)[]
+  const [subjectsData, setSubjectsData] = useState<Subject[]>(subjects)
+  const keys = Object.keys(subjectsData[0] ?? []) as (keyof Subject)[]
 
   keys.forEach((key) => {
     columns.push(
@@ -30,19 +29,17 @@ const MateriiTable = ({ materii }: { materii: Materie[] }) => {
     )
   })
   const table = useReactTable({
-    data: materiiData,
+    data: subjectsData,
     columns,
     state: {
       sorting: sorting,
     },
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel()
+    getSortedRowModel: getSortedRowModel(),
   })
 
-  return (
-    <Table table={table}/>
-  )
+  return <Table table={table} />
 }
 
-export default MateriiTable
+export default SubjectsTable

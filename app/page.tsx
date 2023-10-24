@@ -1,35 +1,34 @@
-import Image from 'next/image'
-import { Prisma, PrismaClient } from '@prisma/client'
-import { Button, Container, Grid, SimpleGrid } from '@mantine/core'
+import { PrismaClient } from '@prisma/client'
+import { Button, Container, SimpleGrid } from '@mantine/core'
 import { Card, Text, Badge, Group } from '@mantine/core'
 
 export const revalidate = 0
 
 export default async function Home() {
   const prisma = new PrismaClient()
-  const materii = await prisma.materie.findMany()
+  const subjects = await prisma.subject.findMany()
   return (
     <main className="">
       <section className="py-14">
         <Container size={'lg'}>
           <SimpleGrid cols={3}>
-            {materii.map((materie) => (
+            {subjects.map((subject) => (
               <Card
                 shadow="sm"
                 padding="lg"
                 radius="md"
                 withBorder
-                key={materie.id}
+                key={subject.id}
               >
                 <Group justify="space-between" mt="md" mb="xs">
-                  <Text fw={500}>{materie.title}</Text>
+                  <Text fw={500}>{subject.title}</Text>
                   <Badge color="yellow" variant="light">
                     FMI
                   </Badge>
                 </Group>
 
                 <Text size="sm" c="dimmed">
-                  {materie.description}
+                  {subject.description}
                 </Text>
 
                 <Button
