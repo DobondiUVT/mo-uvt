@@ -3,6 +3,8 @@ import FacultiesForm from '../../../../components/Admin/Form/FacultyForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveFaculty } from '@/actions/faculty'
 
+export const revalidate = 0
+
 const NewFaculty = () => {
   const breadcrumbLinks = [
     {

@@ -4,6 +4,8 @@ import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveSubject } from '@/actions/subject'
 import { PrismaClient } from '@prisma/client'
 
+export const revalidate = 0
+
 const NewSubject = async () => {
   const breadcrumbLinks = [
     {

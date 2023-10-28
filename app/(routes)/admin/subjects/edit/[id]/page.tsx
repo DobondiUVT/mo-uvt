@@ -6,6 +6,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { PrismaClient } from '@prisma/client'
 import React from 'react'
 
+export const revalidate = 0
+
 const EditSubject = async ({ params }: { params: { id: number } }) => {
   const { id } = params
   const prisma = new PrismaClient()
