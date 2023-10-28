@@ -44,9 +44,8 @@ export default function Combobox({ value, setValue, options }: ComboboxProps) {
           className="w-[200px] justify-between"
         >
           {value
-            ? options.find(
-                (option) =>
-                  isEqualInsensitiveStrings(option.value, value)
+            ? options.find((option) =>
+                isEqualInsensitiveStrings(option.value, value),
               )?.label
             : 'Select option...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />

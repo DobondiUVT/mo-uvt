@@ -26,7 +26,7 @@ const EditFaculty = async ({ params }: { params: { id: number } }) => {
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <FacultiesForm faculty={faculty} method={updateFaculty}/>
+      <FacultiesForm faculty={faculty} method={updateFaculty} />
     </>
   )
 }

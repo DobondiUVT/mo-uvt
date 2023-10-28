@@ -26,7 +26,7 @@ const EditSubject = async ({ params }: { params: { id: number } }) => {
   ]
 
   const faculties = await prisma.faculty.findMany()
-  const faculty = await getFaculty(subject?.facultyId ?? null) ?? null
+  const faculty = (await getFaculty(subject?.facultyId ?? null)) ?? null
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />

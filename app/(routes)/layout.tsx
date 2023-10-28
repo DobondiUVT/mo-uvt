@@ -32,7 +32,7 @@ export default function RootLayout({
       <body className={`${inter.className} bg-zinc-100`}>
         <Navbar />
         {children}
-        <Toaster/>
+        <Toaster />
       </body>
     </html>
   )

@@ -8,16 +8,8 @@ import { Row } from '@tanstack/react-table'
 import { Faculty, PrismaClient, Subject } from '@prisma/client'
 import { getFaculty } from '@/actions/faculty'
 
-// export type finalSubjectData = {
-//   id: number
-//   title: string | null
-//   description: string | null
-//   facultyId: number | null
-//   faculty: {
-//     id: number | null
-//     abbreviation: string | null
-//   } | null
-// }
+export const revalidate = 0
+
 export type finalSubjectData = Pick<
   Subject,
   'id' | 'title' | 'description' | 'facultyId'

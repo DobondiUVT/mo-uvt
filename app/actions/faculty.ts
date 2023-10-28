@@ -44,7 +44,9 @@ export async function saveFaculty(prevState: any, formData: FormData) {
 
   const schema = z.object({
     name: z.string().min(1, 'Name must be at least 1 character'),
-    abbreviation: z.string().min(1, 'Abbreviation must be at least 1 character'),
+    abbreviation: z
+      .string()
+      .min(1, 'Abbreviation must be at least 1 character'),
   })
 
   const parsed = schema.safeParse(Object.fromEntries(formData))
@@ -70,7 +72,9 @@ export async function updateFaculty(prevState: any, formData: FormData) {
   const schema = z.object({
     id: z.coerce.number(),
     name: z.string().min(1, 'Name must be at least 1 character'),
-    abbreviation: z.string().min(1, 'Abbreviation must be at least 1 character'),
+    abbreviation: z
+      .string()
+      .min(1, 'Abbreviation must be at least 1 character'),
   })
 
   const parsed = schema.safeParse(Object.fromEntries(formData))

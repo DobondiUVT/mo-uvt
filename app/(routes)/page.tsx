@@ -9,7 +9,7 @@ export default async function Home() {
     <main className="">
       <section className="py-14">
         <div className="container">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-12">
+          <div className="grid gap-6 sm:grid-cols-2 sm:gap-12 lg:grid-cols-3">
             {subjects &&
               subjects.map((subject) => (
                 <SubjectCard key={subject.id} subject={subject} />

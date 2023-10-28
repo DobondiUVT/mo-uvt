@@ -5,6 +5,8 @@ import { buttonVariants } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
 
+export const revalidate = 0
+
 export default async function FacultiesAdmin() {
   const Faculties = await getFaculties()
 

@@ -20,7 +20,7 @@ const NewSubject = async () => {
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <SubjectsForm method={saveSubject} faculties={faculties}/>
+      <SubjectsForm method={saveSubject} faculties={faculties} />
     </>
   )
 }

@@ -17,7 +17,7 @@ const NewFaculty = () => {
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <FacultiesForm method={saveFaculty}/>
+      <FacultiesForm method={saveFaculty} />
     </>
   )
 }

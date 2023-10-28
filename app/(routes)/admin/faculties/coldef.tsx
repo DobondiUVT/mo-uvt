@@ -73,14 +73,12 @@ const createColumnDefs = () => {
   })
 }
 
-
-
 const DropdownAction = ({ faculty }: { faculty: Faculty }) => {
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteFaculty(id)
     toast({
-      variant: response.status as "success" | "error",
+      variant: response.status as 'success' | 'error',
       title: response.title,
       description: response.description,
     })
