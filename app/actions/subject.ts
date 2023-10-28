@@ -38,6 +38,7 @@ export async function saveSubject(prevState: any, formData: FormData) {
   const schema = z.object({
     title: z.string().min(1, 'Title must be at least 1 character'),
     description: z.string().min(1, 'Description must be at least 1 character'),
+    facultyId: z.coerce.number().positive('Faculty must be selected'),
   })
 
   const parsed = schema.safeParse(Object.fromEntries(formData))
@@ -64,7 +65,10 @@ export async function updateSubject(prevState: any, formData: FormData) {
     id: z.coerce.number(),
     title: z.string().min(1, 'Title must be at least 1 character'),
     description: z.string().min(1, 'Description must be at least 1 character'),
+    facultyId: z.coerce.number().positive('Faculty must be selected'),
   })
+
+  console.log(formData)
 
   const parsed = schema.safeParse(Object.fromEntries(formData))
   if (!parsed.success) {

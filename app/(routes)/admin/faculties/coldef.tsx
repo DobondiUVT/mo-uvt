@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { PrismaClient, Subject } from '@prisma/client'
+import { Faculty } from '@prisma/client'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown, Edit, Trash } from 'lucide-react'
 import { MoreHorizontal } from 'lucide-react'
@@ -15,15 +15,13 @@ import {
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
-import { deleteSubject } from '@/actions/subject'
-import { getFaculty } from '@/actions/faculty'
-import { finalSubjectData } from './page'
+import { deleteFaculty } from '@/actions/faculty'
 
 const SortButton = ({
   column,
   title,
 }: {
-  column: Column<finalSubjectData>
+  column: Column<Faculty>
   title: string
 }) => {
   return (
@@ -38,26 +36,20 @@ const SortButton = ({
   )
 }
 
-type ColumnArray = {
-  id: keyof finalSubjectData
-  title: string
-  sortable: boolean
-}
-
-const columnArray: ColumnArray[] = [
+const columnArray = [
   {
     id: 'id',
     title: 'ID',
     sortable: true,
   },
   {
-    id: 'title',
-    title: 'Title',
+    id: 'name',
+    title: 'Name',
     sortable: true,
   },
   {
-    id: 'description',
-    title: 'Description',
+    id: 'abbreviation',
+    title: 'Abbreviation',
     sortable: false,
   },
 ]
@@ -66,7 +58,7 @@ const createColumnDefs = () => {
   return columnArray.map((columnItem) => {
     return {
       accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<finalSubjectData> }) => {
+      header: ({ column }: { column: Column<Faculty> }) => {
         return (
           <>
             {columnItem.sortable ? (
@@ -77,31 +69,18 @@ const createColumnDefs = () => {
           </>
         )
       },
-      cell: ({ row }: { row: Row<finalSubjectData> }) => {
-        return <div>{row.original[columnItem.id]?.toString()}</div>
-      },
     }
   })
 }
 
-const createSpecialDefs = () => {
-  return {
-    accessorKey: 'Faculty',
-    header: ({ column }: { column: Column<finalSubjectData> }) => {
-      return <SortButton column={column} title="Faculty" />
-    },
-    cell: ({ row }: { row: Row<finalSubjectData> }) => {
-      return <div>{row.original.faculty?.abbreviation}</div>
-    },
-  }
-}
 
-const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
+
+const DropdownAction = ({ faculty }: { faculty: Faculty }) => {
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
-    const response = await deleteSubject(id)
+    const response = await deleteFaculty(id)
     toast({
-      variant: response.status as 'success' | 'error',
+      variant: response.status as "success" | "error",
       title: response.title,
       description: response.description,
     })
@@ -115,7 +94,7 @@ const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <Link href={`/admin/subjects/edit/${subject.id}`}>
+        <Link href={`/admin/faculties/edit/${faculty.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
             Edit
@@ -124,7 +103,7 @@ const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
         <DropdownMenuItem
           className="cursor-pointer text-red-400 focus:bg-red-600 focus:text-zinc-100"
           onClick={(_e) => {
-            handleDelete(subject.id)
+            handleDelete(faculty.id)
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
@@ -138,16 +117,15 @@ const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
 const createActionCell = () => {
   return {
     id: 'actions',
-    cell: ({ row }: { row: Row<finalSubjectData> }) => {
-      const subject = row.original
+    cell: ({ row }: { row: Row<Faculty> }) => {
+      const faculty = row.original
 
-      return <DropdownAction subject={subject} />
+      return <DropdownAction faculty={faculty} />
     },
   }
 }
 
-export const columns: ColumnDef<finalSubjectData>[] = [
+export const columns: ColumnDef<Faculty>[] = [
   ...createColumnDefs(),
-  createSpecialDefs(),
   createActionCell(),
 ]

@@ -1,5 +1,6 @@
-import { updateSubject } from '@/actions'
-import SubjectsForm from '@/components/Admin/Form/SubjectsForm'
+import { getFaculty } from '@/actions/faculty'
+import { updateSubject } from '@/actions/subject'
+import SubjectsForm from '@/components/Admin/Form/SubjectForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PrismaClient } from '@prisma/client'
@@ -23,10 +24,18 @@ const EditSubject = async ({ params }: { params: { id: number } }) => {
       title: `Edit ${subject?.title}`,
     },
   ]
+
+  const faculties = await prisma.faculty.findMany()
+  const faculty = await getFaculty(subject?.facultyId ?? null) ?? null
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <SubjectsForm subject={subject} method={updateSubject}/>
+      <SubjectsForm
+        subject={subject}
+        method={updateSubject}
+        faculties={faculties}
+        defaultFaculty={faculty}
+      />
     </>
   )
 }

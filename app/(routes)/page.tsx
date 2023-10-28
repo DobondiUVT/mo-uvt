@@ -1,5 +1,5 @@
 import SubjectCard from '@/components/Subjects/SubjectCard'
-import { getSubjects } from '@/actions'
+import { getSubjects } from '@/actions/subject'
 
 export const revalidate = 0
 

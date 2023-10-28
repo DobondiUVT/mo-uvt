@@ -5,6 +5,7 @@ import {
   IconBooks,
   IconSettings,
 } from '@tabler/icons-react'
+import { Home } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -48,6 +49,11 @@ const Sidebar = () => {
       title: 'Subjects',
       href: '/admin/subjects',
       icon: <IconBooks />,
+    },
+    {
+      title: 'Faculty',
+      href: '/admin/faculties',
+      icon: <Home />,
     },
     {
       title: 'Settings',
