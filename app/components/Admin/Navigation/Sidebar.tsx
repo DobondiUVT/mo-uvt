@@ -8,7 +8,7 @@ import {
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const TopbarItem = ({
+const SidebarItem = ({
   title,
   href,
   icon,
@@ -27,8 +27,8 @@ const TopbarItem = ({
   return (
     <Link
       href={href}
-      className={`flex items-center gap-1 rounded-xl p-3 text-white hover:bg-gray-100 hover:text-gray-900 ${
-        isActive && 'bg-gray-100 text-gray-900'
+      className={`flex items-center gap-1 rounded-xl p-3 hover:bg-zinc-800 hover:text-zinc-100 sm:p-4 xl:py-3 ${
+        isActive ? 'bg-zinc-800 text-zinc-100' : 'text-gray-800'
       }`}
     >
       {icon}
@@ -37,7 +37,7 @@ const TopbarItem = ({
   )
 }
 
-const Topbar = () => {
+const Sidebar = () => {
   const links = [
     {
       title: 'General',
@@ -56,20 +56,25 @@ const Topbar = () => {
     },
   ]
   return (
-    <nav
-      aria-label="Main"
-      className="bg-uvt-dark-blue px-2 py-2 flex gap-4 overflow-y-hidden hover:overflow-y-auto sm:hidden"
-    >
-      {links.map((link) => (
-        <TopbarItem
-          key={link.href}
-          title={link.title}
-          href={link.href}
-          icon={link.icon}
-        />
-      ))}
-    </nav>
+    <div className="w-full overflow-y-auto border-r border-gray-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8">
+      <div className="mb-4 hidden text-lg font-bold text-gray-800 xl:block">
+        Administration dashboard
+      </div>
+      <nav
+        aria-label="Main"
+        className="flex flex-1 gap-3 overflow-y-hidden hover:overflow-y-auto sm:block sm:space-y-2"
+      >
+        {links.map((link) => (
+          <SidebarItem
+            key={link.href}
+            title={link.title}
+            href={link.href}
+            icon={link.icon}
+          />
+        ))}
+      </nav>
+    </div>
   )
 }
 
-export default Topbar
+export default Sidebar

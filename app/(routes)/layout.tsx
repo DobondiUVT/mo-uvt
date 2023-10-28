@@ -1,13 +1,11 @@
-import Navbar from '@/components/Navbar/Navbar'
-import './globals.css'
+import Navbar from '@/components/Navigation/Navbar'
+import '@/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-import '@mantine/core/styles.css'
 
-import { MantineProvider, ColorSchemeScript } from '@mantine/core'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -32,14 +30,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <ColorSchemeScript />
-      </head>
-      <body className={inter.className}>
-        <MantineProvider theme={theme}>
+      <body className={`${inter.className} bg-zinc-100`}>
           <Navbar />
           {children}
-        </MantineProvider>
       </body>
     </html>
   )

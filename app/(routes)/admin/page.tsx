@@ -1,7 +1,9 @@
 import React from 'react'
 
 const Admin = () => {
-  return <a href="admin/subjects">Subjects</a>
+  return (
+    <div>General Settings</div>
+  )
 }
 
 export default Admin
