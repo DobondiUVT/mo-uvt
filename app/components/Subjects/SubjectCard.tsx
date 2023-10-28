@@ -19,7 +19,7 @@ const SubjectCard = ({ subject }: { subject: Subject }) => {
         <CardDescription>{subject.description}</CardDescription>
       </CardHeader>
       <CardFooter>
-        <div className="flex items-center justify-between w-full">
+        <div className="flex w-full items-center justify-between">
           <div>4 / 80 joined</div>
           <Button variant="outline" size="sm">
             Join

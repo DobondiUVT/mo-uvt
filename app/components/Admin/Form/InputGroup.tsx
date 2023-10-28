@@ -3,9 +3,10 @@ import React from 'react'
 type InputGroupProps = {
   label: string
   children: React.ReactNode
+  error?: string
 }
 
-const InputGroup = ({ label, children }: InputGroupProps) => {
+const InputGroup = ({ label, children, error }: InputGroupProps) => {
   return (
     <div className="mb-6">
       <label
@@ -15,6 +16,7 @@ const InputGroup = ({ label, children }: InputGroupProps) => {
         {label}
       </label>
       {children}
+      <div className="mt-1 text-sm italic text-red-400">{error}</div>
     </div>
   )
 }

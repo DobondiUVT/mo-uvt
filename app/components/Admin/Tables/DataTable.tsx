@@ -18,6 +18,9 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useState } from 'react'
+import { ScrollArea } from '@/components/ui/scroll-area'
+import { useToast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -41,9 +44,9 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded-md border overflow-hidden drop-shadow-sm">
-      <Table className='bg-white'>
-        <TableHeader className='bg-uvt-blue bg-opacity-10'>
+    <div className="overflow-hidden rounded-md border drop-shadow-sm">
+      <Table className="bg-white">
+        <TableHeader className="bg-uvt-blue bg-opacity-10">
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {

@@ -56,7 +56,9 @@ const Sidebar = () => {
     },
   ]
   return (
-    <div className="w-full overflow-y-auto border-r border-gray-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8">
+    <div
+      className={`w-full overflow-y-auto border-r border-gray-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sticky sm:px-4 sm:py-8 top-[64px]`}
+    >
       <div className="mb-4 hidden text-lg font-bold text-gray-800 xl:block">
         Administration dashboard
       </div>

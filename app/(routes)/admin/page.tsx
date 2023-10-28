@@ -1,9 +1,7 @@
 import React from 'react'
 
 const Admin = () => {
-  return (
-    <div>General Settings</div>
-  )
+  return <div>General Settings</div>
 }
 
 export default Admin
