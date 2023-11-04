@@ -15,6 +15,7 @@ model Faculty {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   subjects     Subject[]
+  student      Student[]
 }
 
 enum Semester {
@@ -23,16 +24,46 @@ enum Semester {
 }
 
 model Subject {
-  id           Int      @id @default(autoincrement())
-  title        String?  @db.VarChar(255)
+  id           Int       @id @default(autoincrement())
+  title        String?   @db.VarChar(255)
   description  String?
-  semester     Semester @default(ONE)
-  faculty      Faculty? @relation(fields: [facultyId], references: [id])
+  semester     Semester  @default(ONE)
+  faculty      Faculty?  @relation(fields: [facultyId], references: [id])
   facultyId    Int?
-  abbreviation String?  @db.VarChar(10)
-  published    Boolean  @default(true)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  abbreviation String?   @db.VarChar(10)
+  published    Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  student      Student[] @relation("StudentSubject")
+
+  @@index([facultyId])
+}
+
+enum Role {
+  STUDENT
+  ADMIN
+  EDITOR
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  student   Student?
+}
+
+model Student {
+  id        Int       @id @default(autoincrement())
+  user      User      @relation(fields: [userId], references: [id])
+  userId    Int       @unique
+  faculty   Faculty?  @relation(fields: [facultyId], references: [id])
+  facultyId Int?
+  subjects  Subject[] @relation("StudentSubject")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
   @@index([facultyId])
 }

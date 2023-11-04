@@ -3,6 +3,8 @@ import { Toaster } from '@/components/ui/toaster'
 import '@/globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { getServerSession } from 'next-auth'
+import SessionProvider from '@/components/Auth/SessionProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,17 +24,20 @@ const theme = {
   },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await getServerSession();
   return (
     <html lang="en">
       <body className={`${inter.className} bg-zinc-100`}>
-        <Navbar />
-        {children}
-        <Toaster />
+        <SessionProvider session={session}>
+          <Navbar />
+          {children}
+          <Toaster />
+        </SessionProvider>
       </body>
     </html>
   )

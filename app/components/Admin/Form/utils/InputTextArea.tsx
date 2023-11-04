@@ -8,6 +8,8 @@ type InputTextAreaProps = {
   value?: string | null
   required?: boolean
   error?: string
+  readonly?: boolean
+  disabled?: boolean
 }
 
 const InputTextArea = ({
@@ -17,6 +19,8 @@ const InputTextArea = ({
   value = '',
   required = false,
   error = '',
+  readonly = false,
+  disabled = false,
 }: InputTextAreaProps) => {
   return (
     <InputGroup label={label} error={error}>
@@ -26,6 +30,8 @@ const InputTextArea = ({
         id={id}
         defaultValue={value?.toString()}
         required={required}
+        readOnly={readonly}
+        disabled={disabled}
       />
     </InputGroup>
   )

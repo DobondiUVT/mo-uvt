@@ -55,7 +55,9 @@ export async function saveSubject(prevState: any, formData: FormData) {
     console.error(e)
     return { serverError: `Error saving subject: ${e}` }
   }
-  if (savedSubject) redirect(`/admin/subjects/edit/${savedSubject.id}`)
+  if (savedSubject) {
+    redirect(`/admin/subjects/edit/${savedSubject.id}`)
+  }
 }
 
 export async function updateSubject(prevState: any, formData: FormData) {

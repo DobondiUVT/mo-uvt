@@ -1,14 +1,15 @@
 'use client'
 
-import InputText from '@/components/Admin/Form/InputText'
-import InputTextArea from '@/components/Admin/Form/InputTextArea'
+import InputText from '@/components/Admin/Form/utils/InputText'
+import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
 import { Button } from '@/components/ui/button'
 import { Faculty } from '@prisma/client'
 import { useFormState, useFormStatus } from 'react-dom'
 import { Loader2 } from 'lucide-react'
-import InputHidden from './InputHidden'
-import Combobox from './Combobox'
-import { SubmitButton } from './SubmitButton'
+import InputHidden from './utils/InputHidden'
+import Combobox from './utils/Combobox'
+import { SubmitButton } from './utils/SubmitButton'
+import FormNotifiction from './utils/FormNotification'
 
 const initialState = {
   title: null,
@@ -25,11 +26,7 @@ const FacultyForm = ({
   const [state, formAction] = useFormState(method, initialState)
   return (
     <form id="facultys-form" action={formAction}>
-      {state?.serverError && (
-        <div className="mb-6 rounded-md border-red-400 bg-red-200 px-6 py-4 text-red-800 shadow">
-          {state.serverError}
-        </div>
-      )}
+      {state && <FormNotifiction state={state} />}
       {faculty?.id && <InputHidden name="id" id="id" value={faculty?.id} />}
       <InputText
         label="Name"

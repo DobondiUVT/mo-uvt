@@ -7,7 +7,7 @@ import Combobox from './Combobox'
 type ComboboxOption = {
   label: string
   value: string | number
-  id: number
+  id: number | string
 }
 
 type InputTextProps = {

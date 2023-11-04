@@ -22,7 +22,7 @@ import { isEqualInsensitiveStrings } from '@/utilities/utils'
 type ComboboxOption = {
   label: string
   value: string | number
-  id: number
+  id: number | string
 }
 
 type ComboboxProps = {

@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import defaultColors from '@/utilities/colors'
 import Image from 'next/image'
 import UVTLogo from 'public/logo_simple.png'
-import { buttonVariants } from '../ui/button'
+import { Button, buttonVariants } from '../ui/button'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 
 type NavItemProps = {
   link: string
@@ -55,7 +56,39 @@ const HeaderLogo = ({
   )
 }
 
-const HeaderMegaMenu = () => {
+const AuthSection = () => {
+  const { data: session } = useSession()
+  const getInitials = (name: string) => {
+    const names = name.split(' ')
+    let initials = names[0].substring(0, 1).toUpperCase()
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase()
+    }
+    return initials
+  }
+
+  return (
+    <div>
+      {session ? (
+        <div className="flex items-center gap-4">
+          <Button onClick={() => signOut()} variant={'outline'}>
+            Sign out
+          </Button>
+          <Avatar>
+            <AvatarImage src={session.user?.image ?? ''} />
+            <AvatarFallback className='bg-uvt-yellow'>{getInitials(session.user?.name ?? '')}</AvatarFallback>
+          </Avatar>
+        </div>
+      ) : (
+        <Button onClick={() => signIn("google")} variant={'outline'}>
+          Log in
+        </Button>
+      )}
+    </div>
+  )
+}
+
+const Navbar = () => {
   const navItems = [
     { title: 'Subjects', link: '/subjects' },
     { title: 'About', link: '/about' },
@@ -74,12 +107,8 @@ const HeaderMegaMenu = () => {
             </ul>
           </nav>
           <div className="flex gap-6">
-            {/* <Link
-              href="/login"
-              className={buttonVariants({ variant: 'outline' })}
-            >
-              Log in
-            </Link> */}
+            <AuthSection />
+
             <Link
               href="/admin"
               className={`${buttonVariants({ variant: 'default' })}`}
@@ -93,4 +122,4 @@ const HeaderMegaMenu = () => {
   )
 }
 
-export default HeaderMegaMenu
+export default Navbar

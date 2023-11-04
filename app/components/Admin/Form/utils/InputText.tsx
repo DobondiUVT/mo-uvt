@@ -8,6 +8,8 @@ type InputTextProps = {
   value?: string | number | null
   required?: boolean
   error?: string
+  readonly?: boolean
+  disabled?: boolean
 }
 
 const InputText = ({
@@ -17,6 +19,8 @@ const InputText = ({
   value = '',
   required = false,
   error,
+  readonly = false,
+  disabled = false,
 }: InputTextProps) => {
   return (
     <InputGroup label={label} error={error}>
@@ -27,6 +31,8 @@ const InputText = ({
         id={id}
         defaultValue={value?.toString()}
         required={required}
+        readOnly={readonly}
+        disabled={disabled}
       />
     </InputGroup>
   )

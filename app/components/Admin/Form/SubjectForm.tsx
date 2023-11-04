@@ -1,15 +1,16 @@
 'use client'
 
-import InputText from '@/components/Admin/Form/InputText'
-import InputTextArea from '@/components/Admin/Form/InputTextArea'
+import InputText from '@/components/Admin/Form/utils/InputText'
+import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
 import { Faculty, PrismaClient, Subject } from '@prisma/client'
 import { useFormState } from 'react-dom'
-import InputHidden from './InputHidden'
-import Combobox from './Combobox'
+import InputHidden from './utils/InputHidden'
+import Combobox from './utils/Combobox'
 import { useState } from 'react'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
-import InputCombobox from './InputCombobox'
-import { SubmitButton } from './SubmitButton'
+import InputCombobox from './utils/InputCombobox'
+import { SubmitButton } from './utils/SubmitButton'
+import FormNotification from './utils/FormNotification'
 
 const initialState = {
   title: null,
@@ -38,11 +39,7 @@ const SubjectForm = ({
   const [faculty, setFaculty] = useState(defaultFaculty?.name ?? '')
   return (
     <form id="subjects-form" action={formAction}>
-      {state?.serverError && (
-        <div className="mb-6 rounded-md border-red-400 bg-red-200 px-6 py-4 text-red-800 shadow">
-          {state.serverError}
-        </div>
-      )}
+      {state && <FormNotification state={state} />}
       {subject?.id && <InputHidden name="id" id="id" value={subject?.id} />}
       <InputText
         label="Title"
@@ -68,18 +65,6 @@ const SubjectForm = ({
         label="Faculty"
         error={state?.facultyId?.[0]}
       />
-      {/* <Combobox value={faculty} setValue={setFaculty} options={options} />
-      <InputHidden
-        name="facultyId"
-        id="facultyId"
-        value={
-          subject?.facultyId ??
-          options.find((option) =>
-            isEqualInsensitiveStrings(option.value, faculty),
-          )?.id ??
-          ''
-        }
-      /> */}
       <SubmitButton />
     </form>
   )
