@@ -3,6 +3,7 @@ import SubjectsForm from '../../../../components/Admin/Form/SubjectForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveSubject } from '@/actions/subject'
 import { PrismaClient } from '@prisma/client'
+import prisma from '@/utilities/db'
 
 export const revalidate = 0
 
@@ -17,7 +18,7 @@ const NewSubject = async () => {
       href: '/admin/subjects/new',
     },
   ]
-  const prisma = new PrismaClient()
+  
   const faculties = await prisma.faculty.findMany()
   return (
     <>

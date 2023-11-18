@@ -1,5 +1,6 @@
 'use server'
 
+import prisma from '@/utilities/db'
 import { finalSubjectData } from '@/utilities/types'
 import { PrismaClient, Subject } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
@@ -7,13 +8,13 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getSubjects() {
-  const prisma = new PrismaClient()
+  
   const subjects = await prisma.subject.findMany()
   return subjects
 }
 
 export async function getSubjectsTableData() {
-  const prisma = new PrismaClient()
+  
   const subjects = await prisma.subject.findMany({
     select: {
       id: true,
@@ -33,7 +34,7 @@ export async function getSubjectsTableData() {
 }
 
 export async function deleteSubject(id: number) {
-  const prisma = new PrismaClient()
+  
   try {
     await prisma.subject.delete({ where: { id } })
     return {
@@ -54,7 +55,7 @@ export async function deleteSubject(id: number) {
 }
 
 export async function saveSubject(prevState: any, formData: FormData) {
-  const prisma = new PrismaClient()
+  
 
   const schema = z.object({
     title: z.string().min(1, 'Title must be at least 1 character'),
@@ -82,7 +83,7 @@ export async function saveSubject(prevState: any, formData: FormData) {
 }
 
 export async function updateSubject(prevState: any, formData: FormData) {
-  const prisma = new PrismaClient()
+  
 
   const schema = z.object({
     id: z.coerce.number(),

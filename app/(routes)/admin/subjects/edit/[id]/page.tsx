@@ -3,6 +3,7 @@ import { updateSubject } from '@/actions/subject'
 import SubjectsForm from '@/components/Admin/Form/SubjectForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { Skeleton } from '@/components/ui/skeleton'
+import prisma from '@/utilities/db'
 import { PrismaClient } from '@prisma/client'
 import React from 'react'
 
@@ -10,7 +11,7 @@ export const revalidate = 0
 
 const EditSubject = async ({ params }: { params: { id: number } }) => {
   const { id } = params
-  const prisma = new PrismaClient()
+  
   const subject = await prisma.subject.findUnique({
     where: {
       id: Number(id),

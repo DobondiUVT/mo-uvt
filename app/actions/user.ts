@@ -1,18 +1,19 @@
 'use server'
 
+import prisma from '@/utilities/db'
 import { PrismaClient, User } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getUsers() {
-  const prisma = new PrismaClient()
+  
   const users = await prisma.user.findMany()
   return users
 }
 
 export async function deleteUser(id: number) {
-  const prisma = new PrismaClient()
+  
   try {
     await prisma.user.delete({ where: { id } })
     return {
@@ -33,7 +34,7 @@ export async function deleteUser(id: number) {
 }
 
 export async function updateUser(prevState: any, formData: FormData) {
-  const prisma = new PrismaClient()
+  
 
   const schema = z.object({
     id: z.coerce.number(),

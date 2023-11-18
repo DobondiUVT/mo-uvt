@@ -1,25 +1,26 @@
 'use server'
 
+import prisma from '@/utilities/db'
 import { PrismaClient, Faculty } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getFaculties() {
-  const prisma = new PrismaClient()
+  
   const faculties = await prisma.faculty.findMany()
   return faculties
 }
 
 export async function getFaculty(id: number | null) {
   if (!id) return
-  const prisma = new PrismaClient()
+  
   const faculty = await prisma.faculty.findUnique({ where: { id } })
   return faculty
 }
 
 export async function deleteFaculty(id: number) {
-  const prisma = new PrismaClient()
+  
   try {
     await prisma.faculty.delete({ where: { id } })
     return {
@@ -40,7 +41,7 @@ export async function deleteFaculty(id: number) {
 }
 
 export async function saveFaculty(prevState: any, formData: FormData) {
-  const prisma = new PrismaClient()
+  
 
   const schema = z.object({
     name: z.string().min(1, 'Name must be at least 1 character'),
@@ -67,7 +68,7 @@ export async function saveFaculty(prevState: any, formData: FormData) {
 }
 
 export async function updateFaculty(prevState: any, formData: FormData) {
-  const prisma = new PrismaClient()
+  
 
   const schema = z.object({
     id: z.coerce.number(),
