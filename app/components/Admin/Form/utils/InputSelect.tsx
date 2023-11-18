@@ -35,7 +35,7 @@ const InputSelect = ({
     <InputGroup label={label} error={error}>
       <Select value={value?.toString()} onValueChange={setValue} required={required} disabled={disabled} name={name}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Theme" />
+          <SelectValue placeholder="Select option..." />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (
