@@ -6,7 +6,7 @@ const getEmailDomain = (email: string) => {
   return email.split('@')[1]
 }
 
-export const authOptions: AuthOptions = {
+const authOptions: AuthOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
@@ -48,6 +48,6 @@ export const authOptions: AuthOptions = {
   },
 }
 
-export const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }

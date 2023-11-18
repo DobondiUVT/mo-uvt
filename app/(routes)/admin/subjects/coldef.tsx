@@ -17,7 +17,7 @@ import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
 import { deleteSubject } from '@/actions/subject'
 import { getFaculty } from '@/actions/faculty'
-import { finalSubjectData } from './page'
+import { finalSubjectData } from '@/utilities/types'
 
 const SortButton = ({
   column,
