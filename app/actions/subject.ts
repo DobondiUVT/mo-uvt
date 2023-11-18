@@ -1,5 +1,6 @@
 'use server'
 
+import { finalSubjectData } from '@/utilities/types'
 import { PrismaClient, Subject } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -9,6 +10,26 @@ export async function getSubjects() {
   const prisma = new PrismaClient()
   const subjects = await prisma.subject.findMany()
   return subjects
+}
+
+export async function getSubjectsTableData() {
+  const prisma = new PrismaClient()
+  const subjects = await prisma.subject.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      facultyId: true,
+      faculty: {
+        select: {
+          id: true,
+          abbreviation: true,
+        },
+      },
+    },
+  })
+
+  return subjects as finalSubjectData[]
 }
 
 export async function deleteSubject(id: number) {

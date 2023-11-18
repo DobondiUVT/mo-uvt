@@ -27,12 +27,6 @@ const UserForm = ({
   user?: User | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
-  // const options = faculties.map((faculty) => ({
-  //   label: faculty.abbreviation ?? '',
-  //   value: faculty.name ?? '',
-  //   id: faculty.id ?? 0,
-  // }))
-
   const options = USER_ROLES.map((role) => ({
     label: role,
     value: role,

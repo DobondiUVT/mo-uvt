@@ -1,8 +1,6 @@
-import { getFaculty } from '@/actions/faculty'
 import { updateUser } from '@/actions/user'
 import UsersForm from '@/components/Admin/Form/UserForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
-import { Skeleton } from '@/components/ui/skeleton'
 import { PrismaClient } from '@prisma/client'
 import React from 'react'
 

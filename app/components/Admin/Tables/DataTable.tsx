@@ -21,15 +21,18 @@ import { useState } from 'react'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useToast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
+import Spinner from '../Form/utils/Spinner'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  loading?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  loading,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const table = useReactTable({
@@ -42,6 +45,12 @@ export function DataTable<TData, TValue>({
       sorting,
     },
   })
+
+  const loadingState = (
+    <div className='flex items-center justify-center gap-2'>
+      Loading data <Spinner />
+    </div>
+  )
 
   return (
     <div className="overflow-hidden rounded-md border drop-shadow-sm">
@@ -81,7 +90,7 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                {loading ? loadingState : 'No results found'}
               </TableCell>
             </TableRow>
           )}

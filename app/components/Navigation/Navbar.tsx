@@ -10,16 +10,14 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 type NavItemProps = {
   link: string
   title: string
-  closeDrawer?: () => void
 }
 
-const NavItem = ({ link, title, closeDrawer = () => {} }: NavItemProps) => {
+const NavItem = ({ link, title }: NavItemProps) => {
   return (
     <li>
       <Link
         href={link}
         className="flex h-full items-center px-4 py-4 hover:bg-gray-100"
-        onClick={closeDrawer}
       >
         {title}
       </Link>
@@ -27,17 +25,9 @@ const NavItem = ({ link, title, closeDrawer = () => {} }: NavItemProps) => {
   )
 }
 
-const HeaderLogo = ({
-  closeDrawer = () => {},
-}: {
-  closeDrawer?: () => void
-}) => {
+const HeaderLogo = () => {
   return (
-    <Link
-      className="transition-all delay-100 hover:rotate-3"
-      href={'/'}
-      onClick={closeDrawer}
-    >
+    <Link className="transition-all delay-100 hover:rotate-3" href={'/'}>
       <div className="flex items-center">
         <div className="max-w-[50px]">
           <Image
@@ -76,11 +66,13 @@ const AuthSection = () => {
           </Button>
           <Avatar>
             <AvatarImage src={session.user?.image ?? ''} />
-            <AvatarFallback className='bg-uvt-yellow'>{getInitials(session.user?.name ?? '')}</AvatarFallback>
+            <AvatarFallback className="bg-uvt-yellow">
+              {getInitials(session.user?.name ?? '')}
+            </AvatarFallback>
           </Avatar>
         </div>
       ) : (
-        <Button onClick={() => signIn("google")} variant={'outline'}>
+        <Button onClick={() => signIn('google')} variant={'outline'}>
           Log in
         </Button>
       )}
