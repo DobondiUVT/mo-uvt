@@ -46,13 +46,13 @@ const GroupForm = ({
     id: faculty.id ?? 0,
   }))
 
-  const yearOptions = YEAR_OPTIONS.map((year) => ({
+  const yearOptions = Object.values(YEAR_OPTIONS).map((year) => ({
     label: year,
     value: year,
     id: year,
   }))
 
-  const semesterOptions = SEMESTER_OPTIONS.map((semester) => ({
+  const semesterOptions = Object.values(SEMESTER_OPTIONS).map((semester) => ({
     label: semester,
     value: semester,
     id: semester,
@@ -60,8 +60,8 @@ const GroupForm = ({
 
   const [state, formAction] = useFormState(method, initialState)
   const [faculty, setFaculty] = useState(defaultFaculty?.name ?? '')
-  const [year, setYear] = useState(group?.year ?? '')
-  const [semester, setSemester] = useState(group?.semester ?? '')
+  const [year, setYear] = useState(group?.year ?? YEAR_OPTIONS.ONE)
+  const [semester, setSemester] = useState(group?.semester ?? SEMESTER_OPTIONS.ONE)
 
   const facultyId = facultyOptions.find((option) =>
     isEqualInsensitiveStrings(option.value, faculty),
@@ -118,6 +118,7 @@ const GroupForm = ({
             key={subject.id}
             label={subject.title ?? ''}
             name="subjects"
+            value={subject.id}
             id={subject.id.toString()}
             defaultChecked={selectedSubjects?.some(
               ({ id }) => id === subject.id,

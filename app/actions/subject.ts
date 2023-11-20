@@ -8,13 +8,11 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getSubjects() {
-  
   const subjects = await prisma.subject.findMany()
   return subjects
 }
 
 export async function getSubjectsTableData() {
-  
   const subjects = await prisma.subject.findMany({
     select: {
       id: true,
@@ -34,7 +32,6 @@ export async function getSubjectsTableData() {
 }
 
 export async function deleteSubject(id: number) {
-  
   try {
     await prisma.subject.delete({ where: { id } })
     return {
@@ -55,12 +52,16 @@ export async function deleteSubject(id: number) {
 }
 
 export async function saveSubject(prevState: any, formData: FormData) {
-  
-
   const schema = z.object({
     title: z.string().min(1, 'Title must be at least 1 character'),
     description: z.string().min(1, 'Description must be at least 1 character'),
     facultyId: z.coerce.number().positive('Faculty must be selected'),
+    year: z.enum(['ONE', 'TWO', 'THREE']),
+    semester: z.enum(['ONE', 'TWO']),
+    abbreviation: z
+      .string()
+      .min(1, 'Abbreviation must be at least 1 character')
+      .max(10, 'Abbreviation must be less than 10 characters'),
   })
 
   const parsed = schema.safeParse(Object.fromEntries(formData))
@@ -83,13 +84,17 @@ export async function saveSubject(prevState: any, formData: FormData) {
 }
 
 export async function updateSubject(prevState: any, formData: FormData) {
-  
-
   const schema = z.object({
     id: z.coerce.number(),
     title: z.string().min(1, 'Title must be at least 1 character'),
     description: z.string().min(1, 'Description must be at least 1 character'),
     facultyId: z.coerce.number().positive('Faculty must be selected'),
+    year: z.enum(['ONE', 'TWO', 'THREE']),
+    semester: z.enum(['ONE', 'TWO']),
+    abbreviation: z
+      .string()
+      .min(1, 'Abbreviation must be at least 1 character')
+      .max(10, 'Abbreviation must be less than 10 characters'),
   })
 
   console.log(formData)

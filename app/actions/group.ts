@@ -1,11 +1,13 @@
-"use server";
+'use server'
 
 import prisma from '@/utilities/db'
 
 import { finalGroupData } from '@/utilities/types'
+import { SEMESTER_OPTIONS } from '@/utilities/utils'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { getSubjects } from './subject'
 
 export async function getGroupsTableData() {
   const groups = await prisma.group.findMany({
@@ -58,24 +60,55 @@ export async function deleteGroup(id: number) {
 }
 
 export async function saveGroup(prevState: any, formData: FormData) {
-  
+  console.log(formData)
+
+  const adjustedFormData = {
+    facultyId: formData.get('facultyId'),
+    subjects: formData.getAll('subjects'),
+    semester: formData.get('semester'),
+    year: formData.get('year'),
+  }
 
   const schema = z.object({
-    title: z.string().min(1, 'Title must be at least 1 character'),
-    description: z.string().min(1, 'Description must be at least 1 character'),
     facultyId: z.coerce.number().positive('Faculty must be selected'),
+    semester: z.enum(['ONE', 'TWO']),
+    year: z.enum(['ONE', 'TWO', 'THREE']),
+    subjects: z
+      .array(z.coerce.number())
+      .min(1, 'At least one subject must be selected'),
   })
 
-  const parsed = schema.safeParse(Object.fromEntries(formData))
+  const parsed = schema.safeParse(adjustedFormData)
   if (!parsed.success) {
     console.log(parsed.error.flatten())
     return parsed.error.flatten().fieldErrors
   }
 
+  const { subjects: parsedSubjects, ...parsedGroup } = parsed.data
+  let subjects = await prisma.subject.findMany({
+    where: {
+      id: {
+        in: parsedSubjects,
+      },
+    },
+  })
+  
+  const groupTitle = subjects.map((subject) => subject.abbreviation).join('/')
+
   let savedGroup
 
   try {
-    savedGroup = await prisma.group.create({ data: parsed.data })
+    savedGroup = await prisma.group.create({
+      data: {
+        title: groupTitle,
+        ...parsedGroup,
+        subjects: {
+          connect: parsedSubjects.map((subjectId: number) => ({
+            id: subjectId,
+          })),
+        },
+      },
+    })
   } catch (e) {
     console.error(e)
     return { serverError: `Error saving group: ${e}` }
@@ -83,4 +116,14 @@ export async function saveGroup(prevState: any, formData: FormData) {
   if (savedGroup) {
     redirect(`/admin/groups/edit/${savedGroup.id}`)
   }
+}
+
+export async function getGroupsData() {
+  const group = await prisma.group.findMany({
+    include: {
+      subjects: true,
+      faculty: true,
+    },
+  })
+  return group
 }

@@ -6,6 +6,7 @@ type InputCheckboxProps = {
   label: string
   name: string
   id: string
+  value?: string | number | null
   required?: boolean
   error?: string
   readonly?: boolean
@@ -17,6 +18,7 @@ const InputCheckbox = ({
   label,
   name,
   id,
+  value,
   defaultChecked = false,
   required = false,
   disabled = false,
@@ -29,6 +31,7 @@ const InputCheckbox = ({
         required={required}
         disabled={disabled}
         name={name}
+        value={value?.toString()}
       />
       <label htmlFor={id}>{label}</label>
     </div>

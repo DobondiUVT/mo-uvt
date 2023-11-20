@@ -45,7 +45,6 @@ const InputSelect = ({
           ))}
         </SelectContent>
       </Select>
-      <InputHidden name={name} id={name} value={value}/>
     </InputGroup>
   )
 }
