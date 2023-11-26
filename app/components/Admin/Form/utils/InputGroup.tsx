@@ -10,7 +10,7 @@ const InputGroup = ({ label, children, error }: InputGroupProps) => {
   return (
     <div className="mb-6">
       <label
-        className="mb-2 block text-sm font-bold text-gray-700"
+        className="mb-2 block text-sm font-bold text-zinc-700"
         htmlFor="title"
       >
         {label}

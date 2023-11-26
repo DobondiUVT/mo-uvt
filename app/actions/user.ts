@@ -5,6 +5,7 @@ import { PrismaClient, User } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { Session } from 'next-auth'
 
 export async function hasUserInfo(email: string) {
   const user = await prisma.user.findUnique({
@@ -21,6 +22,24 @@ export async function hasUserInfo(email: string) {
     return user.student.verified
   }
   return true
+}
+
+export async function getCurrentUser(session: Session) {
+  if (!session?.user?.email) return null
+  const user = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    include: { student: true },
+  })
+  return user
+}
+
+export async function getUserRole(session: Session) {
+  if (!session.user?.email) return null
+  const role = await prisma.user.findUnique({
+    where: { email: session.user.email },
+    select: { role: true },
+  })
+  return role
 }
 
 export async function getUsers() {

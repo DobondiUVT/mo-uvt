@@ -8,6 +8,7 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { getSubjects } from './subject'
+import { Student, User } from '@prisma/client'
 
 export async function getGroupsTableData() {
   const groups = await prisma.group.findMany({
@@ -126,4 +127,19 @@ export async function getGroupsData() {
     },
   })
   return group
+}
+
+export async function getGroupsForStudent(student: Student) {
+  if (!student) return null
+  const groups = await prisma.group.findMany({
+    where: {
+      facultyId: student.facultyId,
+      year: student.year,
+    },
+    include: {
+      subjects: true,
+      faculty: true,
+    },
+  })
+  return groups
 }

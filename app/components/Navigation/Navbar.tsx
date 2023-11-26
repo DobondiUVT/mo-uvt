@@ -17,7 +17,7 @@ const NavItem = ({ link, title }: NavItemProps) => {
     <li>
       <Link
         href={link}
-        className="flex h-full items-center px-4 py-4 hover:bg-gray-100"
+        className="flex h-full items-center px-4 py-4 hover:bg-zinc-100"
       >
         {title}
       </Link>
@@ -82,12 +82,13 @@ const AuthSection = () => {
 
 const Navbar = () => {
   const navItems = [
+    { title: 'My choices', link: '/choice' },
     { title: 'Subjects', link: '/subjects' },
     { title: 'About', link: '/about' },
   ]
 
   return (
-    <header className="sticky top-0 z-10 h-16 border-b border-gray-300 bg-zinc-100 bg-opacity-80 px-4 backdrop-blur-sm">
+    <header className="sticky top-0 z-10 h-16 border-b border-zinc-300 bg-zinc-100 bg-opacity-80 px-4 backdrop-blur-sm">
       <div className="h-full">
         <div className="flex h-full items-center justify-between">
           <HeaderLogo />

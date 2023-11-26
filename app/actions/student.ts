@@ -2,8 +2,17 @@
 
 import prisma from '@/utilities/db'
 import { finalStudentData } from '@/utilities/types'
+import { User } from '@prisma/client'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+
+export async function getStudent(user: User) {
+  if (!user) return null
+  const student = await prisma.student.findUnique({
+    where: { userId: user.id },
+  })
+  return student
+}
 
 export async function getStudentsTableData(): Promise<finalStudentData[]> {
   const students = await prisma.student.findMany({

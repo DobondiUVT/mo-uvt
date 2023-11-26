@@ -32,7 +32,7 @@ const SidebarItem = ({
     <Link
       href={href}
       className={`flex items-center gap-1 rounded-xl p-3 hover:bg-zinc-800 hover:text-zinc-100 sm:p-4 xl:py-3 ${
-        isActive ? 'bg-zinc-800 text-zinc-100' : 'text-gray-800'
+        isActive ? 'bg-zinc-800 text-zinc-100' : 'text-zinc-800'
       }`}
     >
       {icon}
@@ -81,9 +81,9 @@ const Sidebar = () => {
   ]
   return (
     <div
-      className={`sticky top-[64px] w-full overflow-y-auto border-r border-gray-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8`}
+      className={`sticky top-[64px] w-full overflow-y-auto border-r border-zinc-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8`}
     >
-      <div className="mb-4 hidden text-lg font-bold text-gray-800 xl:block">
+      <div className="mb-4 hidden text-lg font-bold text-zinc-800 xl:block">
         Administration dashboard
       </div>
       <nav
