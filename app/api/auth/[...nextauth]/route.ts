@@ -19,8 +19,8 @@ const authOptions: AuthOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       if (!profile || !profile.email || !profile.name) return '/auth-error'
 
-      if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
-        return '/auth-error'
+      // if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
+      //   return '/auth-error'
 
       try {
         

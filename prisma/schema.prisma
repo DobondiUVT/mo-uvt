@@ -59,7 +59,6 @@ model User {
   email     String   @unique
   name      String
   role      Role     @default(STUDENT)
-  year      Year     @default(ONE)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   student   Student?
@@ -67,6 +66,8 @@ model User {
 
 model Student {
   id        Int       @id @default(autoincrement())
+  sn        String    @unique @default("I000")
+  year      Year      @default(ONE)
   user      User      @relation(fields: [userId], references: [id])
   userId    Int       @unique
   faculty   Faculty?  @relation(fields: [facultyId], references: [id])
@@ -74,6 +75,7 @@ model Student {
   subjects  Subject[] @relation("StudentSubject")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  verified  Boolean   @default(false)
 
   @@index([facultyId])
 }

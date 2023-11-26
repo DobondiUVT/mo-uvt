@@ -4,6 +4,7 @@ import {
   IconAdjustmentsAlt,
   IconBooks,
   IconHome,
+  IconSchool,
   IconSettings,
   IconTable,
   IconUser,
@@ -66,6 +67,11 @@ const Sidebar = () => {
       title: 'Users',
       href: '/admin/users',
       icon: <IconUser />,
+    },
+    {
+      title: 'Students',
+      href: '/admin/students',
+      icon: <IconSchool />,
     },
     {
       title: 'Settings',

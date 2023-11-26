@@ -3,6 +3,8 @@ import { getSubjects } from '@/actions/subject'
 import { getServerSession } from 'next-auth'
 import { getGroupsData } from '@/actions/group'
 import { Group, Subject } from '@prisma/client'
+import { hasUserInfo } from '@/actions/user'
+import { redirect } from 'next/navigation'
 
 export const revalidate = 0
 
@@ -31,6 +33,12 @@ const GroupSection = ({ group }: { group: GroupsData }) => {
 
 export default async function Home() {
   const session = await getServerSession()
+  if (session?.user?.email) {
+    const hasInfo = await hasUserInfo(session.user.email)
+    if (!hasInfo) {
+      redirect('/info')
+    } 
+  }
   const groups = await getGroupsData()
 
   return (

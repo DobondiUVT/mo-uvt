@@ -27,7 +27,7 @@ const UserForm = ({
   user?: User | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
-  const options = USER_ROLES.map((role) => ({
+  const options = Object.values(USER_ROLES).map((role) => ({
     label: role,
     value: role,
     id: role,

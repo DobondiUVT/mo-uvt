@@ -6,14 +6,29 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
+export async function hasUserInfo(email: string) {
+  const user = await prisma.user.findUnique({
+    where: { email },
+    select: {
+      student: {
+        select: {
+          verified: true,
+        },
+      },
+    },
+  })
+  if (user?.student) {
+    return user.student.verified
+  }
+  return true
+}
+
 export async function getUsers() {
-  
   const users = await prisma.user.findMany()
   return users
 }
 
 export async function deleteUser(id: number) {
-  
   try {
     await prisma.user.delete({ where: { id } })
     return {
@@ -34,8 +49,6 @@ export async function deleteUser(id: number) {
 }
 
 export async function updateUser(prevState: any, formData: FormData) {
-  
-
   const schema = z.object({
     id: z.coerce.number(),
     role: z.enum(['ADMIN', 'STUDENT', 'EDITOR']),
