@@ -1,11 +1,18 @@
 import { Skeleton } from '@/components/ui/skeleton'
+import { getServerSession } from 'next-auth'
+import { redirect } from 'next/navigation'
 
-const ChoiceLoading = () => {
+const ChoiceLoading = async () => {
+  const session = await getServerSession()
+  if (!session) {
+    redirect('/subjects')
+  }
+
   return (
     <main className="">
       <section className="py-14">
         <div className="container">
-          <h1 className="mb-2 text-3xl font-bold">Hi 👋</h1>
+          <h1 className="mb-2 text-3xl font-bold">Hi {session.user?.name} 👋</h1>
           <p className="text-lg">
             We have gathered all the optional subjects that fit your faculty and
             year.

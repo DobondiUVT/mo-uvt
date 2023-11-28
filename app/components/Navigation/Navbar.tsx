@@ -65,7 +65,7 @@ const AuthSection = () => {
             Sign out
           </Button>
           <Avatar>
-            <AvatarImage src={session.user?.image ?? ''} />
+            <AvatarImage alt={session.user?.name ?? ""} src={session.user?.image ?? ''} />
             <AvatarFallback className="bg-uvt-yellow">
               {getInitials(session.user?.name ?? '')}
             </AvatarFallback>
