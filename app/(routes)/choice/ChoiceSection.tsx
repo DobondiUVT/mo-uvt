@@ -1,11 +1,10 @@
 'use client'
-import { getGroupsData } from '@/actions/group'
-import { Semester, Student } from '@prisma/client'
-import React from 'react'
+import { getGroupsForStudent } from '@/actions/group'
+import { Semester } from '@prisma/client'
 import ChoiceCard from './ChoiceCard'
 import { getStudent } from '@/actions/student'
 
-type GroupsData = Awaited<ReturnType<typeof getGroupsData>>[0]
+type GroupsData = Awaited<ReturnType<typeof getGroupsForStudent>>
 type StudentData = Awaited<ReturnType<typeof getStudent>>
 
 const ChoiceSection = ({
@@ -14,10 +13,10 @@ const ChoiceSection = ({
   student,
 }: {
   semester: Semester
-  groups: GroupsData[]
+  groups: GroupsData
   student: StudentData
 }) => {
-  const actionGroups = groups.map((group) => {
+  const actionGroups = groups!.map((group) => {
     return {
       joined:
         group.subjects.find((subject) =>
@@ -54,7 +53,7 @@ const ChoiceSection = ({
                 />
               ))}
             </div>
-            {index != groups.length - 1 && (
+            {index != groups!.length - 1 && (
               <div className="-mx-7 mb-8 mt-8 h-px bg-black"></div>
             )}
           </div>

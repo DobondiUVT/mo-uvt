@@ -7,12 +7,17 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-export async function getStudent(user: User) {
-  if (!user) return null
+export async function getStudent(userId: number) {
+  if (!userId) return null
   const student = await prisma.student.findUnique({
-    where: { userId: user.id },
+    where: { userId: userId },
     include: {
-      subjects: true,
+      subjects: {
+        select: {
+          id: true,
+          title: true,
+        }
+      },
     },
   })
   return student

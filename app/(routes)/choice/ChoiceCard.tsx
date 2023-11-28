@@ -1,16 +1,10 @@
 'use client'
 
 import { Subject } from '@prisma/client'
-import React, { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { getStudent } from '@/actions/student'
-import prisma from '@/utilities/db'
 import { joinStudent, unJoinStudent } from '@/actions/student'
-import { useRouter } from 'next/navigation'
-import { useOptimistic } from 'react'
-import { set } from 'zod'
-import Spinner from '@/components/Admin/Form/utils/Spinner'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>
 
@@ -21,7 +15,7 @@ const ChoiceCard = ({
   student,
   groupId,
 }: {
-  subject: Subject
+  subject: Pick<Subject, 'title' | 'abbreviation' | 'id' | 'description'>
   joinable?: boolean
   joined?: boolean
   student: StudentData

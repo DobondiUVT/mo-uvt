@@ -1,21 +1,18 @@
-import SubjectCard from '@/components/Subjects/SubjectCard'
-import { getSubjects } from '@/actions/subject'
 import { getServerSession } from 'next-auth'
-import { getGroupsData, getGroupsForStudent } from '@/actions/group'
-import { Group, Semester, Student, Subject } from '@prisma/client'
-import { getCurrentUser, hasUserInfo } from '@/actions/user'
+import { getGroupsForStudent } from '@/actions/group'
+import { getCurrentUser } from '@/actions/user'
 import { redirect } from 'next/navigation'
 import { getStudent } from '@/actions/student'
 import ChoiceSection from './ChoiceSection'
 
 export const revalidate = 0
 
-type GroupsData = Awaited<ReturnType<typeof getGroupsData>>[0]
+type GroupsData = Awaited<ReturnType<typeof getGroupsForStudent>>
 
 const getAuthInfo = async () => {
   const session = await getServerSession()
   const user = session ? await getCurrentUser(session) : null
-  const student = user ? await getStudent(user) : null
+  const student = user ? await getStudent(user.id) : null
   return { session, user, student }
 }
 
@@ -30,7 +27,7 @@ export default async function Choice() {
   }
   const groups = await getGroupsForStudent(student)
 
-  let semesters: GroupsData[][] = []
+  let semesters: GroupsData[] = [];
 
   if (groups) {
     semesters = [

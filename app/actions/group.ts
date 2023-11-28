@@ -93,7 +93,7 @@ export async function saveGroup(prevState: any, formData: FormData) {
       },
     },
   })
-  
+
   const groupTitle = subjects.map((subject) => subject.abbreviation).join('/')
 
   let savedGroup
@@ -136,9 +136,19 @@ export async function getGroupsForStudent(student: Student) {
       facultyId: student.facultyId,
       year: student.year,
     },
-    include: {
-      subjects: true,
-      faculty: true,
+    select: {
+      id: true,
+      title: true,
+      semester: true,
+      year: true,
+      subjects: {
+        select: {
+          id: true,
+          title: true,
+          abbreviation: true,
+          description: true,
+        },
+      },
     },
   })
   return groups
