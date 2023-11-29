@@ -1,11 +1,12 @@
-'use client'
-
 import Link from 'next/link'
 import Image from 'next/image'
 import UVTLogo from 'public/logo_simple.png'
 import { Button, buttonVariants } from '../ui/button'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { getCurrentUser } from '@/actions/user'
+import { getServerSession } from 'next-auth'
+import AuthSection from './AuthSection'
 
 type NavItemProps = {
   link: string
@@ -46,46 +47,19 @@ const HeaderLogo = () => {
   )
 }
 
-const AuthSection = () => {
-  const { data: session } = useSession()
-  const getInitials = (name: string) => {
-    const names = name.split(' ')
-    let initials = names[0].substring(0, 1).toUpperCase()
-    if (names.length > 1) {
-      initials += names[names.length - 1].substring(0, 1).toUpperCase()
-    }
-    return initials
+const Navbar = async () => {
+  const session = await getServerSession()
+  let user
+  if (session) {
+    user = await getCurrentUser(session)
+  } else {
+    user = null
   }
-
-  return (
-    <div>
-      {session ? (
-        <div className="flex items-center gap-4">
-          <Button onClick={() => signOut()} variant={'outline'}>
-            Sign out
-          </Button>
-          <Avatar>
-            <AvatarImage alt={session.user?.name ?? ""} src={session.user?.image ?? ''} />
-            <AvatarFallback className="bg-uvt-yellow">
-              {getInitials(session.user?.name ?? '')}
-            </AvatarFallback>
-          </Avatar>
-        </div>
-      ) : (
-        <Button onClick={() => signIn('google')} variant={'outline'}>
-          Log in
-        </Button>
-      )}
-    </div>
-  )
-}
-
-const Navbar = () => {
-  const navItems = [
-    { title: 'My choices', link: '/choice' },
-    { title: 'Subjects', link: '/subjects' },
-    { title: 'About', link: '/about' },
-  ]
+  let navItems = []
+  if (user?.role === 'STUDENT') {
+    navItems.push({ title: 'My choices', link: '/choice' })
+  }
+  navItems.push({ title: 'Subjects', link: '/subjects' })
 
   return (
     <header className="sticky top-0 z-10 h-16 border-b border-zinc-300 bg-zinc-100 bg-opacity-80 px-4 backdrop-blur-sm">
@@ -100,14 +74,15 @@ const Navbar = () => {
             </ul>
           </nav>
           <div className="flex gap-6">
-            <AuthSection />
-
-            <Link
-              href="/admin"
-              className={`${buttonVariants({ variant: 'default' })}`}
-            >
-              Admin
-            </Link>
+            <AuthSection session={session} />
+            {user?.role === 'ADMIN' && (
+              <Link
+                href="/admin"
+                className={`${buttonVariants({ variant: 'default' })}`}
+              >
+                Admin
+              </Link>
+            )}
           </div>
         </div>
       </div>

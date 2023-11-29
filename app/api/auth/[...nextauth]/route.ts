@@ -32,6 +32,7 @@ const authOptions: AuthOptions = {
             name: profile.name,
           },
         })
+        if (dbUser.role == 'ADMIN') return true
         const dbStudent = await prisma.student.upsert({
           where: { userId: dbUser.id },
           update: {},

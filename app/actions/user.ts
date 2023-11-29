@@ -28,10 +28,6 @@ export async function getCurrentUser(session: Session) {
   if (!session?.user?.email) return null
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
-    select: {
-      name: true,
-      id: true
-    }
   })
   return user
 }
