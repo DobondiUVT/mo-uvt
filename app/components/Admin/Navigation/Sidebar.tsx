@@ -54,7 +54,7 @@ const Sidebar = () => {
       icon: <IconBooks />,
     },
     {
-      title: 'Groups',
+      title: 'Packets',
       href: '/admin/groups',
       icon: <IconTable />,
     },
@@ -72,11 +72,6 @@ const Sidebar = () => {
       title: 'Students',
       href: '/admin/students',
       icon: <IconSchool />,
-    },
-    {
-      title: 'Settings',
-      href: '/admin/settings',
-      icon: <IconSettings />,
     },
   ]
   return (

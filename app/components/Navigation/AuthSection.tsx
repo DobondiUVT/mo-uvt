@@ -23,7 +23,7 @@ const AuthSection = ({session}: {session: Session | null}) => {
           <Button onClick={() => signOut()} variant={'outline'}>
             Sign out
           </Button>
-          <Avatar>
+          <Avatar className="hidden md:block">
             <AvatarImage alt={session.user?.name ?? ""} src={session.user?.image ?? ''} />
             <AvatarFallback className="bg-uvt-yellow">
               {getInitials(session.user?.name ?? '')}

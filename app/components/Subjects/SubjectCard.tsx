@@ -1,11 +1,42 @@
-"use client"
-
 import { Subject } from '@prisma/client'
 import React from 'react'
-import { Button } from '../ui/button'
 import Link from 'next/link'
+import prisma from '@/utilities/db'
 
-const SubjectCard = ({
+const SubjectStatus = async ({
+  subject,
+  maxCount,
+}: {
+  subject: Subject
+  maxCount: number
+}) => {
+  const numberOfStudents = await prisma.student.count({
+    where: {
+      subjects: {
+        some: {
+          id: subject.id,
+        },
+      },
+    },
+  })
+
+  let statusClass = ''
+  if (numberOfStudents < maxCount / 3) {
+    statusClass = 'bg-green-400 text-white'
+  } else if (numberOfStudents < (maxCount * 2) / 3) {
+    statusClass = 'bg-yellow-400 text-white'
+  } else {
+    statusClass = 'bg-red-400 text-white'
+  }
+
+  return (
+    <div className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}>
+      {numberOfStudents} / {maxCount} joined
+    </div>
+  )
+}
+
+const SubjectCard = async ({
   subject,
   joinable = false,
 }: {
@@ -14,21 +45,15 @@ const SubjectCard = ({
 }) => {
   return (
     <Link
-      className="rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
+      className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
       href={`/subject/${subject.id}`}
     >
-      <div className="text-xl font-bold">{subject.title}</div>
-      <div className="text-zinc-500 mb-6">{subject.description}</div>
-      <div>
-        <div className="flex w-full items-center justify-between">
-          <div className='text-sm'>4 / 80 joined</div>
-          {joinable && (
-            <Button onClick={(e) => {e.preventDefault();}} size="sm" color="blue">
-              Join
-            </Button>
-          )}
-        </div>
-      </div>
+      <div className="mb-1 text-xl font-bold">{subject.title}</div>
+      <div
+        dangerouslySetInnerHTML={{ __html: subject.description ?? '' }}
+        className="mb-6 line-clamp-3 text-sm leading-relaxed text-zinc-500"
+      />
+      <SubjectStatus subject={subject} maxCount={30} />
     </Link>
   )
 }

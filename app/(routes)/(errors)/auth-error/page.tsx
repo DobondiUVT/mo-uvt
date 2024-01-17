@@ -12,7 +12,7 @@ const AuthError = () => {
 
   return (
     <section className="py-12">
-      <div className="container">
+      <div className="container px-4  ">
         <div className="flex w-full items-center justify-center">
           <div className="inline-block rounded-md border-red-400 bg-red-200 px-6 py-4 text-red-800 shadow">
             <h1 className="mb-1 text-lg font-bold">Login error :(</h1>

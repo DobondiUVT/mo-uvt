@@ -11,7 +11,7 @@ const ChoiceLoading = async () => {
   return (
     <main className="">
       <section className="py-14">
-        <div className="container">
+        <div className="container px-4  ">
           <h1 className="mb-2 text-3xl font-bold">Hi {session.user?.name} 👋</h1>
           <p className="text-lg">
             We have gathered all the optional subjects that fit your faculty and

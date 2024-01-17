@@ -39,7 +39,7 @@ export default async function Choice() {
   return (
     <main className="">
       <section className="py-14">
-        <div className="container">
+        <div className="container px-4  ">
           {session && (
             <h1 className="mb-2 text-3xl font-bold">Hi {user.name} 👋</h1>
           )}

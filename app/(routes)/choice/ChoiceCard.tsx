@@ -1,12 +1,36 @@
 'use client'
 
-import { Subject } from '@prisma/client'
+import { Student, Subject } from '@prisma/client'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { getStudent } from '@/actions/student'
 import { joinStudent, unJoinStudent } from '@/actions/student'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>
+
+const SubjectStatus = async ({
+  numberOfStudents,
+  maxCount,
+}: {
+  numberOfStudents: number
+  maxCount: number
+}) => {
+
+  let statusClass = ''
+  if (numberOfStudents < maxCount / 3) {
+    statusClass = 'bg-green-400 text-white'
+  } else if (numberOfStudents < (maxCount * 2) / 3) {
+    statusClass = 'bg-yellow-400 text-white'
+  } else {
+    statusClass = 'bg-red-400 text-white'
+  }
+
+  return (
+    <div className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}>
+      {numberOfStudents} / {maxCount} joined
+    </div>
+  )
+}
 
 const ChoiceCard = ({
   subject,
@@ -15,7 +39,9 @@ const ChoiceCard = ({
   student,
   groupId,
 }: {
-  subject: Pick<Subject, 'title' | 'abbreviation' | 'id' | 'description'>
+  subject: Pick<Subject, 'title' | 'abbreviation' | 'id' | 'description'> & {
+    student: Pick<Student, 'id'>[]
+  }
   joinable?: boolean
   joined?: boolean
   student: StudentData
@@ -23,14 +49,14 @@ const ChoiceCard = ({
 }) => {
   return (
     <Link
-      className="rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
+      className="rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black flex flex-col"
       href={`/subject/${subject.id}`}
     >
-      <div className="text-xl font-bold">{subject.title}</div>
-      <div className="mb-6 text-zinc-500">{subject.description}</div>
-      <div>
+      <div className="text-xl mb-1 font-bold">{subject.title}</div>
+      <div dangerouslySetInnerHTML={{ __html: subject.description ?? "" }} className="mb-6 text-zinc-500 text-sm line-clamp-3 leading-relaxed"/>
+      <div className='mt-auto'>
         <div className="flex w-full items-center justify-between">
-          <div className="text-sm">4 / 80 joined</div>
+          <SubjectStatus numberOfStudents={subject.student.length} maxCount={30} />
           {joinable && (
             <Button
               onClick={(e) => {

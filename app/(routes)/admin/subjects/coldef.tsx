@@ -55,11 +55,6 @@ const columnArray: ColumnArray[] = [
     title: 'Title',
     sortable: true,
   },
-  {
-    id: 'description',
-    title: 'Description',
-    sortable: false,
-  },
 ]
 
 const createColumnDefs = () => {
