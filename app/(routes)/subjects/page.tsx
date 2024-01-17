@@ -19,7 +19,7 @@ export default async function Subjects() {
 
   return (
     <main className="">
-      <section className="py-14">
+      <section className="lg:py-14 py-8">
         <div className="container px-4  ">
           <h1 className='text-3xl font-bold mb-6'>Check out all of our UVT optional subjects:</h1>
           <div className="flex flex-col gap-4">

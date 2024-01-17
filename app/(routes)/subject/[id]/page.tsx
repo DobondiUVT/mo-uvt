@@ -21,7 +21,7 @@ const SubjectPage = async ({ params }: { params: { id: number } }) => {
   }
 
   return (
-    <section className="py-14">
+    <section className="lg:py-14 py-8">
       <div className="container px-4  ">
         <h1 className="title-font mb-3 text-4xl font-bold text-zinc-900">
           {subject.title} ({subject.abbreviation})

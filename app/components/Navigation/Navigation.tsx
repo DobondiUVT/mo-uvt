@@ -96,7 +96,7 @@ const Navigation = ({
         </div>
       </div>
       {showDrawer && (
-        <div className="-mx-4 flex flex-col gap-4 border-b border-t border-b-zinc-300 bg-zinc-100 px-4 py-6 md:hidden">
+        <div onClick={(e) => setShowDrawer(!showDrawer)} className="-mx-4 flex flex-col gap-4 border-b border-t border-b-zinc-300 bg-zinc-100 px-4 py-6 md:hidden">
           <nav>
             <ul className="flex flex-col items-start gap-6">
               {navItems.map((item) => (
