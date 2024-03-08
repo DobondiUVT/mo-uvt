@@ -19,13 +19,13 @@ const ComponentToPrint = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
         <div className="mb-6 text-zinc-700 text-sm">Generated on {new Date().toLocaleDateString()}</div>
         {subjects.length &&
           subjects.map((subject) => {
-            if (!subject.student.length) return null
+            if (!subject.students.length) return null
             return (
               <div className='mb-6' key={subject.id}>
                 <div className="text-lg font-medium mb-2">{subject.title ?? ''}</div>
                 {/* create a table with all students sn */}
                 <div className="flex gap-3 flex-wrap">
-                  {subject.student.map((student) => (
+                  {subject.students.map((student) => (
                     <div key={student.sn} className="border border-uvt-blue rounded-full bg-uvt-blue bg-opacity-20 px-4 py-2 text-zinc-900">{student.sn}</div>
                   ))}
                 </div>

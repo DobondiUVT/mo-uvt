@@ -147,7 +147,7 @@ export async function getGroupsForStudent(student: Student) {
           title: true,
           abbreviation: true,
           description: true,
-          student: {
+          students: {
             select: {
               id: true
             }

@@ -3,20 +3,21 @@ generator client {
 }
 
 datasource db {
-  provider     = "mysql"
-  url          = env("DATABASE_URL")
-  relationMode = "prisma"
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Faculty {
-  id            Int       @id @default(autoincrement())
-  name          String    @db.VarChar(255)
-  abbreviation  String?   @db.VarChar(10)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  subjects      Subject[]
-  student       Student[]
-  subjectsGroup Group[]
+  id              Int              @id @default(autoincrement())
+  name            String           @db.VarChar(255)
+  abbreviation    String?          @db.VarChar(10)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  subjects        Subject[]
+  students        Student[]
+  groups          Group[]
+  specializations Specialization[]
 }
 
 enum Semester {
@@ -25,22 +26,21 @@ enum Semester {
 }
 
 model Subject {
-  id            Int       @id @default(autoincrement())
-  title         String?   @db.VarChar(255)
-  description   String?   @db.Text
-  file          String?   @db.Text
-  semester      Semester  @default(ONE)
-  year          Year      @default(ONE)
-  faculty       Faculty?  @relation(fields: [facultyId], references: [id])
-  facultyId     Int?
-  abbreviation  String?   @db.VarChar(10)
-  published     Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  student       Student[] @relation("StudentSubject")
-  subjectsGroup Group[]   @relation("GroupSubject")
-
-  @@index([facultyId])
+  id              Int              @id @default(autoincrement())
+  title           String?          @db.VarChar(255)
+  description     String?          @db.Text
+  file            String?          @db.Text
+  semester        Semester         @default(ONE)
+  year            Year             @default(ONE)
+  faculty         Faculty?         @relation(fields: [facultyId], references: [id])
+  facultyId       Int?
+  abbreviation    String?          @db.VarChar(10)
+  published       Boolean          @default(true)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  students        Student[]
+  groups          Group[]
+  specializations Specialization[]
 }
 
 enum Role {
@@ -65,32 +65,44 @@ model User {
   student   Student?
 }
 
-model Student {
-  id        Int       @id @default(autoincrement())
-  sn        String    @default("I000")
-  year      Year      @default(ONE)
-  user      User      @relation(fields: [userId], references: [id])
-  userId    Int       @unique
-  faculty   Faculty?  @relation(fields: [facultyId], references: [id])
-  facultyId Int?
-  subjects  Subject[] @relation("StudentSubject")
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  verified  Boolean   @default(false)
-
-  @@index([facultyId])
-}
-
-model Group {
+model Specialization {
   id        Int       @id @default(autoincrement())
   title     String?   @db.VarChar(255)
   faculty   Faculty?  @relation(fields: [facultyId], references: [id])
   facultyId Int?
-  subjects  Subject[] @relation("GroupSubject")
-  semester  Semester  @default(ONE)
-  year      Year      @default(ONE)
+  subjects  Subject[]
+  students  Student[]
+  groups    Group[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+}
 
-  @@index([facultyId])
+model Student {
+  id               Int             @id @default(autoincrement())
+  sn               String          @default("I000")
+  year             Year            @default(ONE)
+  user             User            @relation(fields: [userId], references: [id])
+  userId           Int             @unique
+  faculty          Faculty?        @relation(fields: [facultyId], references: [id])
+  facultyId        Int?
+  specialization   Specialization? @relation(fields: [specializationId], references: [id])
+  specializationId Int?
+  subjects         Subject[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  verified         Boolean         @default(false)
+}
+
+model Group {
+  id               Int             @id @default(autoincrement())
+  title            String?         @db.VarChar(255)
+  faculty          Faculty?        @relation(fields: [facultyId], references: [id])
+  facultyId        Int?
+  specialization   Specialization? @relation(fields: [specializationId], references: [id])
+  specializationId Int?
+  subjects         Subject[]
+  semester         Semester        @default(ONE)
+  year             Year            @default(ONE)
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 }

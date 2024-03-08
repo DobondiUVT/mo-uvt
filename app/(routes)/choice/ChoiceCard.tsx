@@ -40,7 +40,7 @@ const ChoiceCard = ({
   groupId,
 }: {
   subject: Pick<Subject, 'title' | 'abbreviation' | 'id' | 'description'> & {
-    student: Pick<Student, 'id'>[]
+    students: Pick<Student, 'id'>[]
   }
   joinable?: boolean
   joined?: boolean
@@ -56,7 +56,7 @@ const ChoiceCard = ({
       <div dangerouslySetInnerHTML={{ __html: subject.description ?? "" }} className="mb-6 text-zinc-500 text-sm line-clamp-3 leading-relaxed"/>
       <div className='mt-auto'>
         <div className="flex w-full items-center justify-between">
-          <SubjectStatus numberOfStudents={subject.student.length} maxCount={30} />
+          <SubjectStatus numberOfStudents={subject.students.length} maxCount={30} />
           {joinable && (
             <Button
               onClick={(e) => {

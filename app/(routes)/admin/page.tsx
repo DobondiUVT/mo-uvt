@@ -28,7 +28,7 @@ const SubjectCard = ({ title, students }: SubjectCardProps) => (
 export type subjectsStudentsType = {
   title: string | null
   id: number
-  student: {
+  students: {
     sn: string
   }[]
 }
@@ -38,7 +38,7 @@ const Admin = async () => {
     select: {
       title: true,
       id: true,
-      student: {
+      students: {
         select: {
           sn: true,
         },
@@ -58,7 +58,7 @@ const Admin = async () => {
           <SubjectCard
             key={`subject-${subject.id}`}
             title={subject.title ?? ''}
-            students={subject.student}
+            students={subject.students}
           />
         ))}
       </div>

@@ -5,10 +5,10 @@ import { buttonVariants } from '../ui/button'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import { Session } from 'next-auth'
 import { User } from '@prisma/client'
-import { ReactComponentElement, useState } from 'react'
+import { useState } from 'react'
 import AuthSection from './AuthSection'
 import Image from 'next/image'
-import UVTLogo from 'public/logo_simple.png'
+import UVTLogo from '/public/logo_simple.png'
 
 type NavItemProps = {
   link: string

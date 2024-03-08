@@ -103,7 +103,7 @@ export const joinStudent = async (
     include: {
       subjects: {
         include: {
-          subjectsGroup: true,
+          groups: true,
         },
       },
     },
@@ -120,7 +120,7 @@ export const joinStudent = async (
 
   const hasAnyJoinedSubjectsInGroup =
     joinedSubjects?.subjects.some((subject) =>
-      subject.subjectsGroup.some((group) => group.id === groupId),
+      subject.groups.some((group) => group.id === groupId),
     ) ?? false
 
   if (hasAnyJoinedSubjectsInGroup) {
