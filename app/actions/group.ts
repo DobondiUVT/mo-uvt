@@ -10,26 +10,15 @@ import { z } from 'zod'
 import { getSubjects } from './subject'
 import { Student, User } from '@prisma/client'
 
-export async function getGroupsTableData() {
+export async function getGroups() {
   const groups = await prisma.group.findMany({
-    select: {
-      id: true,
-      title: true,
-      facultyId: true,
-      faculty: {
-        select: {
-          id: true,
-          abbreviation: true,
-        },
-      },
+    include: {
+      faculty: true,
+      subjects: true,
+      specialization: true,
     },
   })
 
-  return groups as finalGroupData[]
-}
-
-export async function getGroups() {
-  const groups = await prisma.group.findMany()
   return groups
 }
 
@@ -38,6 +27,30 @@ export async function getGroup(id: number | null) {
 
   const group = await prisma.group.findUnique({ where: { id } })
   return group
+}
+
+export async function getGroupsForStudent(student: Student) {
+  if (!student) return null
+  const groups = await prisma.group.findMany({
+    where: {
+      year: student.year,
+      facultyId: student.facultyId,
+      specializationId: student.specializationId,
+    },
+    include: {
+      faculty: true,
+      subjects: {
+        include: {
+          faculty: true,
+          specializations: true,
+          students: true,
+          groups: true,
+        },
+      },
+      specialization: true,
+    },
+  })
+  return groups
 }
 
 export async function deleteGroup(id: number) {
@@ -117,44 +130,4 @@ export async function saveGroup(prevState: any, formData: FormData) {
   if (savedGroup) {
     redirect(`/admin/groups/edit/${savedGroup.id}`)
   }
-}
-
-export async function getGroupsData() {
-  const group = await prisma.group.findMany({
-    include: {
-      subjects: true,
-      faculty: true,
-    },
-  })
-  return group
-}
-
-export async function getGroupsForStudent(student: Student) {
-  if (!student) return null
-  const groups = await prisma.group.findMany({
-    where: {
-      facultyId: student.facultyId,
-      year: student.year,
-    },
-    select: {
-      id: true,
-      title: true,
-      semester: true,
-      year: true,
-      subjects: {
-        select: {
-          id: true,
-          title: true,
-          abbreviation: true,
-          description: true,
-          students: {
-            select: {
-              id: true
-            }
-          }
-        },
-      },
-    },
-  })
-  return groups
 }

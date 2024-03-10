@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { finalStudentData } from '@/utilities/types'
+import { StudentData } from '@/utilities/types'
 import { Student } from '@prisma/client'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
@@ -11,7 +11,7 @@ const SortButton = ({
   column,
   title,
 }: {
-  column: Column<finalStudentData>
+  column: Column<NonNullable<StudentData>>
   title: string
 }) => {
   return (
@@ -27,7 +27,7 @@ const SortButton = ({
 }
 
 type ColumnArray = {
-  id: keyof finalStudentData
+  id: keyof NonNullable<StudentData>
   title: string
   sortable: boolean
 }
@@ -44,7 +44,7 @@ const createColumnDefs = () => {
   return columnArray.map((columnItem) => {
     return {
       accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<finalStudentData> }) => {
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return (
           <>
             {columnItem.sortable ? (
@@ -55,8 +55,8 @@ const createColumnDefs = () => {
           </>
         )
       },
-      cell: ({ row }: { row: Row<finalStudentData> }) => {
-        return <div>{row.original[columnItem.id]?.toString()}</div>
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
+        return <div>{row.original[columnItem.id].toString()}</div>
       },
     }
   })
@@ -66,37 +66,37 @@ const createSpecialDefs = () => {
   return [
     {
       accessorKey: 'User',
-      header: ({ column }: { column: Column<finalStudentData> }) => {
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return <SortButton column={column} title="Name" />
       },
-      cell: ({ row }: { row: Row<finalStudentData> }) => {
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.user?.name}</div>
       },
     },
     {
       accessorKey: 'User',
-      header: ({ column }: { column: Column<finalStudentData> }) => {
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return <SortButton column={column} title="Email" />
       },
-      cell: ({ row }: { row: Row<finalStudentData> }) => {
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.user?.email}</div>
       },
     },
     {
       accessorKey: 'Faculty',
-      header: ({ column }: { column: Column<finalStudentData> }) => {
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return <SortButton column={column} title="Faculty" />
       },
-      cell: ({ row }: { row: Row<finalStudentData> }) => {
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.faculty?.abbreviation}</div>
       },
     },
     {
       accessorKey: 'Subjects',
-      header: ({ column }: { column: Column<finalStudentData> }) => {
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return <SortButton column={column} title="Subjects" />
       },
-      cell: ({ row }: { row: Row<finalStudentData> }) => {
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return (
           <div>
             {row.original.subjects?.map((s) => s.abbreviation).join(' ')}
@@ -107,14 +107,14 @@ const createSpecialDefs = () => {
   ]
 }
 
-const DropdownAction = ({ student }: { student: finalStudentData }) => {
-  return <Link href={`/admin/students/edit/${student.id}`}></Link>
+const DropdownAction = ({ student }: { student: NonNullable<StudentData> }) => {
+  return <Link href={`/admin/students/edit/${student!.id}`}></Link>
 }
 
 const createActionCell = () => {
   return {
     id: 'actions',
-    cell: ({ row }: { row: Row<finalStudentData> }) => {
+    cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
       const student = row.original
 
       return <DropdownAction student={student} />
@@ -122,7 +122,7 @@ const createActionCell = () => {
   }
 }
 
-export const columns: ColumnDef<finalStudentData>[] = [
+export const columns: ColumnDef<NonNullable<StudentData>>[] = [
   ...createColumnDefs(),
   ...createSpecialDefs(),
   createActionCell(),

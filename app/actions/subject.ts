@@ -1,34 +1,53 @@
 'use server'
 
 import prisma from '@/utilities/db'
-import { finalSubjectData } from '@/utilities/types'
 import { PrismaClient, Subject } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
+export async function getSubject(id: number) {
+  const subject = await prisma.subject.findUnique({
+    where: { id },
+    include: {
+      faculty: true,
+      specializations: true,
+      students: true,
+      groups: true,
+    },
+  })
+  return subject
+}
+
 export async function getSubjects() {
-  const subjects = await prisma.subject.findMany()
+  const subjects = await prisma.subject.findMany({ 
+    include: {
+      faculty: true,
+      specializations: true,
+      students: true,
+      groups: true,
+    }
+  })
   return subjects
 }
 
-export async function getSubjectsTableData() {
+export async function getSubjectsForGroup(groupId: number) {
   const subjects = await prisma.subject.findMany({
-    select: {
-      id: true,
-      title: true,
-      description: true,
-      facultyId: true,
-      faculty: {
-        select: {
-          id: true,
-          abbreviation: true,
+    where: {
+      groups: {
+        some: {
+          id: groupId,
         },
       },
     },
+    include: {
+      faculty: true,
+      specializations: true,
+      students: true,
+      groups: true,
+    }
   })
-
-  return subjects as finalSubjectData[]
+  return subjects
 }
 
 export async function deleteSubject(id: number) {

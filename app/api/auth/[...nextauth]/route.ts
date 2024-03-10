@@ -22,29 +22,6 @@ const authOptions: AuthOptions = {
       // if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
       //   return '/auth-error'
 
-      try {
-        
-        const dbUser = await prisma.user.upsert({
-          where: { email: profile.email },
-          update: {},
-          create: {
-            email: profile.email,
-            name: profile.name,
-          },
-        })
-        if (dbUser.role == 'ADMIN') return true
-        const dbStudent = await prisma.student.upsert({
-          where: { userId: dbUser.id },
-          update: {},
-          create: {
-            userId: dbUser.id,
-          },
-        })
-      } catch (e) {
-        console.error(e)
-        return '/auth-error'
-      }
-
       return true
     },
   },

@@ -7,38 +7,12 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { Session } from 'next-auth'
 
-export async function hasUserInfo(email: string) {
-  const user = await prisma.user.findUnique({
-    where: { email },
-    select: {
-      student: {
-        select: {
-          verified: true,
-        },
-      },
-    },
-  })
-  if (user?.student) {
-    return user.student.verified
-  }
-  return true
-}
-
 export async function getCurrentUser(session: Session) {
   if (!session?.user?.email) return null
   const user = await prisma.user.findUnique({
     where: { email: session.user.email },
   })
   return user
-}
-
-export async function getUserRole(session: Session) {
-  if (!session.user?.email) return null
-  const role = await prisma.user.findUnique({
-    where: { email: session.user.email },
-    select: { role: true },
-  })
-  return role
 }
 
 export async function getUsers() {

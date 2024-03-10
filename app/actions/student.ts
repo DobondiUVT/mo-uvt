@@ -2,9 +2,10 @@
 
 import prisma from '@/utilities/db'
 import { finalStudentData } from '@/utilities/types'
-import { User } from '@prisma/client'
+import { Student, User } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { spec } from 'node:test/reporters'
 import { z } from 'zod'
 
 export async function getStudent(userId: number) {
@@ -12,54 +13,35 @@ export async function getStudent(userId: number) {
   const student = await prisma.student.findUnique({
     where: { userId: userId },
     include: {
-      subjects: {
-        select: {
-          id: true,
-          title: true,
-        }
-      },
+      subjects: true,
+      faculty: true,
+      specialization: true,
+      user: true,
     },
   })
   return student
 }
 
-export async function getStudentsTableData(): Promise<finalStudentData[]> {
+export async function getStudents() {
   const students = await prisma.student.findMany({
-    select: {
-      id: true,
-      userId: true,
-      facultyId: true,
-      user: {
-        select: {
-          id: true,
-          name: true,
-          email: true,
-        },
-      },
-      faculty: {
-        select: {
-          id: true,
-          abbreviation: true,
-        },
-      },
-      subjects: {
-        select: {
-          id: true,
-          abbreviation: true,
-        },
-      },
-    },
+    include: {
+      subjects: true,
+      faculty: true,
+      specialization: true,
+      user: true,
+    }
   })
   return students
 }
 
-export async function updateStudent(
+export async function createStudent(
   prevState: any,
   formData: FormData,
 ): Promise<any> {
   const schema = z.object({
     userId: z.coerce.number().positive(),
     facultyId: z.coerce.number().positive('You must select a faculty'),
+    specializationId: z.coerce.number().positive('You must select a specialization'),
     sn: z.string().min(1).max(10),
     year: z.enum(['ONE', 'TWO', 'THREE']),
     verified: z.coerce.boolean(),
@@ -71,21 +53,17 @@ export async function updateStudent(
     return parsed.error.flatten().fieldErrors
   }
 
-  let updatedStudent
+  let student
 
   try {
-    updatedStudent = await prisma.student.update({
-      where: { userId: parsed.data.userId },
+    student = await prisma.student.create({
       data: parsed.data,
     })
   } catch (e) {
     console.error(e)
     return { serverError: `Error updating student: ${e}` }
-  }
-
-  if (updatedStudent) {
-    redirect(`/`)
-    return { success: `Succesfully updated student` }
+  } finally {
+    redirect('/choice')
   }
 }
 

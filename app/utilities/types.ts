@@ -1,24 +1,8 @@
-import { Subject, Faculty, Group, Student, User } from "@prisma/client"
+import { getGroups, getGroupsForStudent } from "@/actions/group"
+import { getStudent } from "@/actions/student"
+import { getSubjects } from "@/actions/subject"
 
-export type finalSubjectData = Pick<
-  Subject,
-  'id' | 'title' | 'description' | 'facultyId'
-> & {
-  faculty: Pick<Faculty, 'id' | 'abbreviation'> | null
-}
-
-export type finalGroupData = Pick<
-  Group,
-  'id' | 'title' | 'facultyId'
-> & {
-  faculty: Pick<Faculty, 'id' | 'abbreviation'> | null
-}
-
-export type finalStudentData = Pick<
-  Student,
-  'id' | 'userId' | 'facultyId'
-> & {
-  user: Pick<User, 'id' | 'name' | 'email'> | null
-  faculty: Pick<Faculty, 'id' | 'abbreviation'> | null
-  subjects: Pick<Subject, 'id' | 'abbreviation'>[] | null
-}
+export type GroupData = Awaited<ReturnType<typeof getGroups>>[0]
+export type GroupsStudentData = Awaited<ReturnType<typeof getGroupsForStudent>>
+export type StudentData = Awaited<ReturnType<typeof getStudent>>
+export type SubjectData = Awaited<ReturnType<typeof getSubjects>>[0]

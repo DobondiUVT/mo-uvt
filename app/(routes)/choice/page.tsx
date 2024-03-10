@@ -4,30 +4,24 @@ import { getCurrentUser } from '@/actions/user'
 import { redirect } from 'next/navigation'
 import { getStudent } from '@/actions/student'
 import ChoiceSection from './ChoiceSection'
+import { getAuthInfo } from '@/actions/auth'
 
 export const revalidate = 0
 
-type GroupsData = Awaited<ReturnType<typeof getGroupsForStudent>>
-
-const getAuthInfo = async () => {
-  const session = await getServerSession()
-  const user = session ? await getCurrentUser(session) : null
-  const student = user ? await getStudent(user.id) : null
-  return { session, user, student }
-}
+type GroupsStudentData = Awaited<ReturnType<typeof getGroupsForStudent>>
 
 export default async function Choice() {
   const { session, user, student } = await getAuthInfo()
-  if (!student || !user) {
-    redirect('/subjects')
+  if (!user) {
+    redirect('/')
   }
 
-  if (!student.verified) {
+  if (!student?.verified) {
     redirect('/info')
   }
   const groups = await getGroupsForStudent(student)
 
-  let semesters: GroupsData[] = [];
+  let semesters: GroupsStudentData[] = [];
 
   if (groups) {
     semesters = [
@@ -40,12 +34,10 @@ export default async function Choice() {
     <main className="">
       <section className="lg:py-14 py-8">
         <div className="container px-4  ">
-          {session && (
-            <h1 className="mb-2 text-3xl font-bold">Hi {user.name} 👋</h1>
-          )}
+          <h1 className="mb-2 text-3xl font-bold">Hi {user.name} 👋</h1>
+          <h2 className="text-xl font-semibold mb-3">{student.faculty.name} - {student.specialization.title} - {`Year ${student.year.toLowerCase()}`}</h2>
           <p className="text-lg">
-            We have gathered all the optional subjects that fit your faculty and
-            year.
+            We have gathered all the optional subjects that fit you.
           </p>
           <p className="text-lg">
             Please choose <strong>only one</strong> subject from each group that

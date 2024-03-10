@@ -1,19 +1,17 @@
-'use client'
 import { getGroupsForStudent } from '@/actions/group'
 import { Semester } from '@prisma/client'
 import ChoiceCard from './ChoiceCard'
 import { getStudent } from '@/actions/student'
+import { GroupsStudentData, StudentData } from '@/utilities/types'
+import { getSubject, getSubjects, getSubjectsForGroup } from '@/actions/subject'
 
-type GroupsData = Awaited<ReturnType<typeof getGroupsForStudent>>
-type StudentData = Awaited<ReturnType<typeof getStudent>>
-
-const ChoiceSection = ({
+const ChoiceSection = async ({
   semester,
   groups,
   student,
 }: {
   semester: Semester
-  groups: GroupsData
+  groups: GroupsStudentData
   student: StudentData
 }) => {
   const actionGroups = groups!.map((group) => {

@@ -17,13 +17,13 @@ import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
 import { deleteSubject } from '@/actions/subject'
 import { getFaculty } from '@/actions/faculty'
-import { finalSubjectData } from '@/utilities/types'
+import { SubjectData } from '@/utilities/types'
 
 const SortButton = ({
   column,
   title,
 }: {
-  column: Column<finalSubjectData>
+  column: Column<SubjectData>
   title: string
 }) => {
   return (
@@ -39,7 +39,7 @@ const SortButton = ({
 }
 
 type ColumnArray = {
-  id: keyof finalSubjectData
+  id: keyof SubjectData
   title: string
   sortable: boolean
 }
@@ -61,7 +61,7 @@ const createColumnDefs = () => {
   return columnArray.map((columnItem) => {
     return {
       accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<finalSubjectData> }) => {
+      header: ({ column }: { column: Column<SubjectData> }) => {
         return (
           <>
             {columnItem.sortable ? (
@@ -72,7 +72,7 @@ const createColumnDefs = () => {
           </>
         )
       },
-      cell: ({ row }: { row: Row<finalSubjectData> }) => {
+      cell: ({ row }: { row: Row<SubjectData> }) => {
         return <div>{row.original[columnItem.id]?.toString()}</div>
       },
     }
@@ -82,16 +82,16 @@ const createColumnDefs = () => {
 const createSpecialDefs = () => {
   return {
     accessorKey: 'Faculty',
-    header: ({ column }: { column: Column<finalSubjectData> }) => {
+    header: ({ column }: { column: Column<SubjectData> }) => {
       return <SortButton column={column} title="Faculty" />
     },
-    cell: ({ row }: { row: Row<finalSubjectData> }) => {
+    cell: ({ row }: { row: Row<SubjectData> }) => {
       return <div>{row.original.faculty?.abbreviation}</div>
     },
   }
 }
 
-const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
+const DropdownAction = ({ subject }: { subject: SubjectData }) => {
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteSubject(id)
@@ -133,7 +133,7 @@ const DropdownAction = ({ subject }: { subject: finalSubjectData }) => {
 const createActionCell = () => {
   return {
     id: 'actions',
-    cell: ({ row }: { row: Row<finalSubjectData> }) => {
+    cell: ({ row }: { row: Row<SubjectData> }) => {
       const subject = row.original
 
       return <DropdownAction subject={subject} />
@@ -141,7 +141,7 @@ const createActionCell = () => {
   }
 }
 
-export const columns: ColumnDef<finalSubjectData>[] = [
+export const columns: ColumnDef<SubjectData>[] = [
   ...createColumnDefs(),
   createSpecialDefs(),
   createActionCell(),

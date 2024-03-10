@@ -10,6 +10,7 @@ type InputTextProps = {
   error?: string
   readonly?: boolean
   disabled?: boolean
+  placeholder?: string
 }
 
 const InputText = ({
@@ -21,6 +22,7 @@ const InputText = ({
   error,
   readonly = false,
   disabled = false,
+  placeholder,
 }: InputTextProps) => {
   return (
     <InputGroup label={label} error={error}>
@@ -33,6 +35,7 @@ const InputText = ({
         required={required}
         readOnly={readonly}
         disabled={disabled}
+        placeholder={placeholder}
       />
     </InputGroup>
   )

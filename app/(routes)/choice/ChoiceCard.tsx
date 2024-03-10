@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { getStudent } from '@/actions/student'
 import { joinStudent, unJoinStudent } from '@/actions/student'
+import { SubjectData } from '@/utilities/types'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>
 
@@ -39,9 +40,7 @@ const ChoiceCard = ({
   student,
   groupId,
 }: {
-  subject: Pick<Subject, 'title' | 'abbreviation' | 'id' | 'description'> & {
-    students: Pick<Student, 'id'>[]
-  }
+  subject: SubjectData
   joinable?: boolean
   joined?: boolean
   student: StudentData

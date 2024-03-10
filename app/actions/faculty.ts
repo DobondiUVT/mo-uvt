@@ -8,7 +8,14 @@ import { z } from 'zod'
 
 export async function getFaculties() {
   
-  const faculties = await prisma.faculty.findMany()
+  const faculties = await prisma.faculty.findMany({
+    include: {
+      subjects: true,
+      groups: true,
+      students: true,
+      specializations: true,
+    }
+  })
   return faculties
 }
 

@@ -17,13 +17,13 @@ import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
 import { deleteGroup } from '@/actions/group'
 import { getFaculty } from '@/actions/faculty'
-import { finalGroupData } from '@/utilities/types'
+import { GroupData } from '@/utilities/types'
 
 const SortButton = ({
   column,
   title,
 }: {
-  column: Column<finalGroupData>
+  column: Column<NonNullable<GroupData>>
   title: string
 }) => {
   return (
@@ -39,7 +39,7 @@ const SortButton = ({
 }
 
 type ColumnArray = {
-  id: keyof finalGroupData
+  id: keyof NonNullable<GroupData>
   title: string
   sortable: boolean
 }
@@ -61,7 +61,7 @@ const createColumnDefs = () => {
   return columnArray.map((columnItem) => {
     return {
       accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<finalGroupData> }) => {
+      header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
         return (
           <>
             {columnItem.sortable ? (
@@ -72,7 +72,7 @@ const createColumnDefs = () => {
           </>
         )
       },
-      cell: ({ row }: { row: Row<finalGroupData> }) => {
+      cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
         return <div>{row.original[columnItem.id]?.toString()}</div>
       },
     }
@@ -82,16 +82,16 @@ const createColumnDefs = () => {
 const createSpecialDefs = () => {
   return {
     accessorKey: 'Faculty',
-    header: ({ column }: { column: Column<finalGroupData> }) => {
+    header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
       return <SortButton column={column} title="Faculty" />
     },
-    cell: ({ row }: { row: Row<finalGroupData> }) => {
+    cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
       return <div>{row.original.faculty?.abbreviation}</div>
     },
   }
 }
 
-const DropdownAction = ({ group }: { group: finalGroupData }) => {
+const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteGroup(id)
@@ -133,7 +133,7 @@ const DropdownAction = ({ group }: { group: finalGroupData }) => {
 const createActionCell = () => {
   return {
     id: 'actions',
-    cell: ({ row }: { row: Row<finalGroupData> }) => {
+    cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
       const group = row.original
 
       return <DropdownAction group={group} />
@@ -141,7 +141,7 @@ const createActionCell = () => {
   }
 }
 
-export const columns: ColumnDef<finalGroupData>[] = [
+export const columns: ColumnDef<NonNullable<GroupData>>[] = [
   ...createColumnDefs(),
   createSpecialDefs(),
   createActionCell(),

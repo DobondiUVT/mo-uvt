@@ -3,7 +3,7 @@ import { DataTable } from '../../../components/Admin/Tables/DataTable'
 import { buttonVariants } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
-import { getStudentsTableData } from '@/actions/student'
+import { getStudents } from '@/actions/student'
 import { Suspense } from 'react'
 
 export const revalidate = 0
@@ -15,7 +15,7 @@ const TopHeader = () => (
 )
 
 const StudentsTable = async () => {
-  const students = await getStudentsTableData()
+  const students = await getStudents()
   return <DataTable columns={columns} data={students} />
 }
 

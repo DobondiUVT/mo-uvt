@@ -5,8 +5,7 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { Faculty, PrismaClient, Subject } from '@prisma/client'
 import { Suspense } from 'react'
-import { getSubjectsTableData } from '@/actions/subject'
-import { getGroupsTableData } from '@/actions/group'
+import { getGroups } from '@/actions/group'
 
 export const revalidate = 0
 
@@ -25,7 +24,7 @@ const TopHeader = () => (
 )
 
 const SubjectsTable = async () => {
-  const groups = await getGroupsTableData()
+  const groups = await getGroups()
   return <DataTable columns={columns} data={groups} />
 }
 
