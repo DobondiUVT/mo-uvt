@@ -2,13 +2,10 @@
 
 import prisma from '@/utilities/db'
 
-import { finalGroupData } from '@/utilities/types'
-import { SEMESTER_OPTIONS } from '@/utilities/utils'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
-import { getSubjects } from './subject'
-import { Student, User } from '@prisma/client'
+import { Student } from '@prisma/client'
 
 export async function getGroups() {
   const groups = await prisma.group.findMany({
@@ -87,6 +84,7 @@ export async function saveGroup(prevState: any, formData: FormData) {
     facultyId: z.coerce.number().positive('Faculty must be selected'),
     semester: z.enum(['ONE', 'TWO']),
     year: z.enum(['ONE', 'TWO', 'THREE']),
+    specializationId: z.coerce.number().positive('Specialization must be selected'),
     subjects: z
       .array(z.coerce.number())
       .min(1, 'At least one subject must be selected'),

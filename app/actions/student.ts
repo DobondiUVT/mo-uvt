@@ -1,11 +1,8 @@
 'use server'
 
 import prisma from '@/utilities/db'
-import { finalStudentData } from '@/utilities/types'
-import { Student, User } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { spec } from 'node:test/reporters'
 import { z } from 'zod'
 
 export async function getStudent(userId: number) {

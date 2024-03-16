@@ -59,17 +59,6 @@ export async function updateUser(prevState: any, formData: FormData) {
       where: { id: parsed.data.id },
       data: parsed.data,
     })
-    if (parsed.data.role != 'STUDENT') {
-      await prisma.student.delete({ where: { userId: parsed.data.id } })
-    } else {
-      await prisma.student.upsert({
-        where: { userId: parsed.data.id },
-        update: {},
-        create: {
-          userId: parsed.data.id,
-        },
-      })
-    }
   } catch (e) {
     console.error(e)
     return { serverError: `Error updating user: ${e}` }

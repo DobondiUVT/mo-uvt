@@ -1,7 +1,6 @@
 'use server'
 
 import prisma from '@/utilities/db'
-import { PrismaClient, Subject } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
@@ -81,6 +80,7 @@ export async function saveSubject(prevState: any, formData: FormData) {
       .string()
       .min(1, 'Abbreviation must be at least 1 character')
       .max(10, 'Abbreviation must be less than 10 characters'),
+    file: z.string()
   })
 
   const parsed = schema.safeParse(Object.fromEntries(formData))
