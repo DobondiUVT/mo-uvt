@@ -49,8 +49,7 @@ const InfoForm = ({
   const [state, formAction] = useFormState(createStudent, initialState)
   const [faculty, setFaculty] = useState('')
   const [specialization, setSpecialization] = useState('')
-  const [year, setYear] = useState('')
-  const [sn, setSn] = useState('')
+  const [year, setYear] = useState(YEAR_OPTIONS.ONE)
   return (
     <form id="info-form" action={formAction}>
       <InputHidden name="userId" id="userId" value={user.id} />
@@ -84,7 +83,6 @@ const InfoForm = ({
       />
       <div className="max-w-xs">
         <InputText
-          value={sn}
           name="sn"
           id="sn"
           label="Student Number"

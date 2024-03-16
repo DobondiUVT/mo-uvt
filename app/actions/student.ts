@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/utilities/db'
+import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
@@ -37,10 +38,14 @@ export async function createStudent(
 ): Promise<any> {
   const schema = z.object({
     userId: z.coerce.number().positive(),
-    facultyId: z.coerce.number().positive('You must select a faculty'),
-    specializationId: z.coerce.number().positive('You must select a specialization'),
-    sn: z.string().min(1).max(10),
-    year: z.enum(['ONE', 'TWO', 'THREE']),
+    facultyId: z.coerce.number().positive('This field is required'),
+    specializationId: z.coerce.number().positive('This field is required'),
+    sn: z.string().min(1, "This field is required").max(10),
+    year: z.nativeEnum(Year, {
+      errorMap: (_i, _c) => {
+        return { message: "This field is required" };
+      }
+    }),
     verified: z.coerce.boolean(),
   })
 
@@ -50,10 +55,8 @@ export async function createStudent(
     return parsed.error.flatten().fieldErrors
   }
 
-  let student
-
   try {
-    student = await prisma.student.create({
+    await prisma.student.create({
       data: parsed.data,
     })
   } catch (e) {

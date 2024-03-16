@@ -2,7 +2,6 @@
 
 import { Button } from '@/components/ui/button'
 import { StudentData } from '@/utilities/types'
-import { Student } from '@prisma/client'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown } from 'lucide-react'
 import Link from 'next/link'
@@ -24,42 +23,6 @@ const SortButton = ({
       <ArrowUpDown className="ml-2 h-4 w-4" />
     </Button>
   )
-}
-
-type ColumnArray = {
-  id: keyof NonNullable<StudentData>
-  title: string
-  sortable: boolean
-}
-
-const columnArray: ColumnArray[] = [
-  {
-    id: 'id',
-    title: 'ID',
-    sortable: true,
-  },
-]
-
-const createColumnDefs = () => {
-  return columnArray.map((columnItem) => {
-    return {
-      accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return (
-          <>
-            {columnItem.sortable ? (
-              <SortButton column={column} title={columnItem.title} />
-            ) : (
-              <div>{columnItem.title}</div>
-            )}
-          </>
-        )
-      },
-      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
-        return <div>{row.original[columnItem.id].toString()}</div>
-      },
-    }
-  })
 }
 
 const createSpecialDefs = () => {
@@ -123,7 +86,6 @@ const createActionCell = () => {
 }
 
 export const columns: ColumnDef<NonNullable<StudentData>>[] = [
-  ...createColumnDefs(),
   ...createSpecialDefs(),
   createActionCell(),
 ]

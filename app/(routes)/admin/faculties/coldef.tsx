@@ -38,11 +38,6 @@ const SortButton = ({
 
 const columnArray = [
   {
-    id: 'id',
-    title: 'ID',
-    sortable: true,
-  },
-  {
     id: 'name',
     title: 'Name',
     sortable: true,

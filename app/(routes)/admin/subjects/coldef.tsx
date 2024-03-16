@@ -46,11 +46,6 @@ type ColumnArray = {
 
 const columnArray: ColumnArray[] = [
   {
-    id: 'id',
-    title: 'ID',
-    sortable: true,
-  },
-  {
     id: 'title',
     title: 'Title',
     sortable: true,
