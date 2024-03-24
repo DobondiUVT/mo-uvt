@@ -1,12 +1,11 @@
 'use client'
 
-import { PropsWithChildren, forwardRef, useRef } from 'react'
-import { useReactToPrint } from 'react-to-print'
-import { subjectsStudentsType } from './page'
 import { Button } from '@/components/ui/button'
-import { IconPrinter } from '@tabler/icons-react'
 import { SubjectsData } from '@/utilities/types'
 import { Faculty } from '@prisma/client'
+import { IconPrinter } from '@tabler/icons-react'
+import { PropsWithChildren, forwardRef, useRef } from 'react'
+import { useReactToPrint } from 'react-to-print'
 
 type Props = {
   subjects: SubjectsData

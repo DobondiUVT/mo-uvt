@@ -1,9 +1,9 @@
-import prisma from '@/utilities/db'
-import { Student, Subject } from '@prisma/client'
-import React from 'react'
-import PrintButton from './PrintButton'
-import Statistics from './Statistics'
 import { getSubjects } from '@/actions/subject'
+import prisma from '@/utilities/db'
+import Statistics from '../../components/Admin/Main/Statistics'
+import { Fragment } from 'react'
+import Settings from '@/components/Admin/Main/Settings'
+import { saveDates } from '@/actions/settings'
 
 
 export type subjectsStudentsType = {
@@ -17,9 +17,17 @@ export type subjectsStudentsType = {
 const Admin = async () => {
   const subjects = await getSubjects()
   const faculties = await prisma.faculty.findMany()
+  const settings = await prisma.settings.findFirst({
+    where: {
+      id: 1,
+    },
+  })
 
   return (
-    <Statistics subjects={subjects} faculties={faculties}/>
+    <Fragment>
+      <Settings settings={settings!} method={saveDates}/>
+      <Statistics subjects={subjects} faculties={faculties}/>
+    </Fragment>
   )
 }
 
