@@ -13,7 +13,8 @@ export interface DataTableProps<TData, TValue> {
 export type GroupData = Awaited<ReturnType<typeof getGroups>>[0]
 export type GroupsStudentData = Awaited<ReturnType<typeof getGroupsForStudent>>
 export type StudentData = Awaited<ReturnType<typeof getStudent>>
-export type SubjectData = Awaited<ReturnType<typeof getSubjects>>[0]
+export type SubjectsData = Awaited<ReturnType<typeof getSubjects>>
+export type SubjectData = SubjectsData[0]
 export type SpecializationData = Awaited<
   ReturnType<typeof getSpecializations>
 >[0]

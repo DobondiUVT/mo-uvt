@@ -6,34 +6,8 @@ import prisma from '@/utilities/db'
 
 export const revalidate = 0
 
-export type FilterSubjectsProps = {
-  faculty: {
-    abbreviation: string | null
-    id: number
-  } | null
-  id: number
-  title: string | null
-  description: string | null
-  semester: $Enums.Semester
-  facultyId: number | null
-}
-
 export default async function Subjects() {
-  const subjects = await prisma.subject.findMany({
-    select: {
-      id: true,
-      title: true,
-      semester: true,
-      description: true,
-      facultyId: true,
-      faculty: {
-        select: {
-          id: true,
-          abbreviation: true,
-        },
-      },
-    },
-  })
+  const subjects = await getSubjects()
 
   return (
     <main className="">

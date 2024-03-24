@@ -1,11 +1,9 @@
 'use client'
 import SubjectCard from '@/components/Subjects/SubjectCard'
-import { Subject } from '@prisma/client'
-import { Separator } from '@radix-ui/react-select'
-import { useEffect, useState } from 'react'
-import { FilterSubjectsProps } from './page'
+import { SubjectsData } from '@/utilities/types'
+import { useState } from 'react'
 
-const SubjectsSection = ({ subjects }: { subjects: FilterSubjectsProps[] }) => {
+const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
   const defaultFaculties = Array.from(
     new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? '')),
   )

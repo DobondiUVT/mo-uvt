@@ -34,7 +34,7 @@ function Table({
     [faculties],
   )
 
-  const selectedFaculty = faculty === 'all' ? '' : faculty
+  const selectedFaculty = isEqualInsensitiveStrings(faculty, 'all') ? '' : faculty
 
   const filteredSubjects = selectedFaculty
     ? data.filter((subject) =>

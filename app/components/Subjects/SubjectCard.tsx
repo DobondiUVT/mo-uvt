@@ -1,48 +1,12 @@
 'use client'
-import { Subject } from '@prisma/client'
-import React from 'react'
+import { SubjectData } from '@/utilities/types'
 import Link from 'next/link'
-import prisma from '@/utilities/db'
-import { FilterSubjectsProps } from '@/(routes)/subjects/page'
-
-// const SubjectStatus = async ({
-//   subject,
-//   maxCount,
-// }: {
-//   subject: Subject
-//   maxCount: number
-// }) => {
-//   const numberOfStudents = await prisma.student.count({
-//     where: {
-//       subjects: {
-//         some: {
-//           id: subject.id,
-//         },
-//       },
-//     },
-//   })
-
-//   let statusClass = ''
-//   if (numberOfStudents < maxCount / 3) {
-//     statusClass = 'bg-green-400 text-white'
-//   } else if (numberOfStudents < (maxCount * 2) / 3) {
-//     statusClass = 'bg-yellow-400 text-white'
-//   } else {
-//     statusClass = 'bg-red-400 text-white'
-//   }
-
-//   return (
-//     <div className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}>
-//       {numberOfStudents} / {maxCount} joined
-//     </div>
-//   )
-// }
 
 const SubjectCard = ({
   subject,
   joinable = false,
 }: {
-  subject: FilterSubjectsProps
+  subject: SubjectData
   joinable?: boolean
 }) => {
   return (

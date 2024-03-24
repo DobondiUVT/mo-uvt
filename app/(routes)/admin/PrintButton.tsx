@@ -5,19 +5,27 @@ import { useReactToPrint } from 'react-to-print'
 import { subjectsStudentsType } from './page'
 import { Button } from '@/components/ui/button'
 import { IconPrinter } from '@tabler/icons-react'
+import { SubjectsData } from '@/utilities/types'
+import { Faculty } from '@prisma/client'
 
 type Props = {
-  subjects: subjectsStudentsType[]
+  subjects: SubjectsData
+  faculty: Faculty | undefined
 }
 
 const ComponentToPrint = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
   function MyInput(props, ref) {
-    const { subjects } = props
+    const { subjects, faculty } = props
     return (
       <div className="m-10" ref={ref}>
         <div className="mb-2 text-3xl font-bold text-uvt-blue">
           Students enrolled in UVT optional subjects
         </div>
+        {
+          faculty && <div className="mb-2 text-lg font-medium">
+            Faculty: {faculty.name}
+          </div>
+        }
         <div className="mb-6 text-sm text-zinc-700">
           Generated on {new Date().toLocaleDateString()}
         </div>
@@ -48,7 +56,7 @@ const ComponentToPrint = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
   },
 )
 
-const PrintButton = ({ subjects }: { subjects: subjectsStudentsType[] }) => {
+const PrintButton = ({ subjects, faculty }: Props) => {
   const componentRef = useRef(null)
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -60,7 +68,7 @@ const PrintButton = ({ subjects }: { subjects: subjectsStudentsType[] }) => {
         Print statistics
       </Button>
       <div className="hidden">
-        <ComponentToPrint subjects={subjects} ref={componentRef} />
+        <ComponentToPrint subjects={subjects} faculty={faculty} ref={componentRef} />
       </div>
     </>
   )
