@@ -18,12 +18,7 @@ const Navbar = async () => {
     user = null
   }
 
-  return (
-    <Navigation
-      session={session}
-      user={user}
-    />
-  )
+  return <Navigation session={session} user={user} />
 }
 
 export default Navbar

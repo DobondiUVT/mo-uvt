@@ -20,7 +20,7 @@ const NavItem = ({ link, title }: NavItemProps) => {
     <li>
       <Link
         href={link}
-        className="flex h-full items-center md:px-4 md:py-4 hover:bg-zinc-100"
+        className="flex h-full items-center hover:bg-zinc-100 md:px-4 md:py-4"
       >
         {title}
       </Link>
@@ -86,7 +86,10 @@ const Navigation = ({
               </Link>
             )}
           </div>
-          <button className='md:hidden' onClick={(e) => setShowDrawer(!showDrawer)}>
+          <button
+            className="md:hidden"
+            onClick={(e) => setShowDrawer(!showDrawer)}
+          >
             {showDrawer ? (
               <IconX className="text-uvt-blue" size={32} />
             ) : (
@@ -96,7 +99,10 @@ const Navigation = ({
         </div>
       </div>
       {showDrawer && (
-        <div onClick={(e) => setShowDrawer(!showDrawer)} className="-mx-4 flex flex-col gap-4 border-b border-t border-b-zinc-300 bg-zinc-100 px-4 py-6 md:hidden">
+        <div
+          onClick={(e) => setShowDrawer(!showDrawer)}
+          className="-mx-4 flex flex-col gap-4 border-b border-t border-b-zinc-300 bg-zinc-100 px-4 py-6 md:hidden"
+        >
           <nav>
             <ul className="flex flex-col items-start gap-6">
               {navItems.map((item) => (

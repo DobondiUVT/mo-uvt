@@ -33,7 +33,13 @@ const InputSelect = ({
 }: InputSelectProps) => {
   return (
     <InputGroup label={label} error={error}>
-      <Select value={value?.toString()} onValueChange={setValue} required={required} disabled={disabled} name={name}>
+      <Select
+        value={value?.toString()}
+        onValueChange={setValue}
+        required={required}
+        disabled={disabled}
+        name={name}
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select option..." />
         </SelectTrigger>

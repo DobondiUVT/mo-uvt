@@ -11,7 +11,7 @@ const Footer = () => {
         <div className="relative flex min-h-[600px] items-end justify-start overflow-hidden rounded-lg bg-gray-300 p-10 sm:mr-10">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2784.2008363156433!2d21.2316152!3d45.7471195!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47455d84610655bf%3A0xfd169ff24d29f192!2sWest%20University%20of%20Timi%C8%99oara!5e0!3m2!1sen!2sro!4v1705534104344!5m2!1sen!2sro"
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 h-full w-full"
           />
           <div className="relative flex flex-wrap rounded bg-white py-6 shadow-md">
             <div className="px-6 lg:w-1/2">
@@ -26,9 +26,7 @@ const Footer = () => {
               <h2 className="title-font text-xs font-semibold tracking-widest text-gray-900">
                 EMAIL
               </h2>
-              <a className="leading-relaxed text-indigo-500">
-                info@e-uvt.ro
-              </a>
+              <a className="leading-relaxed text-indigo-500">info@e-uvt.ro</a>
               <h2 className="title-font mt-4 text-xs font-semibold tracking-widest text-gray-900">
                 PHONE
               </h2>

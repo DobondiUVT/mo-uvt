@@ -30,7 +30,7 @@ const Banner = ({ title, type }: BannerProps) => {
       className={`mb-6 rounded-md border-${color}-400 bg-${color}-200 px-6 py-4 text-${color}-800 flex items-center justify-between gap-4 shadow`}
     >
       <div>{title}</div>
-      <button type='button' onClick={() => setShow(false)} className="text-xl">
+      <button type="button" onClick={() => setShow(false)} className="text-xl">
         <IconX />
       </button>
     </div>

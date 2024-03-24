@@ -9,7 +9,7 @@ export const revalidate = 0
 
 const EditUser = async ({ params }: { params: { id: number } }) => {
   const { id } = params
-  
+
   const user = await prisma.user.findUnique({
     where: {
       id: Number(id),
@@ -29,10 +29,7 @@ const EditUser = async ({ params }: { params: { id: number } }) => {
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <UsersForm
-        user={user}
-        method={updateUser}
-      />
+      <UsersForm user={user} method={updateUser} />
     </>
   )
 }

@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { PrismaClient, Group } from '@prisma/client'
+import { PrismaClient, Specialization } from '@prisma/client'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown, Edit, Trash } from 'lucide-react'
 import { MoreHorizontal } from 'lucide-react'
@@ -15,15 +15,15 @@ import {
 } from '@/components/ui/dropdown-menu'
 import Link from 'next/link'
 import { useToast } from '@/components/ui/use-toast'
-import { deleteGroup } from '@/actions/group'
+import { deleteSpecialization } from '@/actions/specialization'
 import { getFaculty } from '@/actions/faculty'
-import { GroupData } from '@/utilities/types'
+import { SpecializationData } from '@/utilities/types'
 
 const SortButton = ({
   column,
   title,
 }: {
-  column: Column<NonNullable<GroupData>>
+  column: Column<SpecializationData>
   title: string
 }) => {
   return (
@@ -39,7 +39,7 @@ const SortButton = ({
 }
 
 type ColumnArray = {
-  id: keyof NonNullable<GroupData>
+  id: keyof SpecializationData
   title: string
   sortable: boolean
 }
@@ -50,13 +50,18 @@ const columnArray: ColumnArray[] = [
     title: 'Title',
     sortable: true,
   },
+  {
+    id: 'abbreviation',
+    title: 'Abbreviation',
+    sortable: true,
+  },
 ]
 
 const createColumnDefs = () => {
   return columnArray.map((columnItem) => {
     return {
       accessorKey: columnItem.id,
-      header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
+      header: ({ column }: { column: Column<SpecializationData> }) => {
         return (
           <>
             {columnItem.sortable ? (
@@ -67,7 +72,7 @@ const createColumnDefs = () => {
           </>
         )
       },
-      cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
+      cell: ({ row }: { row: Row<SpecializationData> }) => {
         return <div>{row.original[columnItem.id]?.toString()}</div>
       },
     }
@@ -75,45 +80,25 @@ const createColumnDefs = () => {
 }
 
 const createSpecialDefs = () => {
-  return [
-    {
-      accessorKey: 'Faculty',
-      header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
-        return <SortButton column={column} title="Faculty" />
-      },
-      cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
-        return <div>{row.original.faculty?.abbreviation}</div>
-      },
+  return {
+    accessorKey: 'Faculty',
+    header: ({ column }: { column: Column<SpecializationData> }) => {
+      return <SortButton column={column} title="Faculty" />
     },
-    {
-      accessorKey: 'Specializations',
-      header: 'Specializations',
-      cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
-        return (
-          <div>
-            {row.original.specializations.map((s) => s.abbreviation).join(', ')}
-          </div>
-        )
-      },
+    cell: ({ row }: { row: Row<SpecializationData> }) => {
+      return <div>{row.original.faculty?.abbreviation}</div>
     },
-    {
-      accessorKey: 'Subjects',
-      header: 'Subjects',
-      cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
-        return (
-          <div>
-            {row.original.subjects.map((s) => s.abbreviation).join(', ')}
-          </div>
-        )
-      },
-    },
-  ]
+  }
 }
 
-const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
+const DropdownAction = ({
+  specialization,
+}: {
+  specialization: SpecializationData
+}) => {
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
-    const response = await deleteGroup(id)
+    const response = await deleteSpecialization(id)
     toast({
       variant: response.status as 'success' | 'error',
       title: response.title,
@@ -129,7 +114,7 @@ const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <Link href={`/admin/groups/edit/${group.id}`}>
+        <Link href={`/admin/specializations/edit/${specialization.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
             Edit
@@ -138,7 +123,7 @@ const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
         <DropdownMenuItem
           className="cursor-pointer text-red-400 focus:bg-red-600 focus:text-zinc-100"
           onClick={(_e) => {
-            handleDelete(group.id)
+            handleDelete(specialization.id)
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
@@ -152,16 +137,16 @@ const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
 const createActionCell = () => {
   return {
     id: 'actions',
-    cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
-      const group = row.original
+    cell: ({ row }: { row: Row<SpecializationData> }) => {
+      const specialization = row.original
 
-      return <DropdownAction group={group} />
+      return <DropdownAction specialization={specialization} />
     },
   }
 }
 
-export const columns: ColumnDef<NonNullable<GroupData>>[] = [
+export const columns: ColumnDef<SpecializationData>[] = [
   ...createColumnDefs(),
-  ...createSpecialDefs(),
+  createSpecialDefs(),
   createActionCell(),
 ]

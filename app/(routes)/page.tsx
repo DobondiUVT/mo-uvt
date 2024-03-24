@@ -1,5 +1,9 @@
 import { buttonVariants } from '@/components/ui/button'
-import { IconActivityHeartbeat, IconBook, IconSchool } from '@tabler/icons-react'
+import {
+  IconActivityHeartbeat,
+  IconBook,
+  IconSchool,
+} from '@tabler/icons-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Footer from './Footer'
@@ -63,7 +67,6 @@ export default function Home() {
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   Explore
-                  
                 </a>
               </div>
             </div>
@@ -85,7 +88,6 @@ export default function Home() {
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   Pick
-                  
                 </a>
               </div>
             </div>
@@ -107,7 +109,6 @@ export default function Home() {
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   Find out more
-                  
                 </a>
               </div>
             </div>

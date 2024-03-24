@@ -47,7 +47,7 @@ export function DataTable<TData, TValue>({
   })
 
   const loadingState = (
-    <div className='flex items-center justify-center gap-2'>
+    <div className="flex items-center justify-center gap-2">
       Loading data <Spinner />
     </div>
   )

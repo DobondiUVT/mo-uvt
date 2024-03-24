@@ -11,7 +11,7 @@ const AuthError = () => {
   }
 
   return (
-    <section className="lg:py-14 py-8">
+    <section className="py-8 lg:py-14">
       <div className="container px-4  ">
         <div className="flex w-full items-center justify-center">
           <div className="inline-block rounded-md border-red-400 bg-red-200 px-6 py-4 text-red-800 shadow">
@@ -35,7 +35,7 @@ const AuthError = () => {
               <Link href={'/'} className={buttonVariants({ variant: 'ghost' })}>
                 Go home
               </Link>
-              <Button onClick={() => signIn("google")} variant={'outline'}>
+              <Button onClick={() => signIn('google')} variant={'outline'}>
                 Try again
               </Button>
             </div>

@@ -11,22 +11,26 @@ import { getAuthInfo } from '@/actions/auth'
 const MoreInfo = async () => {
   const { session, user, student } = await getAuthInfo()
 
-  if (!user) redirect ('/')
+  if (!user) redirect('/')
 
-  if (student?.verified) redirect ('/')
+  if (student?.verified) redirect('/')
 
   const faculties = await prisma.faculty.findMany()
   const specializations = await prisma.specialization.findMany()
 
   return (
-    <div className="container px-4   mx-auto lg:py-14 py-8">
+    <div className="container mx-auto   px-4 py-8 lg:py-14">
       <div className="rounded-lg border bg-white p-6 shadow">
         <h1 className="text-3xl font-bold">More Info</h1>
         <p className="mb-6">
           In order to choose your optional subjects, please provide us with some
           more information regarding your academic status.
         </p>
-        <InfoForm user={user} faculties={faculties} specializations={specializations} />
+        <InfoForm
+          user={user}
+          faculties={faculties}
+          specializations={specializations}
+        />
       </div>
     </div>
   )

@@ -16,7 +16,6 @@ const SubjectStatus = async ({
   numberOfStudents: number
   maxCount: number
 }) => {
-
   let statusClass = ''
   if (numberOfStudents < maxCount / 3) {
     statusClass = 'bg-green-400 text-white'
@@ -27,7 +26,9 @@ const SubjectStatus = async ({
   }
 
   return (
-    <div className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}>
+    <div
+      className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}
+    >
       {numberOfStudents} / {maxCount} joined
     </div>
   )
@@ -48,14 +49,20 @@ const ChoiceCard = ({
 }) => {
   return (
     <Link
-      className="rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black flex flex-col"
+      className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
       href={`/subject/${subject.id}`}
     >
-      <div className="text-xl mb-1 font-bold">{subject.title}</div>
-      <div dangerouslySetInnerHTML={{ __html: subject.description ?? "" }} className="mb-6 text-zinc-500 text-sm line-clamp-3 leading-relaxed"/>
-      <div className='mt-auto'>
+      <div className="mb-1 text-xl font-bold">{subject.title}</div>
+      <div
+        dangerouslySetInnerHTML={{ __html: subject.description ?? '' }}
+        className="mb-6 line-clamp-3 text-sm leading-relaxed text-zinc-500"
+      />
+      <div className="mt-auto">
         <div className="flex w-full items-center justify-between">
-          <SubjectStatus numberOfStudents={subject.students.length} maxCount={30} />
+          <SubjectStatus
+            numberOfStudents={subject.students.length}
+            maxCount={30}
+          />
           {joinable && (
             <Button
               onClick={(e) => {
@@ -67,33 +74,31 @@ const ChoiceCard = ({
               Join
             </Button>
           )}
-          {
-            (!joinable && joined) && (
-              <div className='group'>
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault()
-                  }}
-                  size="sm"
-                  disabled={joined || !joinable}
-                  className='group-hover:hidden'
-                >
-                  Joined
-                </Button>
-                <Button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    unJoinStudent(student!.id, subject.id)
-                  }}
-                  size="sm"
-                  variant={'destructive'}
-                  className='hidden group-hover:block'
-                >
-                  Cancel
-                </Button>
-              </div>
-            )
-          }
+          {!joinable && joined && (
+            <div className="group">
+              <Button
+                onClick={(e) => {
+                  e.preventDefault()
+                }}
+                size="sm"
+                disabled={joined || !joinable}
+                className="group-hover:hidden"
+              >
+                Joined
+              </Button>
+              <Button
+                onClick={(e) => {
+                  e.preventDefault()
+                  unJoinStudent(student!.id, subject.id)
+                }}
+                size="sm"
+                variant={'destructive'}
+                className="hidden group-hover:block"
+              >
+                Cancel
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </Link>

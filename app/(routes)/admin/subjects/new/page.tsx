@@ -18,12 +18,17 @@ const NewSubject = async () => {
       href: '/admin/subjects/new',
     },
   ]
-  
+
   const faculties = await prisma.faculty.findMany()
+  const specializations = await prisma.specialization.findMany()
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <SubjectsForm method={saveSubject} faculties={faculties} />
+      <SubjectsForm
+        method={saveSubject}
+        faculties={faculties}
+        specializations={specializations}
+      />
     </>
   )
 }

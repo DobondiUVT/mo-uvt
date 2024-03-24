@@ -50,9 +50,7 @@ const Admin = async () => {
     <div>
       <div className="text-xl font-bold">Statistics</div>
       <div className="mb-4 text-lg">Subjects & Students</div>
-      <PrintButton 
-        subjects={subjects}
-      />
+      <PrintButton subjects={subjects} />
       <div className="grid grid-cols-3 gap-6">
         {subjects.map((subject) => (
           <SubjectCard

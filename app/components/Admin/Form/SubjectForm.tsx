@@ -2,32 +2,44 @@
 
 import InputText from '@/components/Admin/Form/utils/InputText'
 import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
-import { Faculty, PrismaClient, Subject } from '@prisma/client'
-import { useFormState } from 'react-dom'
-import InputHidden from './utils/InputHidden'
-import Combobox from './utils/Combobox'
+import {
+  SEMESTER_OPTIONS,
+  YEAR_OPTIONS,
+  isEqualInsensitiveStrings,
+} from '@/utilities/utils'
+import { Faculty, Specialization, Subject } from '@prisma/client'
 import { useState } from 'react'
-import { SEMESTER_OPTIONS, YEAR_OPTIONS, isEqualInsensitiveStrings } from '@/utilities/utils'
-import InputCombobox from './utils/InputCombobox'
-import { SubmitButton } from './utils/SubmitButton'
+import { useFormState } from 'react-dom'
 import FormNotification from './utils/FormNotification'
+import InputCombobox from './utils/InputCombobox'
+import InputHidden from './utils/InputHidden'
 import InputSelect from './utils/InputSelect'
+import { SubmitButton } from './utils/SubmitButton'
+import InputCheckbox from './utils/InputCheckbox'
+import InputMultipleCheckbox from './utils/InputMultipleCheckbox'
 
 const initialState = {
   title: null,
   description: null,
   faculty: null,
+  year: null,
+  semester: null,
+  specialization: null,
 }
 
 const SubjectForm = ({
   subject = null,
   faculties,
+  specializations,
   defaultFaculty = null,
+  defaultSpecializations = null,
   method,
 }: {
   subject?: Subject | null
   faculties: Faculty[]
+  specializations: Specialization[]
   defaultFaculty?: Faculty | null
+  defaultSpecializations?: Specialization[] | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
   const facultyOptions = faculties.map((faculty) => ({
@@ -51,7 +63,21 @@ const SubjectForm = ({
   const [state, formAction] = useFormState(method, initialState)
   const [faculty, setFaculty] = useState(defaultFaculty?.name ?? '')
   const [year, setYear] = useState(subject?.year ?? YEAR_OPTIONS.ONE)
-  const [semester, setSemester] = useState(subject?.semester ?? SEMESTER_OPTIONS.ONE)
+  const [semester, setSemester] = useState(
+    subject?.semester ?? SEMESTER_OPTIONS.ONE,
+  )
+
+  const selectedFacultyId = facultyOptions.find((option) =>
+    isEqualInsensitiveStrings(option.value, faculty),
+  )?.id
+
+  const specializationOptions = specializations
+    .filter((s) => s.facultyId === selectedFacultyId)
+    .map((specialization) => ({
+      label: specialization.title ?? '',
+      value: specialization.title ?? '',
+      id: specialization.id ?? 0,
+    }))
   return (
     <form id="subjects-form" action={formAction}>
       {state && <FormNotification state={state} />}
@@ -87,6 +113,29 @@ const SubjectForm = ({
         label="Faculty"
         error={state?.facultyId?.[0]}
       />
+      {specializationOptions.length > 0 ? (
+        <InputMultipleCheckbox
+          label="Specializations"
+          error={state?.specializations?.[0]}
+        >
+          {specializationOptions.map((specialization) => (
+            <InputCheckbox
+              key={specialization.id}
+              label={specialization.label ?? ''}
+              name="specializations"
+              value={specialization.id}
+              id={specialization.id.toString()}
+              defaultChecked={defaultSpecializations?.some(
+                ({ id }) => id === specialization.id,
+              )}
+            />
+          ))}
+        </InputMultipleCheckbox>
+      ) : (
+        <div className="mb-6 italic">
+          No specializations available for this faculty
+        </div>
+      )}
       <InputSelect
         value={year}
         setValue={setYear}
@@ -104,6 +153,15 @@ const SubjectForm = ({
         id="semester"
         label="Semester"
         error={state?.semester?.[0]}
+      />
+      {/* create text input for file url name file */}
+      <InputText
+        label="Subject description file URL"
+        name="file"
+        id="file"
+        value={subject?.file}
+        error={state?.file?.[0]}
+        placeholder="https://example.com/file.pdf"
       />
       <SubmitButton />
     </form>

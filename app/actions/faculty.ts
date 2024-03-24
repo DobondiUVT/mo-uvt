@@ -7,27 +7,25 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getFaculties() {
-  
   const faculties = await prisma.faculty.findMany({
     include: {
       subjects: true,
       groups: true,
       students: true,
       specializations: true,
-    }
+    },
   })
   return faculties
 }
 
 export async function getFaculty(id: number | null) {
   if (!id) return
-  
+
   const faculty = await prisma.faculty.findUnique({ where: { id } })
   return faculty
 }
 
 export async function deleteFaculty(id: number) {
-  
   try {
     await prisma.faculty.delete({ where: { id } })
     return {
@@ -48,8 +46,6 @@ export async function deleteFaculty(id: number) {
 }
 
 export async function saveFaculty(prevState: any, formData: FormData) {
-  
-
   const schema = z.object({
     name: z.string().min(1, 'Name must be at least 1 character'),
     abbreviation: z
@@ -75,8 +71,6 @@ export async function saveFaculty(prevState: any, formData: FormData) {
 }
 
 export async function updateFaculty(prevState: any, formData: FormData) {
-  
-
   const schema = z.object({
     id: z.coerce.number(),
     name: z.string().min(1, 'Name must be at least 1 character'),

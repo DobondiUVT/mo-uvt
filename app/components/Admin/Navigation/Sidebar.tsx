@@ -3,9 +3,9 @@
 import {
   IconAdjustmentsAlt,
   IconBooks,
+  IconHammer,
   IconHome,
   IconSchool,
-  IconSettings,
   IconTable,
   IconUser,
 } from '@tabler/icons-react'
@@ -62,6 +62,11 @@ const Sidebar = () => {
       title: 'Faculty',
       href: '/admin/faculties',
       icon: <IconHome />,
+    },
+    {
+      title: 'Specializations',
+      href: '/admin/specializations',
+      icon: <IconHammer />,
     },
     {
       title: 'Users',

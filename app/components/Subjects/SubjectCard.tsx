@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { Subject } from '@prisma/client'
 import React from 'react'
 import Link from 'next/link'

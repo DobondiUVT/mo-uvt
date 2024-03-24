@@ -1,12 +1,12 @@
-"use client"
+'use client'
 
-import { signIn, signOut, useSession } from "next-auth/react"
-import { Button } from "../ui/button"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
-import { Session } from "next-auth"
-import { User } from "@prisma/client"
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { Button } from '../ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
+import { Session } from 'next-auth'
+import { User } from '@prisma/client'
 
-const AuthSection = ({session}: {session: Session | null}) => {
+const AuthSection = ({ session }: { session: Session | null }) => {
   const getInitials = (name: string) => {
     const names = name.split(' ')
     let initials = names[0].substring(0, 1).toUpperCase()
@@ -24,7 +24,10 @@ const AuthSection = ({session}: {session: Session | null}) => {
             Sign out
           </Button>
           <Avatar className="hidden md:block">
-            <AvatarImage alt={session.user?.name ?? ""} src={session.user?.image ?? ''} />
+            <AvatarImage
+              alt={session.user?.name ?? ''}
+              src={session.user?.image ?? ''}
+            />
             <AvatarFallback className="bg-uvt-yellow">
               {getInitials(session.user?.name ?? '')}
             </AvatarFallback>

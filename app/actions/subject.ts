@@ -19,13 +19,13 @@ export async function getSubject(id: number) {
 }
 
 export async function getSubjects() {
-  const subjects = await prisma.subject.findMany({ 
+  const subjects = await prisma.subject.findMany({
     include: {
       faculty: true,
       specializations: true,
       students: true,
       groups: true,
-    }
+    },
   })
   return subjects
 }
@@ -44,7 +44,7 @@ export async function getSubjectsForGroup(groupId: number) {
       specializations: true,
       students: true,
       groups: true,
-    }
+    },
   })
   return subjects
 }
@@ -70,6 +70,16 @@ export async function deleteSubject(id: number) {
 }
 
 export async function saveSubject(prevState: any, formData: FormData) {
+  const adjustedFormData = {
+    title: formData.get('title'),
+    description: formData.get('description'),
+    facultyId: formData.get('facultyId'),
+    year: formData.get('year'),
+    semester: formData.get('semester'),
+    abbreviation: formData.get('abbreviation'),
+    file: formData.get('file'),
+    specializations: formData.getAll('specializations'),
+  }
   const schema = z.object({
     title: z.string().min(1, 'Title must be at least 1 character'),
     description: z.string().min(1, 'Description must be at least 1 character'),
@@ -80,19 +90,38 @@ export async function saveSubject(prevState: any, formData: FormData) {
       .string()
       .min(1, 'Abbreviation must be at least 1 character')
       .max(10, 'Abbreviation must be less than 10 characters'),
-    file: z.string()
+    file: z.string().min(1, 'File URL must be at least 1 character'),
+    specializations: z
+      .array(z.coerce.number())
+      .min(1, 'At least one specialization must be selected'),
   })
 
-  const parsed = schema.safeParse(Object.fromEntries(formData))
+  const parsed = schema.safeParse(adjustedFormData)
   if (!parsed.success) {
     console.log(parsed.error.flatten())
     return parsed.error.flatten().fieldErrors
   }
 
+  const { specializations: parsedSpecializations, ...parsedGroup } = parsed.data
+  let specializations = await prisma.specialization.findMany({
+    where: {
+      id: {
+        in: parsedSpecializations,
+      },
+    },
+  })
+
   let savedSubject
 
   try {
-    savedSubject = await prisma.subject.create({ data: parsed.data })
+    savedSubject = await prisma.subject.create({
+      data: {
+        ...parsedGroup,
+        specializations: {
+          connect: specializations.map((s) => ({ id: s.id })),
+        },
+      },
+    })
   } catch (e) {
     console.error(e)
     return { serverError: `Error saving subject: ${e}` }
@@ -103,6 +132,18 @@ export async function saveSubject(prevState: any, formData: FormData) {
 }
 
 export async function updateSubject(prevState: any, formData: FormData) {
+  const adjustedFormData = {
+    id: formData.get('id'),
+    title: formData.get('title'),
+    description: formData.get('description'),
+    facultyId: formData.get('facultyId'),
+    year: formData.get('year'),
+    semester: formData.get('semester'),
+    abbreviation: formData.get('abbreviation'),
+    file: formData.get('file'),
+    specializations: formData.getAll('specializations'),
+  }
+
   const schema = z.object({
     id: z.coerce.number(),
     title: z.string().min(1, 'Title must be at least 1 character'),
@@ -114,29 +155,39 @@ export async function updateSubject(prevState: any, formData: FormData) {
       .string()
       .min(1, 'Abbreviation must be at least 1 character')
       .max(10, 'Abbreviation must be less than 10 characters'),
+    file: z.string().min(1, 'File URL must be at least 1 character'),
+    specializations: z
+      .array(z.coerce.number())
+      .min(1, 'At least one specialization must be selected'),
   })
 
-  console.log(formData)
-
-  const parsed = schema.safeParse(Object.fromEntries(formData))
+  const parsed = schema.safeParse(adjustedFormData)
   if (!parsed.success) {
     console.log(parsed.error.flatten())
     return parsed.error.flatten().fieldErrors
   }
 
-  let updatedSubject
+  const { specializations: parsedSpecializations, ...parsedGroup } = parsed.data
+  let specializations = await prisma.specialization.findMany({
+    where: {
+      id: {
+        in: parsedSpecializations,
+      },
+    },
+  })
 
   try {
-    updatedSubject = await prisma.subject.update({
-      where: { id: parsed.data.id },
-      data: parsed.data,
+    await prisma.subject.update({
+      where: { id: parsedGroup.id },
+      data: {
+        ...parsedGroup,
+        specializations: {
+          set: specializations.map((s) => ({ id: s.id })),
+        },
+      },
     })
   } catch (e) {
     console.error(e)
     return { serverError: `Error updating subject: ${e}` }
-  }
-
-  if (updatedSubject) {
-    revalidatePath(`/admin/subjects/edit/${updatedSubject.id}`)
   }
 }

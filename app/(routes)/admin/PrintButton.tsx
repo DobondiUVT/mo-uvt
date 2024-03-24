@@ -15,18 +15,29 @@ const ComponentToPrint = forwardRef<HTMLDivElement, PropsWithChildren<Props>>(
     const { subjects } = props
     return (
       <div className="m-10" ref={ref}>
-        <div className="text-3xl font-bold mb-2 text-uvt-blue">Students enrolled in UVT optional subjects</div>
-        <div className="mb-6 text-zinc-700 text-sm">Generated on {new Date().toLocaleDateString()}</div>
+        <div className="mb-2 text-3xl font-bold text-uvt-blue">
+          Students enrolled in UVT optional subjects
+        </div>
+        <div className="mb-6 text-sm text-zinc-700">
+          Generated on {new Date().toLocaleDateString()}
+        </div>
         {subjects.length &&
           subjects.map((subject) => {
             if (!subject.students.length) return null
             return (
-              <div className='mb-6' key={subject.id}>
-                <div className="text-lg font-medium mb-2">{subject.title ?? ''}</div>
+              <div className="mb-6" key={subject.id}>
+                <div className="mb-2 text-lg font-medium">
+                  {subject.title ?? ''}
+                </div>
                 {/* create a table with all students sn */}
-                <div className="flex gap-3 flex-wrap">
+                <div className="flex flex-wrap gap-3">
                   {subject.students.map((student) => (
-                    <div key={student.sn} className="border border-uvt-blue rounded-full bg-uvt-blue bg-opacity-20 px-4 py-2 text-zinc-900">{student.sn}</div>
+                    <div
+                      key={student.sn}
+                      className="rounded-full border border-uvt-blue bg-uvt-blue bg-opacity-20 px-4 py-2 text-zinc-900"
+                    >
+                      {student.sn}
+                    </div>
                   ))}
                 </div>
               </div>

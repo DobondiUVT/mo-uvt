@@ -99,8 +99,7 @@ model Group {
   title            String         @db.VarChar(255)
   faculty          Faculty        @relation(fields: [facultyId], references: [id])
   facultyId        Int
-  specialization   Specialization @relation(fields: [specializationId], references: [id])
-  specializationId Int
+  specializations  Specialization[]
   subjects         Subject[]
   semester         Semester       @default(ONE)
   year             Year           @default(ONE)

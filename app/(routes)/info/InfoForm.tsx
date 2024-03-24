@@ -17,12 +17,12 @@ const initialState = {
   specializationId: null,
   year: null,
   sn: null,
-  verified: null
+  verified: null,
 }
 const InfoForm = ({
   user,
   faculties,
-  specializations
+  specializations,
 }: {
   user: User
   faculties: Faculty[]

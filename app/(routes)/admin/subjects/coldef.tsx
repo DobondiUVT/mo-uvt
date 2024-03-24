@@ -75,15 +75,32 @@ const createColumnDefs = () => {
 }
 
 const createSpecialDefs = () => {
-  return {
-    accessorKey: 'Faculty',
-    header: ({ column }: { column: Column<SubjectData> }) => {
-      return <SortButton column={column} title="Faculty" />
+  return [
+    {
+      accessorKey: 'Faculty',
+      header: ({ column }: { column: Column<SubjectData> }) => {
+        return <SortButton column={column} title="Faculty" />
+      },
+      cell: ({ row }: { row: Row<SubjectData> }) => {
+        return <div>{row.original.faculty?.abbreviation}</div>
+      },
     },
-    cell: ({ row }: { row: Row<SubjectData> }) => {
-      return <div>{row.original.faculty?.abbreviation}</div>
+    {
+      accessorKey: 'Specializations',
+      header: ({ column }: { column: Column<SubjectData> }) => {
+        return <div>Specializations</div>
+      },
+      cell: ({ row }: { row: Row<SubjectData> }) => {
+        return (
+          <div>
+            {row.original.specializations
+              .map((specialization) => specialization.abbreviation)
+              .join(', ')}
+          </div>
+        )
+      },
     },
-  }
+  ]
 }
 
 const DropdownAction = ({ subject }: { subject: SubjectData }) => {
@@ -138,6 +155,6 @@ const createActionCell = () => {
 
 export const columns: ColumnDef<SubjectData>[] = [
   ...createColumnDefs(),
-  createSpecialDefs(),
+  ...createSpecialDefs(),
   createActionCell(),
 ]

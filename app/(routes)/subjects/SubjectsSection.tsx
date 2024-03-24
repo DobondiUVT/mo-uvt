@@ -6,17 +6,19 @@ import { useEffect, useState } from 'react'
 import { FilterSubjectsProps } from './page'
 
 const SubjectsSection = ({ subjects }: { subjects: FilterSubjectsProps[] }) => {
-  const defaultFaculties = Array.from(new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? "")))
+  const defaultFaculties = Array.from(
+    new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? '')),
+  )
   const [semesters, setSemesters] = useState<string[]>(['ONE', 'TWO'])
   const [faculties, setFaculties] = useState<string[]>(defaultFaculties)
-  const [search, setSearch] = useState<string>("")
+  const [search, setSearch] = useState<string>('')
 
   let filteredSubjects = subjects.filter((subject) => {
     return semesters.includes(subject.semester)
   })
 
   filteredSubjects = filteredSubjects.filter((subject) => {
-    return faculties.includes(subject.faculty?.abbreviation ?? "")
+    return faculties.includes(subject.faculty?.abbreviation ?? '')
   })
 
   filteredSubjects = filteredSubjects.filter((subject) => {
@@ -26,20 +28,20 @@ const SubjectsSection = ({ subjects }: { subjects: FilterSubjectsProps[] }) => {
   return (
     <section>
       {/* create a search bar */}
-      <div className="flex items-center justify-center mb-6">
+      <div className="mb-6 flex items-center justify-center">
         <input
           type="text"
           placeholder="Search for a subject"
-          className="w-full px-4 py-2 text-lg border border-zinc-300 rounded-md focus:outline-none focus:ring-1 focus:ring-zinc-500 focus:border-zinc-500"
+          className="w-full rounded-md border border-zinc-300 px-4 py-2 text-lg focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-      <div className="flex lg:items-start flex-col gap-6 lg:flex-row">
+      <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <div className="lg:flex-shrink-0 lg:basis-64">
-          <div className="rounded-sm border flex gap-6 sm:gap-12 lg:block border-zinc-200 p-4 bg-white">
+          <div className="flex gap-6 rounded-sm border border-zinc-200 bg-white p-4 sm:gap-12 lg:block">
             <div className="text-lg">Filters</div>
-            <div className="-mx-4 my-4 h-px bg-zinc-200 hidden lg:block"></div>
+            <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Semester</div>
               <div className="flex flex-col gap-2">
@@ -79,7 +81,7 @@ const SubjectsSection = ({ subjects }: { subjects: FilterSubjectsProps[] }) => {
                 </label>
               </div>
             </div>
-            <div className="-mx-4 my-4 h-px bg-zinc-200 hidden lg:block"></div>
+            <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Faculties</div>
               <div className="flex flex-col gap-2">

@@ -10,7 +10,7 @@ export const revalidate = 0
 
 const EditFaculty = async ({ params }: { params: { id: number } }) => {
   const { id } = params
-  
+
   const faculty = await prisma.faculty.findUnique({
     where: {
       id: Number(id),

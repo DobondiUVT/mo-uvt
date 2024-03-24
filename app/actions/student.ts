@@ -27,7 +27,7 @@ export async function getStudents() {
       faculty: true,
       specialization: true,
       user: true,
-    }
+    },
   })
   return students
 }
@@ -40,11 +40,11 @@ export async function createStudent(
     userId: z.coerce.number().positive(),
     facultyId: z.coerce.number().positive('This field is required'),
     specializationId: z.coerce.number().positive('This field is required'),
-    sn: z.string().min(1, "This field is required").max(10),
+    sn: z.string().min(1, 'This field is required').max(10),
     year: z.nativeEnum(Year, {
       errorMap: (_i, _c) => {
-        return { message: "This field is required" };
-      }
+        return { message: 'This field is required' }
+      },
     }),
     verified: z.coerce.boolean(),
   })
@@ -92,7 +92,7 @@ export const joinStudent = async (
   )
 
   if (hasAlreadyJoined) {
-    console.log("Has already joined")
+    console.log('Has already joined')
     return
   }
 
@@ -102,7 +102,7 @@ export const joinStudent = async (
     ) ?? false
 
   if (hasAnyJoinedSubjectsInGroup) {
-    console.log("Has already joined another in group")
+    console.log('Has already joined another in group')
     return
   }
 
@@ -120,10 +120,7 @@ export const joinStudent = async (
   })
   revalidatePath('/choice')
 }
-export const unJoinStudent = async (
-  studentId: number,
-  subjectId: number,
-) => {
+export const unJoinStudent = async (studentId: number, subjectId: number) => {
   'use server'
   await prisma.student.update({
     where: {

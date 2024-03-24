@@ -10,9 +10,11 @@ const ChoiceLoading = async () => {
 
   return (
     <main className="">
-      <section className="lg:py-14 py-8">
+      <section className="py-8 lg:py-14">
         <div className="container px-4  ">
-          <h1 className="mb-2 text-3xl font-bold">Hi {session.user?.name} 👋</h1>
+          <h1 className="mb-2 text-3xl font-bold">
+            Hi {session.user?.name} 👋
+          </h1>
           <p className="text-lg">
             We have gathered all the optional subjects that fit you
           </p>
@@ -27,8 +29,8 @@ const ChoiceLoading = async () => {
             </a>
           </p>
           <div className="flex flex-col gap-4">
-              <Skeleton className='bg-zinc-200 w-full h-48'/>
-              <Skeleton className='bg-zinc-200 w-full h-96'/>
+            <Skeleton className="h-48 w-full bg-zinc-200" />
+            <Skeleton className="h-96 w-full bg-zinc-200" />
           </div>
         </div>
       </section>

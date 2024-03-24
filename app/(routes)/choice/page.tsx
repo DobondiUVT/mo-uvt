@@ -21,7 +21,7 @@ export default async function Choice() {
   }
   const groups = await getGroupsForStudent(student)
 
-  let semesters: GroupsStudentData[] = [];
+  let semesters: GroupsStudentData[] = []
 
   if (groups) {
     semesters = [
@@ -32,10 +32,13 @@ export default async function Choice() {
 
   return (
     <main className="">
-      <section className="lg:py-14 py-8">
+      <section className="py-8 lg:py-14">
         <div className="container px-4  ">
           <h1 className="mb-2 text-3xl font-bold">Hi {user.name} 👋</h1>
-          <h2 className="text-xl font-semibold mb-3">{student.faculty.name} - {student.specialization.title} - {`Year ${student.year.toLowerCase()}`}</h2>
+          <h2 className="mb-3 text-xl font-semibold">
+            {student.faculty.name} - {student.specialization.title} -{' '}
+            {`Year ${student.year.toLowerCase()}`}
+          </h2>
           <p className="text-lg">
             We have gathered all the optional subjects that fit you.
           </p>
@@ -63,10 +66,18 @@ export default async function Choice() {
               </h1>
             )}
             {semesters[0] && (
-              <ChoiceSection semester={'ONE'} groups={semesters[0]} student={student} />
+              <ChoiceSection
+                semester={'ONE'}
+                groups={semesters[0]}
+                student={student}
+              />
             )}
             {semesters[1] && (
-              <ChoiceSection semester={'TWO'} groups={semesters[1]} student={student} />
+              <ChoiceSection
+                semester={'TWO'}
+                groups={semesters[1]}
+                student={student}
+              />
             )}
           </div>
         </div>

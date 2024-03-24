@@ -12,7 +12,7 @@ export async function getGroups() {
     include: {
       faculty: true,
       subjects: true,
-      specialization: true,
+      specializations: true,
     },
   })
 
@@ -22,7 +22,14 @@ export async function getGroups() {
 export async function getGroup(id: number | null) {
   if (!id) return
 
-  const group = await prisma.group.findUnique({ where: { id } })
+  const group = await prisma.group.findUnique({
+    where: { id },
+    include: {
+      faculty: true,
+      subjects: true,
+      specializations: true,
+    },
+  })
   return group
 }
 
@@ -32,7 +39,11 @@ export async function getGroupsForStudent(student: Student) {
     where: {
       year: student.year,
       facultyId: student.facultyId,
-      specializationId: student.specializationId,
+      specializations: {
+        some: {
+          id: student.specializationId,
+        },
+      },
     },
     include: {
       faculty: true,
@@ -44,7 +55,7 @@ export async function getGroupsForStudent(student: Student) {
           groups: true,
         },
       },
-      specialization: true,
+      specializations: true,
     },
   })
   return groups
@@ -78,16 +89,19 @@ export async function saveGroup(prevState: any, formData: FormData) {
     subjects: formData.getAll('subjects'),
     semester: formData.get('semester'),
     year: formData.get('year'),
+    specializations: formData.getAll('specializations'),
   }
 
   const schema = z.object({
     facultyId: z.coerce.number().positive('Faculty must be selected'),
     semester: z.enum(['ONE', 'TWO']),
     year: z.enum(['ONE', 'TWO', 'THREE']),
-    specializationId: z.coerce.number().positive('Specialization must be selected'),
     subjects: z
       .array(z.coerce.number())
       .min(1, 'At least one subject must be selected'),
+    specializations: z
+      .array(z.coerce.number())
+      .min(1, 'At least one specialization must be selected'),
   })
 
   const parsed = schema.safeParse(adjustedFormData)
@@ -96,11 +110,22 @@ export async function saveGroup(prevState: any, formData: FormData) {
     return parsed.error.flatten().fieldErrors
   }
 
-  const { subjects: parsedSubjects, ...parsedGroup } = parsed.data
+  const {
+    subjects: parsedSubjects,
+    specializations: parsedSpecializations,
+    ...parsedGroup
+  } = parsed.data
   let subjects = await prisma.subject.findMany({
     where: {
       id: {
         in: parsedSubjects,
+      },
+    },
+  })
+  let specializations = await prisma.specialization.findMany({
+    where: {
+      id: {
+        in: parsedSpecializations,
       },
     },
   })
@@ -119,6 +144,9 @@ export async function saveGroup(prevState: any, formData: FormData) {
             id: subjectId,
           })),
         },
+        specializations: {
+          connect: specializations.map((s) => ({ id: s.id })),
+        },
       },
     })
   } catch (e) {
@@ -127,5 +155,82 @@ export async function saveGroup(prevState: any, formData: FormData) {
   }
   if (savedGroup) {
     redirect(`/admin/groups/edit/${savedGroup.id}`)
+  }
+}
+
+export async function updateGroup(prevState: any, formData: FormData) {
+  const adjustedFormData = {
+    facultyId: formData.get('facultyId'),
+    subjects: formData.getAll('subjects'),
+    semester: formData.get('semester'),
+    year: formData.get('year'),
+    specializations: formData.getAll('specializations'),
+  }
+
+  const schema = z.object({
+    id: z.coerce.number().positive(),
+    facultyId: z.coerce.number().positive('Faculty must be selected'),
+    semester: z.enum(['ONE', 'TWO']),
+    year: z.enum(['ONE', 'TWO', 'THREE']),
+    subjects: z
+      .array(z.coerce.number())
+      .min(1, 'At least one subject must be selected'),
+    specializations: z
+      .array(z.coerce.number())
+      .min(1, 'At least one specialization must be selected'),
+  })
+
+  const parsed = schema.safeParse(adjustedFormData)
+  if (!parsed.success) {
+    console.log(parsed.error.flatten())
+    return parsed.error.flatten().fieldErrors
+  }
+
+  const {
+    subjects: parsedSubjects,
+    specializations: parsedSpecializations,
+    ...parsedGroup
+  } = parsed.data
+  let subjects = await prisma.subject.findMany({
+    where: {
+      id: {
+        in: parsedSubjects,
+      },
+    },
+  })
+  let specializations = await prisma.specialization.findMany({
+    where: {
+      id: {
+        in: parsedSpecializations,
+      },
+    },
+  })
+
+  const groupTitle = subjects.map((subject) => subject.abbreviation).join('/')
+
+  let updatedGroup
+
+  try {
+    updatedGroup = await prisma.group.update({
+      where: { id: parsedGroup.id },
+      data: {
+        title: groupTitle,
+        ...parsedGroup,
+        subjects: {
+          set: parsedSubjects.map((subjectId: number) => ({
+            id: subjectId,
+          })),
+        },
+        specializations: {
+          set: specializations.map((s) => ({ id: s.id })),
+        },
+      },
+    })
+  } catch (e) {
+    console.error(e)
+    return { serverError: `Error saving group: ${e}` }
+  }
+  if (updatedGroup) {
+    redirect(`/admin/groups/edit/${updatedGroup.id}`)
   }
 }
