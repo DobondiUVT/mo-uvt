@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { Faculty, PrismaClient, Subject } from '@prisma/client'
 import { Suspense } from 'react'
 import { getSubjects } from '@/actions/subject'
+import Table from './Table'
+import prisma from '@/utilities/db'
 
 export const revalidate = 0
 
@@ -23,16 +25,13 @@ const TopHeader = () => (
   </div>
 )
 
-const SubjectsTable = async () => {
+export default async function SubjectsAdmin() {
   const subjects = await getSubjects()
-  return <DataTable columns={columns} data={subjects} />
-}
-
-export default function SubjectsAdmin() {
+  const faculties = await prisma.faculty.findMany()
   return (
     <>
       <TopHeader />
-      <SubjectsTable />
+      <Table columns={columns} data={subjects} faculties={faculties}/>
     </>
   )
 }

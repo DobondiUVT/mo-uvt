@@ -1,9 +1,8 @@
 'use client'
 
-import * as React from 'react'
 import { Check, ChevronsUpDown } from 'lucide-react'
+import * as React from 'react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -17,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
 
 type ComboboxOption = {
@@ -68,7 +68,9 @@ export default function Combobox({ value, setValue, options }: ComboboxProps) {
                 <Check
                   className={cn(
                     'mr-2 h-4 w-4',
-                    value === option.value ? 'opacity-100' : 'opacity-0',
+                    isEqualInsensitiveStrings(option.value, value)
+                      ? 'opacity-100'
+                      : 'opacity-0',
                   )}
                 />
                 {option.label}

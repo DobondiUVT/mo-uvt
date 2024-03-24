@@ -3,11 +3,11 @@
 import {
   IconAdjustmentsAlt,
   IconBooks,
-  IconHammer,
   IconHome,
+  IconPencil,
   IconSchool,
   IconTable,
-  IconUser,
+  IconUser
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -66,7 +66,7 @@ const Sidebar = () => {
     {
       title: 'Specializations',
       href: '/admin/specializations',
-      icon: <IconHammer />,
+      icon: <IconPencil />,
     },
     {
       title: 'Users',
