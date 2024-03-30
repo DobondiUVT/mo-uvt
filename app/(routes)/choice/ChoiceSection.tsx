@@ -1,9 +1,6 @@
-import { getGroupsForStudent } from '@/actions/group'
+import { GroupsStudentData, StudentData } from '@/utilities/types'
 import { Semester } from '@prisma/client'
 import ChoiceCard from './ChoiceCard'
-import { getStudent } from '@/actions/student'
-import { GroupsStudentData, StudentData } from '@/utilities/types'
-import { getSubject, getSubjects, getSubjectsForGroup } from '@/actions/subject'
 
 const ChoiceSection = async ({
   semester,
