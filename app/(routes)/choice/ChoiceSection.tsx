@@ -23,6 +23,9 @@ const ChoiceSection = async ({
       id: group.id,
     }
   })
+
+  if (!actionGroups.length) return
+
   return (
     <div className="relative mb-10 rounded-lg border border-black p-7">
       <h1 className="absolute top-0 -ms-4 mb-4 -translate-y-1/2 bg-zinc-100 px-4 py-2 text-xl font-bold">
