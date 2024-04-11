@@ -4,38 +4,25 @@ import { getStudent, joinStudent, unJoinStudent } from '@/actions/student'
 import { Button } from '@/components/ui/button'
 import { SubjectData } from '@/utilities/types'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>
 
-const SubjectStatus = ({
-  numberOfStudents,
-  maxCount,
-}: {
-  numberOfStudents: number
-  maxCount: number
-}) => {
-  let statusClass = ''
-  if (numberOfStudents < maxCount / 3) {
-    statusClass = 'bg-green-400 text-white'
-  } else if (numberOfStudents < (maxCount * 2) / 3) {
-    statusClass = 'bg-yellow-400 text-white'
-  } else {
-    statusClass = 'bg-red-400 text-white'
-  }
-
+const SubjectStatus = ({ numberOfStudents }: { numberOfStudents: number }) => {
   return (
     <div
-      className={`text-md mt-auto self-end rounded-xl border px-2 py-1 font-medium ${statusClass}`}
+      className={`mt-auto self-end rounded-xl border px-2 py-1 text-sm font-medium shadow-sm`}
     >
-      {numberOfStudents} / {maxCount} joined
+      {numberOfStudents === 0
+        ? 'No students joined yet'
+        : `${numberOfStudents} student${numberOfStudents > 1 ? 's' : ''} joined`}
     </div>
   )
 }
 
 const SvgLoader = () => (
   <svg
-    className="h-5 w-5 animate-spin text-white ms-2"
+    className="ms-2 h-5 w-5 animate-spin text-white"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
@@ -92,10 +79,7 @@ const ChoiceCard = ({
       />
       <div className="mt-auto">
         <div className="flex w-full items-center justify-between">
-          <SubjectStatus
-            numberOfStudents={subject.students.length}
-            maxCount={30}
-          />
+          {<SubjectStatus numberOfStudents={subject.students.length} />}
           {joinable && (
             <Button
               onClick={(e) => {

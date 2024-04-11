@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 export async function getSpecializations() {
-  return await prisma.specialization.findMany({
+  return prisma.specialization.findMany({
     select: {
       id: true,
       title: true,
@@ -15,6 +15,7 @@ export async function getSpecializations() {
       faculty: {
         select: {
           id: true,
+          name: true,
           abbreviation: true,
         },
       },

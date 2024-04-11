@@ -4,6 +4,8 @@ import { Plus } from 'lucide-react'
 import Link from 'next/link'
 import { DataTable } from '../../../components/Admin/Tables/DataTable'
 import { columns } from './coldef'
+import Table from '@/(routes)/admin/specializations/Table'
+import prisma from '@/utilities/db'
 
 export const revalidate = 0
 
@@ -21,16 +23,14 @@ const TopHeader = () => (
   </div>
 )
 
-const SpecializationsTable = async () => {
+export default async function SpecializationsAdmin() {
   const specializations = await getSpecializations()
-  return <DataTable columns={columns} data={specializations} />
-}
+  const faculties = await prisma.faculty.findMany()
 
-export default function SpecializationsAdmin() {
   return (
     <>
       <TopHeader />
-      <SpecializationsTable />
+      <Table faculties={faculties} columns={columns} data={specializations} />
     </>
   )
 }
