@@ -69,7 +69,7 @@ const ChoiceCard = ({
 
   return (
     <Link
-      className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
+      className={`flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:border-black ${joined ? 'border-2 border-uvt-blue' : ''}`}
       href={`/subject/${subject.id}`}
     >
       <div className="mb-1 text-xl font-bold">{subject.title}</div>
@@ -95,32 +95,19 @@ const ChoiceCard = ({
             </Button>
           )}
           {!joinable && joined && (
-            <div className="group">
-              <Button
-                onClick={(e) => {
-                  e.preventDefault()
-                }}
-                size="sm"
-                disabled={joined || !joinable}
-                className={`${cancelLoading ? 'hidden' : 'group-hover:hidden'}`}
-              >
-                Joined
-              </Button>
-              <Button
-                onClick={(e) => {
-                  e.preventDefault()
-                  setCancelLoading(true)
-                  unJoinStudent(student!.id, subject.id)
-                }}
-                size="sm"
-                variant={'destructive'}
-                className={`${!cancelLoading && 'hidden group-hover:block'}`}
-                disabled={cancelLoading}
-              >
-                Cancel
-                {cancelLoading && <SvgLoader />}
-              </Button>
-            </div>
+            <Button
+              onClick={(e) => {
+                e.preventDefault()
+                setCancelLoading(true)
+                unJoinStudent(student!.id, subject.id)
+              }}
+              size="sm"
+              variant={'destructive'}
+              disabled={cancelLoading}
+            >
+              Unjoin
+              {cancelLoading && <SvgLoader />}
+            </Button>
           )}
         </div>
       </div>

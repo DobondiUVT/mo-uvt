@@ -1,10 +1,17 @@
+import { getAuthInfo } from '@/actions/auth'
 import Sidebar from '@/components/Admin/Navigation/Sidebar'
+import { redirect } from 'next/navigation'
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { session, user } = await getAuthInfo()
+  if (!session || !user || !(user.role === 'ADMIN')) {
+    redirect('/')
+  }
+
   return (
     <div className="flex flex-col sm:flex-row">
       <div className="flex-shrink-0 xl:w-96">

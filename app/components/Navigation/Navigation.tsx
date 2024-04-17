@@ -63,6 +63,7 @@ const Navigation = ({
     navItems.push({ title: 'My choices', link: '/choice' })
   }
   navItems.push({ title: 'Subjects', link: '/subjects' })
+  navItems.push({ title: 'Feedback', link: '/feedback' })
   return (
     <header className="sticky top-0 z-10 h-16 border-b border-zinc-300 bg-zinc-100 bg-opacity-80 px-4 backdrop-blur-sm">
       <div className="h-full">

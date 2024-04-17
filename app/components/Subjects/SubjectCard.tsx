@@ -11,7 +11,7 @@ const SubjectCard = ({
 }) => {
   return (
     <Link
-      className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:-translate-x-1 hover:-translate-y-1 hover:border-black"
+      className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:border-black"
       href={`/subject/${subject.id}`}
     >
       <div className="mb-1 text-xl font-bold">{subject.title}</div>
