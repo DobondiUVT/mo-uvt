@@ -19,6 +19,21 @@ const authOptions: AuthOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       if (!profile || !profile.email || !profile.name) return '/auth-error'
 
+      try {
+        await prisma.user.upsert({
+          where: { email: profile.email },
+          update: {},
+          create: {
+            email: profile.email,
+            name: profile.name,
+            role: 'STUDENT'
+          },
+        })
+      } catch (e) {
+        console.error(e)
+        return '/auth-error'
+      }
+
       // if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
       //   return '/auth-error'
 
