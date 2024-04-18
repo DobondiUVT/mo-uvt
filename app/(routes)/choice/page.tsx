@@ -51,14 +51,7 @@ async function Subjects({ student }: { student: StudentData }) {
 }
 
 export default async function Choice() {
-  const { session, user, student } = await getAuthInfo()
-  const dates = await prisma.settings.findFirst({
-    select: { dateStart: true, dateEnd: true },
-  })
-  const dateStart = new Date(dates!.dateStart)
-  const dateEnd = new Date(dates!.dateEnd)
-  const dateNow = new Date()
-  const isJoinPeriod = dateNow >= dateStart && dateNow <= dateEnd
+  const { user, student } = await getAuthInfo()
 
   if (!user) {
     redirect('/')
@@ -67,6 +60,14 @@ export default async function Choice() {
   if (!student?.verified) {
     redirect('/info')
   }
+
+  const dates = await prisma.settings.findFirst({
+    select: { dateStart: true, dateEnd: true },
+  })
+  const dateStart = new Date(dates!.dateStart)
+  const dateEnd = new Date(dates!.dateEnd)
+  const dateNow = new Date()
+  const isJoinPeriod = dateNow >= dateStart && dateNow <= dateEnd
 
   return (
     <main className="">

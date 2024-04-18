@@ -19,23 +19,25 @@ const authOptions: AuthOptions = {
     async signIn({ user, account, profile, email, credentials }) {
       if (!profile || !profile.email || !profile.name) return '/auth-error'
 
+      let dbUser;
+
       try {
-        await prisma.user.upsert({
+        dbUser = await prisma.user.findUnique({
           where: { email: profile.email },
-          update: {},
-          create: {
-            email: profile.email,
-            name: profile.name,
-            role: 'STUDENT'
-          },
         })
+        if (!dbUser) {
+          dbUser = await prisma.user.create({
+            data: {
+              email: profile.email,
+              name: profile.name,
+              role: "STUDENT"
+            }
+          })
+        }
       } catch (e) {
         console.error(e)
         return '/auth-error'
       }
-
-      // if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
-      //   return '/auth-error'
 
       return true
     },
