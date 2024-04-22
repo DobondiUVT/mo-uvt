@@ -7,8 +7,19 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
   const defaultFaculties = Array.from(
     new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? '')),
   )
+  let uniqueSpecializations = new Set<string>();
+  subjects.forEach(subject => {
+    subject.specializations.forEach(specialization => {
+      uniqueSpecializations.add(specialization.abbreviation);
+    })
+  });
+
+  let defaultSpecializations = Array.from(uniqueSpecializations);
+
+  const [year, setYear] = useState<string[]>(['ONE', 'TWO', 'THREE'])
   const [semesters, setSemesters] = useState<string[]>(['ONE', 'TWO'])
   const [faculties, setFaculties] = useState<string[]>(defaultFaculties)
+  const [specializations, setSpecializations] = useState<string[]>(defaultSpecializations)
   const [search, setSearch] = useState<string>('')
 
   let filteredSubjects = subjects.filter((subject) => {
@@ -21,6 +32,14 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
 
   filteredSubjects = filteredSubjects.filter((subject) => {
     return subject.title?.toLowerCase().includes(search.toLowerCase()) ?? false
+  })
+
+  filteredSubjects = filteredSubjects.filter((subject) => {
+    return specializations.some(specialization => subject.specializations.some(s => s.abbreviation === specialization))
+  })
+
+  filteredSubjects = filteredSubjects.filter((subject) => {
+    return year.includes(subject.year)
   })
 
   return (
@@ -37,12 +56,60 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
       </div>
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <div className="lg:flex-shrink-0 lg:basis-64">
-          <div className="flex gap-6 rounded-sm border border-zinc-200 bg-white p-4 sm:gap-12 lg:block">
+          <div className="flex flex-col gap-4 rounded-sm border border-zinc-200 bg-white p-4 sm:gap-12 lg:block">
             <div className="text-lg">Filters</div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
+              <div className="text-md">Year</div>
+              <div className="flex flex-row lg:flex-col gap-3">
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={year.includes('ONE')}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        if (!year.includes('ONE')) setYear([...year, 'ONE'])
+                      } else {
+                        setYear(year.filter((y) => y !== 'ONE'))
+                      }
+                    }}
+                  />
+                  ONE
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={year.includes('TWO')}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        if (!year.includes('TWO')) setYear([...year, 'TWO'])
+                      } else {
+                        setYear(year.filter((y) => y !== 'TWO'))
+                      }
+                    }}
+                  />
+                  TWO
+                </label>
+                <label className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={year.includes('THREE')}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        if (!year.includes('THREE')) setYear([...year, 'THREE'])
+                      } else {
+                        setYear(year.filter((y) => y !== 'THREE'))
+                      }
+                    }}
+                  />
+                  THREE
+                </label>
+              </div>
+            </div>
+            <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
+            <div>
               <div className="text-md">Semester</div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-row lg:flex-col gap-3">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -82,7 +149,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Faculties</div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-row lg:flex-col gap-3">
                 {defaultFaculties.map((faculty) => (
                   <label key={faculty} className="flex items-center gap-2">
                     <input
@@ -100,6 +167,34 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }}
                     />
                     {faculty}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
+            <div>
+              <div className="text-md">Specializations</div>
+              <div className="flex flex-row lg:flex-col gap-3">
+                {defaultSpecializations.map((specialization) => (
+                  <label
+                    key={specialization}
+                    className="flex items-center gap-2"
+                  >
+                    <input
+                      type="checkbox"
+                      checked={specializations.includes(specialization)}
+                      onChange={(e) => {
+                        if (e.target.checked) {
+                          if (!specializations.includes(specialization))
+                            setSpecializations([...specializations, specialization])
+                        } else {
+                          setSpecializations(
+                            specializations.filter((spec) => spec !== specialization),
+                          )
+                        }
+                      }}
+                    />
+                    {specialization}
                   </label>
                 ))}
               </div>
