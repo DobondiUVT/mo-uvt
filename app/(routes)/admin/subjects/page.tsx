@@ -28,10 +28,11 @@ const TopHeader = () => (
 export default async function SubjectsAdmin() {
   const subjects = await getSubjects()
   const faculties = await prisma.faculty.findMany()
+  const specializations = await prisma.specialization.findMany()
   return (
     <>
       <TopHeader />
-      <Table columns={columns} data={subjects} faculties={faculties}/>
+      <Table columns={columns} data={subjects} faculties={faculties} specializations={specializations}/>
     </>
   )
 }

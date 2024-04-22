@@ -50,6 +50,16 @@ const columnArray: ColumnArray[] = [
     title: 'Title',
     sortable: true,
   },
+  {
+    id: 'semester',
+    title: 'Semester',
+    sortable: true,
+  },
+  {
+    id: 'year',
+    title: 'Year',
+    sortable: true,
+  },
 ]
 
 const createColumnDefs = () => {

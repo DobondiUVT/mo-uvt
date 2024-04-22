@@ -26,9 +26,9 @@ const AuthError = () => {
               If you are still having issues, please contact us at{' '}
               <a
                 className="font-bold underline"
-                href="mailto:info.uvt@e-uvt.ro"
+                href="mailto:laszlo.dobondi02@e-uvt.ro"
               >
-                info.uvt@e-uvt.ro
+                laszlo.dobondi02@e-uvt.ro
               </a>
             </div>
             <div className="flex w-full items-center justify-end gap-4">
