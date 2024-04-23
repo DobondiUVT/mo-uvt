@@ -1,20 +1,11 @@
-import { buttonVariants } from '@/components/ui/button'
+import { getSubject } from '@/actions/subject'
 import prisma from '@/utilities/db'
-import {
-  IconFile,
-  IconFileText,
-  IconFileTypePdf,
-  IconPdf,
-} from '@tabler/icons-react'
+import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { notFound } from 'next/navigation'
 
 const SubjectPage = async ({ params }: { params: { id: number } }) => {
   const { id } = params
-  const subject = await prisma.subject.findUnique({
-    where: {
-      id: Number(id),
-    },
-  })
+  const subject = await getSubject(Number(id))
 
   if (!subject) {
     notFound()
@@ -27,6 +18,39 @@ const SubjectPage = async ({ params }: { params: { id: number } }) => {
           {subject.title} ({subject.abbreviation})
         </h1>
         <div className="mb-6 h-1 w-32 rounded bg-uvt-blue"></div>
+        <div className="mb-2 text-xl font-bold text-zinc-700">
+          Informații generale
+        </div>
+        <div className="mb-4">
+          {
+            subject.faculty && (
+              <div className="text-zinc-700">
+                {subject.faculty.name}
+              </div>
+            )
+          }
+          {
+            subject.specializations.length > 0 && (
+              <div className="text-zinc-700">
+                {subject.specializations.map((spec) => spec.title).join(', ')}
+              </div>
+            )
+          }
+          {
+            subject.year && (
+              <div className="text-zinc-700">
+                Anul {ENUM_TO_NUMBER[subject.year]}
+              </div>
+            )
+          }
+          {
+            subject.semester && (
+              <div className="text-zinc-700">
+                Semestrul {ENUM_TO_NUMBER[subject.semester]}
+              </div>
+            )
+          }
+        </div>
         {subject.description && (
           <>
             <div className="mb-2 text-xl font-bold text-zinc-700">

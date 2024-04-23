@@ -61,7 +61,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Year</div>
-              <div className="flex flex-row lg:flex-col gap-3">
+              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -74,7 +74,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }
                     }}
                   />
-                  ONE
+                  1
                 </label>
                 <label className="flex items-center gap-2">
                   <input
@@ -88,7 +88,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }
                     }}
                   />
-                  TWO
+                  2
                 </label>
                 <label className="flex items-center gap-2">
                   <input
@@ -102,14 +102,14 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }
                     }}
                   />
-                  THREE
+                  3
                 </label>
               </div>
             </div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Semester</div>
-              <div className="flex flex-row lg:flex-col gap-3">
+              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -125,7 +125,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }
                     }}
                   />
-                  ONE
+                  1
                 </label>
                 <label className="flex items-center gap-2">
                   <input
@@ -142,14 +142,14 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       }
                     }}
                   />
-                  TWO
+                  2
                 </label>
               </div>
             </div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Faculties</div>
-              <div className="flex flex-row lg:flex-col gap-3">
+              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
                 {defaultFaculties.map((faculty) => (
                   <label key={faculty} className="flex items-center gap-2">
                     <input
@@ -174,7 +174,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Specializations</div>
-              <div className="flex flex-row lg:flex-col gap-3">
+              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
                 {defaultSpecializations.map((specialization) => (
                   <label
                     key={specialization}

@@ -7,8 +7,10 @@ import {
 import Image from 'next/image'
 import Link from 'next/link'
 import Footer from './Footer'
+import { getAuthInfo } from '@/actions/auth'
 
-export default function Home() {
+export default async function Home() {
+  const { session, user, student } = await getAuthInfo()
   return (
     <>
       <section className="overflow-y-hidden bg-gray-100 py-8 lg:py-14">
@@ -84,7 +86,11 @@ export default function Home() {
                   your liking offered by our university.
                 </p>
                 <a
-                  href="/subjects"
+                  href={
+                    session && user?.role === 'STUDENT'
+                      ? `/choice`
+                      : '/subjects'
+                  }
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   Pick

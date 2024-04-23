@@ -20,3 +20,9 @@ export const SEMESTER_OPTIONS: Record<Semester, Semester> = {
   ONE: 'ONE',
   TWO: 'TWO',
 }
+
+export const ENUM_TO_NUMBER: Record<string, number> = {
+  ONE: 1,
+  TWO: 2,
+  THREE: 3,
+}
