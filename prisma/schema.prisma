@@ -29,7 +29,7 @@ model Subject {
   id              Int              @id @default(autoincrement())
   title           String           @db.VarChar(255)
   description     String           @db.Text
-  file            String           @db.Text
+  file            String?          @db.Text
   semester        Semester         @default(ONE)
   year            Year             @default(ONE)
   faculty         Faculty          @relation(fields: [facultyId], references: [id])

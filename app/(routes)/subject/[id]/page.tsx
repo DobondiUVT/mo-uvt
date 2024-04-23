@@ -38,7 +38,7 @@ const SubjectPage = async ({ params }: { params: { id: number } }) => {
             />
           </>
         )}
-        {subject.file && (
+        {subject.file ? (
           <>
             <div className="mb-4 text-xl font-bold text-zinc-700">
               Fisa disciplinei
@@ -51,6 +51,10 @@ const SubjectPage = async ({ params }: { params: { id: number } }) => {
               ></iframe>
             </div>
           </>
+        ) : (
+          <div className="mb-4 text-xl font-bold text-zinc-700">
+            Fișa disciplinei nu este momentan disponibilă
+          </div>
         )}
       </div>
     </section>

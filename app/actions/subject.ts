@@ -90,7 +90,7 @@ export async function saveSubject(prevState: any, formData: FormData) {
       .string()
       .min(1, 'Abbreviation must be at least 1 character')
       .max(10, 'Abbreviation must be less than 10 characters'),
-    file: z.string().min(1, 'File URL must be at least 1 character'),
+    file: z.string().optional(),
     specializations: z
       .array(z.coerce.number())
       .min(1, 'At least one specialization must be selected'),
@@ -155,7 +155,7 @@ export async function updateSubject(prevState: any, formData: FormData) {
       .string()
       .min(1, 'Abbreviation must be at least 1 character')
       .max(10, 'Abbreviation must be less than 10 characters'),
-    file: z.string().min(1, 'File URL must be at least 1 character'),
+    file: z.string().optional(),
     specializations: z
       .array(z.coerce.number())
       .min(1, 'At least one specialization must be selected'),
