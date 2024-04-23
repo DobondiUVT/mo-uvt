@@ -8,6 +8,7 @@ import InputText from '@/components/Admin/Form/utils/InputText'
 import { SubmitButton } from '@/components/Admin/Form/utils/SubmitButton'
 import { YEAR_OPTIONS } from '@/utilities/utils'
 import { Faculty, Specialization, User } from '@prisma/client'
+import { IconInfoCircle } from '@tabler/icons-react'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
@@ -72,15 +73,6 @@ const InfoForm = ({
         label="Specialization"
         error={state?.specializationId?.[0]}
       />
-      <InputSelect
-        value={year}
-        setValue={setYear}
-        options={yearOptions}
-        name="year"
-        id="year"
-        label="Year"
-        error={state?.year?.[0]}
-      />
       <div className="max-w-xs">
         <InputText
           name="sn"
@@ -89,6 +81,23 @@ const InfoForm = ({
           placeholder="I000"
           error={state?.sn?.[0]}
         />
+      </div>
+      <div className="mb-4 p-4 bg-uvt-yellow rounded-lg inline-block">
+        <div className='inline-flex gap-2 text-gray-700'>
+          <IconInfoCircle size={24} />
+          Please select the year for which you want to choose the optional subjects (not the one you are currently in)
+        </div>
+        <div className="-mb-6">
+          <InputSelect
+            value={year}
+            setValue={setYear}
+            options={yearOptions}
+            name="year"
+            id="year"
+            label=''
+            error={state?.year?.[0]}
+          />
+        </div>
       </div>
       <SubmitButton />
     </form>
