@@ -1,5 +1,6 @@
 'use server'
 
+import { FileStudent } from '@/(routes)/admin/students/add/page'
 import prisma from '@/utilities/db'
 import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
@@ -135,4 +136,38 @@ export const unJoinStudent = async (studentId: number, subjectId: number) => {
     },
   })
   revalidatePath('/choice')
+}
+
+export const saveStudentsFromFile = async (students: FileStudent[]) => {
+  'use server'
+  for (const student of students) {
+    const dbFaculty = await prisma.faculty.findFirst({
+      where: { abbreviation: student.faculty },
+    })
+    const dbSpecialization = await prisma.specialization.findFirst({
+      where: { abbreviation: student.specialization },
+    })
+    if (!dbFaculty || !dbSpecialization) 
+      return
+    const user = await prisma.user.upsert({
+      where: { email: student.email },
+      create: {
+        name: student.name,
+        email: student.email,
+        role: 'STUDENT',
+      },
+      update: {},
+    })
+    const newStudent = await prisma.student.upsert({
+      where: { sn: student.sn },
+      create: {
+        sn: student.sn,
+        userId: user.id,
+        facultyId: dbFaculty.id,
+        specializationId: dbSpecialization.id,
+      },
+      update: {},
+    })
+  }
+  redirect('/admin/students')
 }
