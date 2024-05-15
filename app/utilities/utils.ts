@@ -26,3 +26,9 @@ export const ENUM_TO_NUMBER: Record<string, number> = {
   TWO: 2,
   THREE: 3,
 }
+
+export const NUMBER_TO_ENUM: Record<number, Year> = {
+  1: 'ONE',
+  2: 'TWO',
+  3: 'THREE',
+}

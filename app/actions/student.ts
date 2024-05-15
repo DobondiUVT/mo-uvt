@@ -2,6 +2,7 @@
 
 import { FileStudent } from '@/(routes)/admin/students/add/page'
 import prisma from '@/utilities/db'
+import { NUMBER_TO_ENUM, YEAR_OPTIONS } from '@/utilities/utils'
 import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
@@ -147,7 +148,7 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
     const dbSpecialization = await prisma.specialization.findFirst({
       where: { abbreviation: student.specialization },
     })
-    if (!dbFaculty || !dbSpecialization) 
+    if (!dbFaculty || !dbSpecialization)
       return
     const user = await prisma.user.upsert({
       where: { email: student.email },
@@ -165,6 +166,8 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
         userId: user.id,
         facultyId: dbFaculty.id,
         specializationId: dbSpecialization.id,
+        year: NUMBER_TO_ENUM[student.year],
+        verified: true
       },
       update: {},
     })

@@ -50,6 +50,15 @@ const createSpecialDefs = () => {
         return <div>{row.original.specialization}</div>
       },
     },
+    {
+      accessorKey: 'year',
+      header: () => {
+        return <div>Year</div>
+      },
+      cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
+        return <div>{row.original.year}</div>
+      },
+    }
   ]
 }
 

@@ -17,6 +17,7 @@ export type subjectsStudentsType = {
 const Admin = async () => {
   const subjects = await getSubjects()
   const faculties = await prisma.faculty.findMany()
+  const specializations = await prisma.specialization.findMany()
   const settings = await prisma.settings.findFirst({
     where: {
       id: 1,
@@ -26,7 +27,7 @@ const Admin = async () => {
   return (
     <Fragment>
       <Settings settings={settings!} method={saveDates}/>
-      <Statistics subjects={subjects} faculties={faculties}/>
+      <Statistics subjects={subjects} faculties={faculties} specializations={specializations}/>
     </Fragment>
   )
 }
