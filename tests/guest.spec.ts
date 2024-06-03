@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 // Tests suite for checking the availability of the pages
+// than can be accessed by a guest user
 
 // Homepage
 test('should navigate to the homepage', async ({ page }) => {

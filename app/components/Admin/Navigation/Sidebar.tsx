@@ -83,9 +83,9 @@ const Sidebar = () => {
     <div
       className={`sticky top-[64px] w-full overflow-y-auto border-r border-zinc-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8`}
     >
-      <div className="mb-4 hidden text-lg font-bold text-zinc-800 xl:block">
+      <h1 className="mb-4 hidden text-lg font-bold text-zinc-800 xl:block">
         Administration dashboard
-      </div>
+      </h1>
       <nav
         aria-label="Main"
         className="flex flex-1 gap-3 overflow-y-hidden hover:overflow-y-auto sm:block sm:space-y-2"
