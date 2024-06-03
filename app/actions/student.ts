@@ -7,6 +7,7 @@ import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
+import { getAuthInfo } from './auth'
 
 export async function getStudent(userId: number) {
   if (!userId) return null
@@ -156,7 +157,9 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
         email: student.email,
         role: 'STUDENT',
       },
-      update: {},
+      update: {
+        name: student.name,
+      },
     })
     const newStudent = await prisma.student.upsert({
       where: { sn: student.sn },
@@ -168,9 +171,34 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
         year: NUMBER_TO_ENUM[student.year],
         verified: true,
       },
-      update: {},
+      update: {
+        facultyId: dbFaculty.id,
+        specializationId: dbSpecialization.id,
+        year: NUMBER_TO_ENUM[student.year],
+        verified: true,
+      },
     })
   }
+
+  const { user } = await getAuthInfo()
+
+  const importSettings = await prisma.settings.upsert({
+    where: {
+      id: 1,
+    },
+    create: {
+      id: 1,
+      dateStart: new Date(),
+      dateEnd: new Date(),
+      lastImportAuthorName: user?.name,
+      lastImportDate: new Date(),
+    },
+    update: {
+      lastImportAuthorName: user?.name,
+      lastImportDate: new Date(),
+    },
+  })
+
   redirect('/admin/students')
 }
 
