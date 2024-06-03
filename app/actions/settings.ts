@@ -12,7 +12,7 @@ export async function saveDates(prevState: any, formData: FormData) {
     },
     data: {
       dateStart,
-      dateEnd
+      dateEnd,
     },
   })
   revalidatePath('/admin')

@@ -12,7 +12,7 @@ function Table({
   columns,
   data,
   faculties,
-  specializations
+  specializations,
 }: {
   columns: ColumnDef<SubjectData>[]
   data: SubjectData[]
@@ -93,15 +93,23 @@ function Table({
       label: 'THREE',
       value: 'THREE',
       id: 3,
-    }
+    },
   ]
-  const selectedFaculty = isEqualInsensitiveStrings(faculty, 'all') ? '' : faculty
-  const selectedSpecialization = isEqualInsensitiveStrings(specialization, 'all') ? '' : specialization
-  const selectedSemester = isEqualInsensitiveStrings(semester, 'all') ? '' : semester
+  const selectedFaculty = isEqualInsensitiveStrings(faculty, 'all')
+    ? ''
+    : faculty
+  const selectedSpecialization = isEqualInsensitiveStrings(
+    specialization,
+    'all',
+  )
+    ? ''
+    : specialization
+  const selectedSemester = isEqualInsensitiveStrings(semester, 'all')
+    ? ''
+    : semester
   const selectedYear = isEqualInsensitiveStrings(year, 'all') ? '' : year
 
-
-  let filteredSubjects = data;
+  let filteredSubjects = data
   filteredSubjects = selectedFaculty
     ? filteredSubjects.filter((subject) =>
         isEqualInsensitiveStrings(subject.faculty.name, selectedFaculty),
@@ -110,7 +118,10 @@ function Table({
   filteredSubjects = selectedSpecialization
     ? filteredSubjects.filter((subject) =>
         subject.specializations.some((specialization) =>
-          isEqualInsensitiveStrings(specialization.title, selectedSpecialization),
+          isEqualInsensitiveStrings(
+            specialization.title,
+            selectedSpecialization,
+          ),
         ),
       )
     : filteredSubjects
@@ -126,7 +137,7 @@ function Table({
     : filteredSubjects
   return (
     <Fragment>
-      <div className="flex gap-4 flex-wrap">
+      <div className="flex flex-wrap gap-4">
         <InputCombobox
           value={faculty}
           setValue={setFaculty}

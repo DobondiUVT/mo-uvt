@@ -15,7 +15,7 @@ const EditStudent = async ({ params }: { params: { id: number } }) => {
   const student = await getStudent(Number(id))
 
   if (!student) {
-    return "No student found"
+    return 'No student found'
   }
 
   const breadcrumbLinks = [

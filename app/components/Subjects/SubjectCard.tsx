@@ -6,18 +6,24 @@ import { ENUM_TO_NUMBER, SEMESTER_OPTIONS } from '@/utilities/utils'
 
 const Tags = (subject: SubjectData) => {
   return (
-    <div className="flex flex-wrap gap-2 mb-2">
+    <div className="mb-2 flex flex-wrap gap-2">
       {subject.faculty && (
         <Badge variant={'secondary'}>{subject.faculty.abbreviation}</Badge>
       )}
       {subject.specializations.map((specialization) => (
-        <Badge variant={'secondary'} key={specialization.id}>{specialization.abbreviation}</Badge>
+        <Badge variant={'secondary'} key={specialization.id}>
+          {specialization.abbreviation}
+        </Badge>
       ))}
       {subject.year && (
-        <Badge variant={'secondary'}>{`Y${ENUM_TO_NUMBER[subject.year]}`}</Badge>
+        <Badge
+          variant={'secondary'}
+        >{`Y${ENUM_TO_NUMBER[subject.year]}`}</Badge>
       )}
       {subject.semester && (
-        <Badge variant={'secondary'}>{`S${ENUM_TO_NUMBER[subject.semester]}`}</Badge>
+        <Badge
+          variant={'secondary'}
+        >{`S${ENUM_TO_NUMBER[subject.semester]}`}</Badge>
       )}
     </div>
   )
@@ -35,7 +41,7 @@ const SubjectCard = ({
       className="flex flex-col rounded-lg border bg-white p-5 shadow transition-transform hover:border-black"
       href={`/subject/${subject.id}`}
     >
-      <div className="text-lg font-bold mb-2">{subject.title}</div>
+      <div className="mb-2 text-lg font-bold">{subject.title}</div>
       <Tags {...subject} />
       <div
         dangerouslySetInnerHTML={{ __html: subject.description ?? '' }}

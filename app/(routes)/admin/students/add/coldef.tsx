@@ -58,7 +58,7 @@ const createSpecialDefs = () => {
       cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
         return <div>{row.original.year}</div>
       },
-    }
+    },
   ]
 }
 

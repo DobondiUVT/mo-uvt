@@ -7,19 +7,21 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
   const defaultFaculties = Array.from(
     new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? '')),
   )
-  let uniqueSpecializations = new Set<string>();
-  subjects.forEach(subject => {
-    subject.specializations.forEach(specialization => {
-      uniqueSpecializations.add(specialization.abbreviation);
+  let uniqueSpecializations = new Set<string>()
+  subjects.forEach((subject) => {
+    subject.specializations.forEach((specialization) => {
+      uniqueSpecializations.add(specialization.abbreviation)
     })
-  });
+  })
 
-  let defaultSpecializations = Array.from(uniqueSpecializations);
+  let defaultSpecializations = Array.from(uniqueSpecializations)
 
   const [year, setYear] = useState<string[]>(['ONE', 'TWO', 'THREE'])
   const [semesters, setSemesters] = useState<string[]>(['ONE', 'TWO'])
   const [faculties, setFaculties] = useState<string[]>(defaultFaculties)
-  const [specializations, setSpecializations] = useState<string[]>(defaultSpecializations)
+  const [specializations, setSpecializations] = useState<string[]>(
+    defaultSpecializations,
+  )
   const [search, setSearch] = useState<string>('')
 
   let filteredSubjects = subjects.filter((subject) => {
@@ -35,7 +37,9 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
   })
 
   filteredSubjects = filteredSubjects.filter((subject) => {
-    return specializations.some(specialization => subject.specializations.some(s => s.abbreviation === specialization))
+    return specializations.some((specialization) =>
+      subject.specializations.some((s) => s.abbreviation === specialization),
+    )
   })
 
   filteredSubjects = filteredSubjects.filter((subject) => {
@@ -61,7 +65,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Year</div>
-              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
+              <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -109,7 +113,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Semester</div>
-              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
+              <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -149,7 +153,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Faculties</div>
-              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
+              <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 {defaultFaculties.map((faculty) => (
                   <label key={faculty} className="flex items-center gap-2">
                     <input
@@ -174,7 +178,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
               <div className="text-md">Specializations</div>
-              <div className="flex flex-row lg:flex-col gap-3 lg:gap-1">
+              <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 {defaultSpecializations.map((specialization) => (
                   <label
                     key={specialization}
@@ -186,10 +190,15 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
                       onChange={(e) => {
                         if (e.target.checked) {
                           if (!specializations.includes(specialization))
-                            setSpecializations([...specializations, specialization])
+                            setSpecializations([
+                              ...specializations,
+                              specialization,
+                            ])
                         } else {
                           setSpecializations(
-                            specializations.filter((spec) => spec !== specialization),
+                            specializations.filter(
+                              (spec) => spec !== specialization,
+                            ),
                           )
                         }
                       }}

@@ -35,9 +35,12 @@ const ChoiceDescription = ({
     } else if (hasJoinPeriodPassed) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          Registrations have ended!<br/>Last registration period was between{' '}
-          {dateStart.toLocaleDateString()} and {dateEnd.toLocaleDateString()}.
-          <br/>Please contact us at{' '}
+          Registrations have ended!
+          <br />
+          Last registration period was between {dateStart.toLocaleDateString()}{' '}
+          and {dateEnd.toLocaleDateString()}.
+          <br />
+          Please contact us at{' '}
           <a href="mailto:info@e-uvt.ro" className="underline">
             info@e-uvt.ro
           </a>{' '}

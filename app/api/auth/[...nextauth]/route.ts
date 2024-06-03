@@ -22,7 +22,7 @@ const authOptions: AuthOptions = {
       if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
         return '/auth-error'
 
-      let dbUser;
+      let dbUser
 
       try {
         dbUser = await prisma.user.findUnique({
@@ -33,8 +33,8 @@ const authOptions: AuthOptions = {
             data: {
               email: profile.email,
               name: profile.name,
-              role: "STUDENT"
-            }
+              role: 'STUDENT',
+            },
           })
         }
       } catch (e) {

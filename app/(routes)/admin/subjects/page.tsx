@@ -32,7 +32,12 @@ export default async function SubjectsAdmin() {
   return (
     <>
       <TopHeader />
-      <Table columns={columns} data={subjects} faculties={faculties} specializations={specializations}/>
+      <Table
+        columns={columns}
+        data={subjects}
+        faculties={faculties}
+        specializations={specializations}
+      />
     </>
   )
 }

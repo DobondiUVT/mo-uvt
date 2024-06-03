@@ -7,7 +7,7 @@ import {
   IconPencil,
   IconSchool,
   IconTable,
-  IconUser
+  IconUser,
 } from '@tabler/icons-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'

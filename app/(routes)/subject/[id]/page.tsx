@@ -22,34 +22,24 @@ const SubjectPage = async ({ params }: { params: { id: number } }) => {
           Informații generale
         </div>
         <div className="mb-4">
-          {
-            subject.faculty && (
-              <div className="text-zinc-700">
-                {subject.faculty.name}
-              </div>
-            )
-          }
-          {
-            subject.specializations.length > 0 && (
-              <div className="text-zinc-700">
-                {subject.specializations.map((spec) => spec.title).join(', ')}
-              </div>
-            )
-          }
-          {
-            subject.year && (
-              <div className="text-zinc-700">
-                Anul {ENUM_TO_NUMBER[subject.year]}
-              </div>
-            )
-          }
-          {
-            subject.semester && (
-              <div className="text-zinc-700">
-                Semestrul {ENUM_TO_NUMBER[subject.semester]}
-              </div>
-            )
-          }
+          {subject.faculty && (
+            <div className="text-zinc-700">{subject.faculty.name}</div>
+          )}
+          {subject.specializations.length > 0 && (
+            <div className="text-zinc-700">
+              {subject.specializations.map((spec) => spec.title).join(', ')}
+            </div>
+          )}
+          {subject.year && (
+            <div className="text-zinc-700">
+              Anul {ENUM_TO_NUMBER[subject.year]}
+            </div>
+          )}
+          {subject.semester && (
+            <div className="text-zinc-700">
+              Semestrul {ENUM_TO_NUMBER[subject.semester]}
+            </div>
+          )}
         </div>
         {subject.description && (
           <>

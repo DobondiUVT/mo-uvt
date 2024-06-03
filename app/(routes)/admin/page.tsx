@@ -5,7 +5,6 @@ import { Fragment } from 'react'
 import Settings from '@/components/Admin/Main/Settings'
 import { saveDates } from '@/actions/settings'
 
-
 export type subjectsStudentsType = {
   title: string | null
   id: number
@@ -26,8 +25,12 @@ const Admin = async () => {
 
   return (
     <Fragment>
-      <Settings settings={settings!} method={saveDates}/>
-      <Statistics subjects={subjects} faculties={faculties} specializations={specializations}/>
+      <Settings settings={settings!} method={saveDates} />
+      <Statistics
+        subjects={subjects}
+        faculties={faculties}
+        specializations={specializations}
+      />
     </Fragment>
   )
 }

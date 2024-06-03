@@ -2,7 +2,13 @@
 
 import { SubjectsData } from '@/utilities/types'
 import { ENUM_TO_NUMBER, isEqualInsensitiveStrings } from '@/utilities/utils'
-import { Faculty, Semester, Specialization, Student, Year } from '@prisma/client'
+import {
+  Faculty,
+  Semester,
+  Specialization,
+  Student,
+  Year,
+} from '@prisma/client'
 import { useMemo, useState } from 'react'
 import InputCombobox from '@/components/Admin/Form/utils/InputCombobox'
 import { buttonVariants } from '@/components/ui/button'
@@ -104,8 +110,7 @@ const Statistics = ({
     filteredSubjects = filteredSubjects.filter((subject) => {
       const subjectSpecializations = subject.specializations.map((s) => s.title)
       return subjectSpecializations.includes(specialization)
-    }
-    )
+    })
   }
 
   if (year) {
@@ -121,25 +126,27 @@ const Statistics = ({
   }
 
   const handleExcelDownload = () => {
-    const sheetColumns: string[][] = [];
+    const sheetColumns: string[][] = []
 
     filteredSubjects.forEach((subject) => {
-      const column = [];
-      column.push(subject.abbreviation);
-      column.push(...subject.students.map((student) => student.sn));
-      sheetColumns.push(column);
+      const column = []
+      column.push(subject.abbreviation)
+      column.push(...subject.students.map((student) => student.sn))
+      sheetColumns.push(column)
     })
 
-    const maxColumnLength = Math.max(...sheetColumns.map((column) => column.length));
+    const maxColumnLength = Math.max(
+      ...sheetColumns.map((column) => column.length),
+    )
 
-    const sheetRows = [];
+    const sheetRows = []
 
     for (let i = 0; i < maxColumnLength; i++) {
-      const row = [] as string[];
+      const row = [] as string[]
       sheetColumns.forEach((column) => {
-        row.push(column[i] ?? '');
+        row.push(column[i] ?? '')
       })
-      sheetRows.push(row);
+      sheetRows.push(row)
     }
 
     const ws = XLSX.utils.aoa_to_sheet(sheetRows)
@@ -148,8 +155,8 @@ const Statistics = ({
     const fileNameAttributes = [
       selectedFacultyEntity?.abbreviation,
       selectedSpecializationEntity?.abbreviation,
-      "Y" + ENUM_TO_NUMBER[year],
-      "S" + ENUM_TO_NUMBER[semester],
+      'Y' + ENUM_TO_NUMBER[year],
+      'S' + ENUM_TO_NUMBER[semester],
     ]
     const fileName = `subjects_${fileNameAttributes.join('_')}.xlsx`
     XLSX.writeFile(wb, fileName)
@@ -193,23 +200,27 @@ const Statistics = ({
           label="Semester"
         />
       </div>
-      {
-        filteredSubjects.length > 0 && (
-          <>
-            <div className="mb-6"><button className={buttonVariants({ variant: 'default' })} onClick={handleExcelDownload}>Download excel</button></div>
-            <div className="grid grid-cols-3 gap-6">
-              {filteredSubjects.map((subject) => (
-                <SubjectCard
-                  key={`subject-${subject.id}`}
-                  title={subject.title ?? ''}
-                  students={subject.students}
-                />
-              ))}
-            </div>
-          </>
-        )
-      }
-
+      {filteredSubjects.length > 0 && (
+        <>
+          <div className="mb-6">
+            <button
+              className={buttonVariants({ variant: 'default' })}
+              onClick={handleExcelDownload}
+            >
+              Download excel
+            </button>
+          </div>
+          <div className="grid grid-cols-3 gap-6">
+            {filteredSubjects.map((subject) => (
+              <SubjectCard
+                key={`subject-${subject.id}`}
+                title={subject.title ?? ''}
+                students={subject.students}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }

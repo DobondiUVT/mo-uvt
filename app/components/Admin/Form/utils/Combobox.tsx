@@ -51,7 +51,7 @@ export default function Combobox({ value, setValue, options }: ComboboxProps) {
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0 overflow-y-auto max-h-[16rem]">
+      <PopoverContent className="max-h-[16rem] w-[200px] overflow-y-auto p-0">
         <Command>
           <CommandInput placeholder="Search option..." />
           <CommandEmpty>No option found.</CommandEmpty>

@@ -82,10 +82,11 @@ const InfoForm = ({
           error={state?.sn?.[0]}
         />
       </div>
-      <div className="mb-4 p-4 bg-uvt-yellow rounded-lg inline-block">
-        <div className='inline-flex gap-2 text-gray-700'>
+      <div className="mb-4 inline-block rounded-lg bg-uvt-yellow p-4">
+        <div className="inline-flex gap-2 text-gray-700">
           <IconInfoCircle size={24} />
-          Please select the year for which you want to choose the optional subjects (not the one you are currently in)
+          Please select the year for which you want to choose the optional
+          subjects (not the one you are currently in)
         </div>
         <div className="-mb-6">
           <InputSelect
@@ -94,7 +95,7 @@ const InfoForm = ({
             options={yearOptions}
             name="year"
             id="year"
-            label=''
+            label=""
             error={state?.year?.[0]}
           />
         </div>

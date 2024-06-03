@@ -148,8 +148,7 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
     const dbSpecialization = await prisma.specialization.findFirst({
       where: { abbreviation: student.specialization },
     })
-    if (!dbFaculty || !dbSpecialization)
-      return
+    if (!dbFaculty || !dbSpecialization) return
     const user = await prisma.user.upsert({
       where: { email: student.email },
       create: {
@@ -167,7 +166,7 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
         facultyId: dbFaculty.id,
         specializationId: dbSpecialization.id,
         year: NUMBER_TO_ENUM[student.year],
-        verified: true
+        verified: true,
       },
       update: {},
     })

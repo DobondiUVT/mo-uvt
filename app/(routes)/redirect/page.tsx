@@ -4,19 +4,19 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 
 const Redirect = async () => {
-    const { user, student } = await getAuthInfo()
-    if (!user) {
-        redirect('/')
+  const { user, student } = await getAuthInfo()
+  if (!user) {
+    redirect('/')
+  }
+  if (user.role === 'ADMIN') {
+    redirect('/admin')
+  }
+  if (user.role === 'STUDENT') {
+    if (!student) {
+      redirect('/info')
     }
-    if (user.role === 'ADMIN') {
-        redirect('/admin')
-    }
-    if (user.role === 'STUDENT') {
-        if (!student) {
-            redirect('/info')
-        }
-        redirect('/choice')
-    }
+    redirect('/choice')
+  }
 }
 
 export default Redirect

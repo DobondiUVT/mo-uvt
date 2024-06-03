@@ -34,7 +34,10 @@ const AuthSection = ({ session }: { session: Session | null }) => {
           </Avatar>
         </div>
       ) : (
-        <Button onClick={() => signIn('google', { callbackUrl: "/redirect" })} variant={'outline'}>
+        <Button
+          onClick={() => signIn('google', { callbackUrl: '/redirect' })}
+          variant={'outline'}
+        >
           Log in
         </Button>
       )}
