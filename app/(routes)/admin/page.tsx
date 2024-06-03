@@ -23,11 +23,15 @@ const Admin = async () => {
     },
   })
 
+  const sortedSubjects = subjects.sort(
+    (a, b) => b.students.length - a.students.length,
+  )
+
   return (
     <Fragment>
       <Settings settings={settings!} method={saveDates} />
       <Statistics
-        subjects={subjects}
+        subjects={sortedSubjects}
         faculties={faculties}
         specializations={specializations}
       />

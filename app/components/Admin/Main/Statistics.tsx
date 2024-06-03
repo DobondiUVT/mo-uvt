@@ -20,20 +20,17 @@ type SubjectCardProps = {
   students: Pick<Student, 'sn'>[]
 }
 
+const formatNoOfStudents = (students: Pick<Student, 'sn'>[]) =>
+  students.length > 0
+    ? `${students.length} student${students.length > 1 ? 's' : ''} joined.`
+    : 'No students joined yet.'
+
 const SubjectCard = ({ title, students }: SubjectCardProps) => (
   <div className="rounded-lg border bg-white p-4 shadow">
-    <div className="mb-2 text-xl font-bold">{title}</div>
-    <ul className="flex flex-col items-center justify-center gap-4">
-      {students.length ? (
-        students.map((student) => (
-          <li key={student.sn} className="text-lg">
-            {student.sn}
-          </li>
-        ))
-      ) : (
-        <div className="text-zinc-500">No students yet</div>
-      )}
-    </ul>
+    <div className="mb-2 text-lg font-bold">{title}</div>
+    <div className="text-zinc-500">
+      {formatNoOfStudents(students)}
+    </div>
   </div>
 )
 
@@ -50,6 +47,7 @@ const Statistics = ({
   const [specialization, setSpecialization] = useState(specializations[0].title)
   const [year, setYear] = useState(Year.ONE)
   const [semester, setSemester] = useState(Semester.ONE)
+  const [excelSettings, setExcelSettings] = useState('ids')
 
   const facultiesOptions = useMemo(
     () => [
@@ -86,6 +84,15 @@ const Statistics = ({
     () => [
       { label: '1', value: Semester.ONE },
       { label: '2', value: Semester.TWO },
+    ],
+    [],
+  )
+
+  const excelSettingsOptions = useMemo(
+    () => [
+      { label: 'Ids', value: 'ids' },
+      { label: 'Names', value: 'names' },
+      { label: 'Ids + Names', value: 'ids+names' },
     ],
     [],
   )
@@ -131,7 +138,17 @@ const Statistics = ({
     filteredSubjects.forEach((subject) => {
       const column = []
       column.push(subject.abbreviation)
-      column.push(...subject.students.map((student) => student.sn))
+      column.push(
+        ...subject.students.map((student) => {
+          if (excelSettings === 'ids') {
+            return student.sn
+          } else if (excelSettings === 'names') {
+            return student.user.name
+          } else {
+            return `${student.sn} ${student.user.name}`
+          }
+        }),
+      )
       sheetColumns.push(column)
     })
 
@@ -166,7 +183,7 @@ const Statistics = ({
     <div>
       <div className="text-xl font-bold">Statistics</div>
       <div className="mb-4 text-lg">Subjects & Students</div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center gap-2">
         <InputCombobox
           value={faculty}
           setValue={setFaculty}
@@ -202,7 +219,15 @@ const Statistics = ({
       </div>
       {filteredSubjects.length > 0 && (
         <>
-          <div className="mb-6">
+          <div className="mb-6 flex flex-wrap items-center gap-3">
+            <InputSelect
+              name="excelSettings"
+              id="excelSettings"
+              label="Excel student details"
+              options={excelSettingsOptions}
+              value={excelSettings}
+              setValue={setExcelSettings}
+            />
             <button
               className={buttonVariants({ variant: 'default' })}
               onClick={handleExcelDownload}
@@ -210,7 +235,7 @@ const Statistics = ({
               Download excel
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {filteredSubjects.map((subject) => (
               <SubjectCard
                 key={`subject-${subject.id}`}

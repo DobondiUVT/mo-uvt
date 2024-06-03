@@ -23,7 +23,11 @@ export async function getSubjects() {
     include: {
       faculty: true,
       specializations: true,
-      students: true,
+      students: {
+        include: {
+          user: true,
+        }
+      },
       groups: true,
     },
   })
