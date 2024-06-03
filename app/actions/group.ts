@@ -51,7 +51,11 @@ export async function getGroupsForStudent(student: Student) {
         include: {
           faculty: true,
           specializations: true,
-          students: true,
+          students: {
+            include: {
+              user: true,
+            },
+          },
           groups: true,
         },
       },
