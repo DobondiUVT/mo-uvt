@@ -174,3 +174,64 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
   }
   redirect('/admin/students')
 }
+
+export async function deleteStudent(id: number) {
+  try {
+    await prisma.student.delete({ where: { id } })
+    return {
+      title: 'Hooray!',
+      description: 'Successfully deleted student',
+      status: 'success',
+    }
+  } catch (e) {
+    console.error(e)
+    return {
+      title: `Error deleting student`,
+      description: `${e}`,
+      status: 'error',
+    }
+  } finally {
+    revalidatePath('/admin/students')
+  }
+}
+
+export async function updateStudent(prevState: any, formData: FormData) {
+  const adjustedFormData = {
+    id: formData.get('id'),
+    facultyId: formData.get('facultyId'),
+    specializationId: formData.get('specializationId'),
+    sn: formData.get('sn'),
+    year: formData.get('year'),
+  }
+
+  const schema = z.object({
+    id: z.coerce.number(),
+    facultyId: z.coerce.number().positive('This field is required'),
+    specializationId: z.coerce.number().positive('This field is required'),
+    sn: z.string().min(1, 'This field is required').max(10),
+    year: z.nativeEnum(Year, {
+      errorMap: (_i, _c) => {
+        return { message: 'This field is required' }
+      },
+    }),
+    verified: z.coerce.boolean(),
+  })
+
+  const parsed = schema.safeParse(adjustedFormData)
+  if (!parsed.success) {
+    console.log(parsed.error.flatten())
+    return parsed.error.flatten().fieldErrors
+  }
+
+  try {
+    await prisma.student.update({
+      where: { id: parsed.data.id },
+      data: parsed.data,
+    })
+  } catch (e) {
+    console.error(e)
+    return { serverError: `Error updating student: ${e}` }
+  } finally {
+    redirect('/admin/students')
+  }
+}

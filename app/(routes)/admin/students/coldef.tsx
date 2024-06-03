@@ -1,10 +1,21 @@
 'use client'
 
+import { deleteStudent } from '@/actions/student'
+import { deleteSubject } from '@/actions/subject'
 import { Button } from '@/components/ui/button'
-import { StudentData } from '@/utilities/types'
+import { useToast } from '@/components/ui/use-toast'
+import { StudentData, SubjectData } from '@/utilities/types'
+import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
-import { ArrowUpDown } from 'lucide-react'
+import { ArrowUpDown, Edit, MoreHorizontal, Trash } from 'lucide-react'
 import Link from 'next/link'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 const SortButton = ({
   column,
@@ -55,6 +66,24 @@ const createSpecialDefs = () => {
       },
     },
     {
+      accessorKey: 'Specialization',
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
+        return <SortButton column={column} title="Specialization" />
+      },
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
+        return <div>{row.original.specialization?.title}</div>
+      },
+    },
+    {
+      accessorKey: 'Year',
+      header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
+        return <SortButton column={column} title="Year" />
+      },
+      cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
+        return <div>{ENUM_TO_NUMBER[row.original.year]}</div>
+      },
+    },
+    {
       accessorKey: 'Subjects',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
         return <SortButton column={column} title="Subjects" />
@@ -70,8 +99,43 @@ const createSpecialDefs = () => {
   ]
 }
 
-const DropdownAction = ({ student }: { student: NonNullable<StudentData> }) => {
-  return <Link href={`/admin/students/edit/${student!.id}`}></Link>
+const DropdownAction = ({ student }: { student: StudentData }) => {
+  const { toast } = useToast()
+  const handleDelete = async (id: number) => {
+    const response = await deleteStudent(id)
+    toast({
+      variant: response.status as 'success' | 'error',
+      title: response.title,
+      description: response.description,
+    })
+  }
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-8 w-8 p-0">
+          <span className="sr-only">Open menu</span>
+          <MoreHorizontal className="h-4 w-4" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <Link href={`/admin/students/edit/${student!.id}`}>
+          <DropdownMenuItem className="cursor-pointer">
+            <Edit className="mr-1 h-4 w-4" />
+            Edit
+          </DropdownMenuItem>
+        </Link>
+        <DropdownMenuItem
+          className="cursor-pointer text-red-400 focus:bg-red-600 focus:text-zinc-100"
+          onClick={(_e) => {
+            handleDelete(student!.id)
+          }}
+        >
+          <Trash className="mr-1 h-4 w-4" />
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }
 
 const createActionCell = () => {
