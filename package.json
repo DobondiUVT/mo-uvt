@@ -52,6 +52,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.44.1",
     "@types/node": "^20.4.5",
     "eslint-config-prettier": "^8.9.0",
     "postcss": "^8.4.31",
