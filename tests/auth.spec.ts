@@ -5,7 +5,7 @@ import { test, expect } from '@playwright/test'
 
 // Test the main admin page
 test('should navigate to the admin page', async ({ page }) => {
-  await page.goto('/admin')
+  await page.goto('/en/admin')
   await expect(page.locator('h1')).toContainText('Administration dashboard')
 })
 
@@ -22,7 +22,7 @@ const subpages = [
 
 subpages.forEach((subpage) => {
   test(`should navigate to the admin ${subpage} page`, async ({ page }) => {
-    const response = await page.goto(`/admin/${subpage}`)
+    const response = await page.goto(`/en/admin/${subpage}`)
     expect(response?.status()).toBe(200)
   })
 })

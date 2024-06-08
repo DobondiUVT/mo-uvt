@@ -6,7 +6,7 @@ import { test, expect } from '@playwright/test'
 // Homepage
 test('should navigate to the homepage', async ({ page }) => {
   // Go to the homepage
-  await page.goto('/')
+  await page.goto('/en/')
 
   // Check if the title is visible
   await expect(page.locator('h1')).toContainText('Optional subjects UVT')
@@ -15,7 +15,7 @@ test('should navigate to the homepage', async ({ page }) => {
 // Subjects page
 test('should navigate to the subjects page', async ({ page }) => {
   // Go to the subjects page
-  await page.goto('/subjects')
+  await page.goto('/en/subjects')
 
   // Check if the title is visible
   await expect(page.locator('h1')).toContainText(
@@ -26,7 +26,7 @@ test('should navigate to the subjects page', async ({ page }) => {
 // Feedback page
 test('should navigate to the feedback page', async ({ page }) => {
   // Go to the feedback page
-  await page.goto('/feedback')
+  await page.goto('/en/feedback')
 
   // Check if the title is visible
   await expect(page.locator('h1')).toContainText(
