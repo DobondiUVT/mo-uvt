@@ -1,4 +1,10 @@
-import { Link, locales, redirect, usePathname, useRouter } from '%/i18n/navigation'
+import {
+  Link,
+  locales,
+  redirect,
+  usePathname,
+  useRouter,
+} from '%/i18n/navigation'
 import { useLocale, useTranslations } from 'next-intl'
 import {
   Select,
@@ -17,12 +23,14 @@ export default function LocaleSwitcher() {
 
   return (
     <Select
-        value={locale}
-        onValueChange={(newLocale) => router.replace(pathname, {
-            locale: newLocale,
-        })}
+      value={locale}
+      onValueChange={(newLocale) =>
+        router.replace(pathname, {
+          locale: newLocale,
+        })
+      }
     >
-      <SelectTrigger className='w-auto'>
+      <SelectTrigger className="w-auto">
         <SelectValue placeholder={locale.toUpperCase()} />
       </SelectTrigger>
       <SelectContent>

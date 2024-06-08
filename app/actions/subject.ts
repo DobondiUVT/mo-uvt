@@ -26,7 +26,7 @@ export async function getSubjects() {
       students: {
         include: {
           user: true,
-        }
+        },
       },
       groups: true,
     },
@@ -132,6 +132,7 @@ export async function saveSubject(prevState: any, formData: FormData) {
   }
   if (savedSubject) {
     redirect(`/admin/subjects/edit/${savedSubject.id}`)
+    return
   }
 }
 

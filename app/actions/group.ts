@@ -159,6 +159,7 @@ export async function saveGroup(prevState: any, formData: FormData) {
   }
   if (savedGroup) {
     redirect(`/admin/groups/edit/${savedGroup.id}`)
+    return
   }
 }
 
@@ -236,5 +237,6 @@ export async function updateGroup(prevState: any, formData: FormData) {
   }
   if (updatedGroup) {
     redirect(`/admin/groups/edit/${updatedGroup.id}`)
+    return
   }
 }

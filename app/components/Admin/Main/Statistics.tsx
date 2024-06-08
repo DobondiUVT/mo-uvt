@@ -28,9 +28,7 @@ const formatNoOfStudents = (students: Pick<Student, 'sn'>[]) =>
 const SubjectCard = ({ title, students }: SubjectCardProps) => (
   <div className="rounded-lg border bg-white p-4 shadow">
     <div className="mb-2 text-lg font-bold">{title}</div>
-    <div className="text-zinc-500">
-      {formatNoOfStudents(students)}
-    </div>
+    <div className="text-zinc-500">{formatNoOfStudents(students)}</div>
   </div>
 )
 
@@ -235,7 +233,7 @@ const Statistics = ({
               Download excel
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {filteredSubjects.map((subject) => (
               <SubjectCard
                 key={`subject-${subject.id}`}

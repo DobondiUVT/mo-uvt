@@ -38,7 +38,9 @@ const AuthSection = ({ session }: { session: Session | null }) => {
         </div>
       ) : (
         <Button
-          onClick={() => signIn('google', { callbackUrl: `/${locale}/redirect` })}
+          onClick={() =>
+            signIn('google', { callbackUrl: `/${locale}/redirect` })
+          }
           variant={'outline'}
         >
           Log in

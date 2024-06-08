@@ -8,6 +8,7 @@ const AuthError = () => {
   const { data: session } = useSession()
   if (session) {
     redirect('/')
+    return
   }
 
   return (

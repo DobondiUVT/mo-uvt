@@ -55,10 +55,12 @@ export default async function Choice() {
 
   if (!user) {
     redirect('/')
+    return
   }
 
   if (!student?.verified) {
     redirect('/info')
+    return
   }
 
   const dates = await prisma.settings.findFirst({

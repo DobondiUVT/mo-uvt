@@ -67,6 +67,7 @@ export async function createStudent(
     return { serverError: `Error updating student: ${e}` }
   } finally {
     redirect('/choice')
+    return
   }
 }
 
@@ -200,6 +201,7 @@ export const saveStudentsFromFile = async (students: FileStudent[]) => {
   })
 
   redirect('/admin/students')
+  return
 }
 
 export async function deleteStudent(id: number) {
@@ -260,5 +262,6 @@ export async function updateStudent(prevState: any, formData: FormData) {
     return { serverError: `Error updating student: ${e}` }
   } finally {
     redirect('/admin/students')
+    return
   }
 }

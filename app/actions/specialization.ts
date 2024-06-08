@@ -50,6 +50,7 @@ export async function saveSpecialization(prevState: any, formData: FormData) {
   }
   if (savedSpecialization) {
     redirect(`/admin/specializations/edit/${savedSpecialization.id}`)
+    return
   }
 }
 

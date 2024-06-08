@@ -22,7 +22,7 @@ const SidebarItem = ({
 }) => {
   const pathName = usePathname()
   const isActive = pathName === href
-  
+
   return (
     <Link
       href={href}

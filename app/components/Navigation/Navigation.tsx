@@ -87,7 +87,7 @@ const Navigation = ({
                 Admin
               </Link>
             )}
-            <LocaleSwitcher/>
+            <LocaleSwitcher />
           </div>
           <button
             className="md:hidden"
@@ -120,7 +120,7 @@ const Navigation = ({
                   Admin
                 </Link>
               )}
-              <LocaleSwitcher/>
+              <LocaleSwitcher />
             </ul>
           </nav>
         </div>

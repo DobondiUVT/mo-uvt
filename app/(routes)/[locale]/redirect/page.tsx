@@ -7,7 +7,7 @@ const Redirect = async () => {
   const { user, student } = await getAuthInfo()
   if (!user) {
     redirect('/')
-    return;
+    return
   }
   if (user.role === 'ADMIN') {
     redirect('/admin')

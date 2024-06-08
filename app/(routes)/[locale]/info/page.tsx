@@ -11,9 +11,15 @@ import { getAuthInfo } from '@/actions/auth'
 const MoreInfo = async () => {
   const { session, user, student } = await getAuthInfo()
 
-  if (!user) redirect('/')
+  if (!user) {
+    redirect('/')
+    return
+  }
 
-  if (student?.verified) redirect('/')
+  if (student?.verified) {
+    redirect('/')
+    return
+  }
 
   const faculties = await prisma.faculty.findMany()
   const specializations = await prisma.specialization.findMany()

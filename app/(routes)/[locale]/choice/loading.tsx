@@ -6,6 +6,7 @@ const ChoiceLoading = async () => {
   const session = await getServerSession()
   if (!session) {
     redirect('/subjects')
+    return
   }
 
   return (

@@ -67,7 +67,10 @@ export async function saveFaculty(prevState: any, formData: FormData) {
     console.error(e)
     return { serverError: `Error saving faculty: ${e}` }
   }
-  if (savedFaculty) redirect(`/admin/faculties/edit/${savedFaculty.id}`)
+  if (savedFaculty) {
+    redirect(`/admin/faculties/edit/${savedFaculty.id}`)
+    return
+  }
 }
 
 export async function updateFaculty(prevState: any, formData: FormData) {

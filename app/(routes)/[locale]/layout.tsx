@@ -6,7 +6,7 @@ import { Inter } from 'next/font/google'
 import { getServerSession } from 'next-auth'
 import SessionProvider from '@/components/Auth/SessionProvider'
 import { getMessages } from 'next-intl/server'
-import {NextIntlClientProvider} from 'next-intl';
+import { NextIntlClientProvider } from 'next-intl'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -27,10 +27,10 @@ const theme = {
 
 export default async function RootLayout({
   children,
-  params: {locale}
+  params: { locale },
 }: {
   children: React.ReactNode
-  params: {locale: string}
+  params: { locale: string }
 }) {
   const session = await getServerSession()
   const messages = await getMessages()
