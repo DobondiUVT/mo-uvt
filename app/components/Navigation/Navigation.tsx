@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { buttonVariants } from '../ui/button'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import { Session } from 'next-auth'
@@ -9,6 +8,8 @@ import { useState } from 'react'
 import AuthSection from './AuthSection'
 import Image from 'next/image'
 import UVTLogo from '/public/logo_simple.png'
+import { Link } from '%/i18n/navigation'
+import LocaleSwitcher from './LocaleSwitcher'
 
 type NavItemProps = {
   link: string
@@ -86,6 +87,7 @@ const Navigation = ({
                 Admin
               </Link>
             )}
+            <LocaleSwitcher/>
           </div>
           <button
             className="md:hidden"
@@ -109,6 +111,7 @@ const Navigation = ({
               {navItems.map((item) => (
                 <NavItem key={item.title} title={item.title} link={item.link} />
               ))}
+              <AuthSection session={session} />
               {user?.role === 'ADMIN' && (
                 <Link
                   href="/admin"
@@ -117,7 +120,7 @@ const Navigation = ({
                   Admin
                 </Link>
               )}
-              <AuthSection session={session} />
+              <LocaleSwitcher/>
             </ul>
           </nav>
         </div>

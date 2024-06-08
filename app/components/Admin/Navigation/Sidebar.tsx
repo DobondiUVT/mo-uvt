@@ -9,7 +9,7 @@ import {
   IconTable,
   IconUser,
 } from '@tabler/icons-react'
-import Link from 'next/link'
+import { Link } from '%/i18n/navigation'
 import { usePathname } from 'next/navigation'
 
 const SidebarItem = ({
@@ -22,12 +22,7 @@ const SidebarItem = ({
   icon: React.ReactNode
 }) => {
   const pathName = usePathname()
-  let isActive
-  if (href == '/admin') {
-    isActive = pathName == '/admin'
-  } else {
-    isActive = pathName.includes(href)
-  }
+  const isActive = pathName.includes(href)
   return (
     <Link
       href={href}

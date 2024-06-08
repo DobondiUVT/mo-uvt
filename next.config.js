@@ -3,4 +3,10 @@ const nextConfig = {
   reactStrictMode: false,
 }
 
-module.exports = nextConfig
+const createNextIntlPlugin = require('next-intl/plugin');
+ 
+const withNextIntl = createNextIntlPlugin(
+  './i18n/i18n.ts'
+);
+ 
+module.exports = withNextIntl(nextConfig);

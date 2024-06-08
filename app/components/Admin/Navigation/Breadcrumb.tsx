@@ -1,6 +1,6 @@
 import { buttonVariants } from '@/components/ui/button'
 import { IconAdjustmentsAlt } from '@tabler/icons-react'
-import Link from 'next/link'
+import { Link } from '%/i18n/navigation'
 import React from 'react'
 
 type BreadCrumbItem = {

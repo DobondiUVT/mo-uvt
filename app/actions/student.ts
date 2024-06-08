@@ -1,6 +1,6 @@
 'use server'
 
-import { FileStudent } from '@/(routes)/admin/students/add/page'
+import { FileStudent } from '@/(routes)/[locale]/admin/students/add/page'
 import prisma from '@/utilities/db'
 import { NUMBER_TO_ENUM, YEAR_OPTIONS } from '@/utilities/utils'
 import { Year } from '@prisma/client'
