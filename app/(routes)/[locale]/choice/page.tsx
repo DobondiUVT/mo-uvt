@@ -2,7 +2,7 @@ import { getAuthInfo } from '@/actions/auth'
 import { getGroupsForStudent } from '@/actions/group'
 import prisma from '@/utilities/db'
 import { StudentData } from '@/utilities/types'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 import ChoiceDescription from './ChoiceDescription'
 import ChoiceSection from './ChoiceSection'
 

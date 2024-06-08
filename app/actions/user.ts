@@ -3,7 +3,7 @@
 import prisma from '@/utilities/db'
 import { PrismaClient, User } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 import { z } from 'zod'
 import { Session } from 'next-auth'
 

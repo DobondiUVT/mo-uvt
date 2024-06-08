@@ -5,6 +5,7 @@ import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Session } from 'next-auth'
 import { User } from '@prisma/client'
+import { useLocale } from 'next-intl'
 
 const AuthSection = ({ session }: { session: Session | null }) => {
   const getInitials = (name: string) => {
@@ -15,6 +16,8 @@ const AuthSection = ({ session }: { session: Session | null }) => {
     }
     return initials
   }
+
+  const locale = useLocale() as 'en' | 'ro'
 
   return (
     <div>
@@ -35,7 +38,7 @@ const AuthSection = ({ session }: { session: Session | null }) => {
         </div>
       ) : (
         <Button
-          onClick={() => signIn('google', { callbackUrl: '/redirect' })}
+          onClick={() => signIn('google', { callbackUrl: `/${locale}/redirect` })}
           variant={'outline'}
         >
           Log in

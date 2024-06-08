@@ -1,6 +1,6 @@
 import { getAuthInfo } from '@/actions/auth'
 import Sidebar from '@/components/Admin/Navigation/Sidebar'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 
 export default async function AdminLayout({
   children,

@@ -17,10 +17,10 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      if (!profile || !profile.email || !profile.name) return '/auth-error'
+      if (!profile || !profile.email || !profile.name) return '/ro/auth-error'
 
       if (getEmailDomain(profile.email ?? '') != 'e-uvt.ro')
-        return '/auth-error'
+        return '/ro/auth-error'
 
       let dbUser
 
@@ -39,7 +39,7 @@ const authOptions: AuthOptions = {
         }
       } catch (e) {
         console.error(e)
-        return '/auth-error'
+        return '/ro/auth-error'
       }
 
       return true

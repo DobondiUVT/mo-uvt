@@ -2,7 +2,7 @@
 
 import prisma from '@/utilities/db'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 import { z } from 'zod'
 
 export async function getSpecializations() {

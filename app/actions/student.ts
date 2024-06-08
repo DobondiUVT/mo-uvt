@@ -5,7 +5,7 @@ import prisma from '@/utilities/db'
 import { NUMBER_TO_ENUM, YEAR_OPTIONS } from '@/utilities/utils'
 import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 import { z } from 'zod'
 import { getAuthInfo } from './auth'
 

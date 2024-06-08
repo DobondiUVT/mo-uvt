@@ -2,7 +2,7 @@
 import { Button, buttonVariants } from '@/components/ui/button'
 import { signIn, useSession } from 'next-auth/react'
 import { Link } from '%/i18n/navigation'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 
 const AuthError = () => {
   const { data: session } = useSession()

@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { getServerSession } from 'next-auth'
-import { redirect } from 'next/navigation'
+import { redirect } from '%/i18n/navigation'
 
 const ChoiceLoading = async () => {
   const session = await getServerSession()
