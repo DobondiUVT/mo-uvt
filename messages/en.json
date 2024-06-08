@@ -1,8 +1,26 @@
 {
   "Index": {
-    "title": "Hello world!"
+    "Optional subjects UVT": "Optional subjects UVT",
+    "Personalize your student experience one course at a time": "Personalize your student experience one course at a time",
+    "Explore our curriculum": "Explore our curriculum",
+    "Fast & Easy process": "Fast & Easy process",
+    "See all our curriculum": "See all our curriculum",
+    "You can find valuable information about all the subjects we offer Find out more about the teachers, the course content and the evaluation method": "You can find valuable information about all the subjects we offer. Find out more about the teachers, the course content and the evaluation method.",
+    "Explore": "Explore",
+    "Choose your own path": "Choose your own path",
+    "Pick the subjects you like and create your own path to success You can choose from a wide variety of subjects of your liking offered by our university": "Pick the subjects you like and create your own path to success. You can choose from a wide variety of subjects of your liking offered by our university.",
+    "Pick": "Pick",
+    "See status updates in real time": "See status updates in real time",
+    "Find out the status of your choices in real time You can see the number of available places for each subject Hurry up Places are limited": "Find out the status of your choices in real time. You can see the number of available places for each subject. Hurry up! Places are limited.",
+    "Find out more": "Find out more",
+    "Always at your disposal": "Always at your disposal"
   },
-  "LocaleSwitcher": {
-    "switchLocale": "Switch to {locale, select, ro {Romanian} en {English} other {Unknown}}"
+  "Navigation": {
+    "Subjects": "Subjects",
+    "Feedback": "Feedback",
+    "Sign out": "Sign out",
+    "Log in": "Sign in",
+    "Admin": "Admin",
+    "My choices": "My choices"
   }
 }

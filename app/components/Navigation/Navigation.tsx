@@ -10,6 +10,7 @@ import Image from 'next/image'
 import UVTLogo from '/public/logo_simple.png'
 import { Link } from '%/i18n/navigation'
 import LocaleSwitcher from './LocaleSwitcher'
+import { useTranslations } from 'next-intl'
 
 type NavItemProps = {
   link: string
@@ -58,13 +59,13 @@ const Navigation = ({
   user: User | null
 }) => {
   const [showDrawer, setShowDrawer] = useState(false)
-
+  const t = useTranslations("Navigation")
   let navItems = []
   if (user?.role === 'STUDENT') {
-    navItems.push({ title: 'My choices', link: '/choice' })
+    navItems.push({ title: t("My choices"), link: '/choice' })
   }
-  navItems.push({ title: 'Subjects', link: '/subjects' })
-  navItems.push({ title: 'Feedback', link: '/feedback' })
+  navItems.push({ title: t("Subjects"), link: '/subjects' })
+  navItems.push({ title: t("Feedback"), link: '/feedback' })
   return (
     <header className="sticky top-0 z-10 h-16 border-b border-zinc-300 bg-zinc-100 bg-opacity-80 px-4 backdrop-blur-sm">
       <div className="h-full">
@@ -84,7 +85,7 @@ const Navigation = ({
                 href="/admin"
                 className={`${buttonVariants({ variant: 'default' })}`}
               >
-                Admin
+                {t("Admin")}
               </Link>
             )}
             <LocaleSwitcher />
@@ -117,7 +118,7 @@ const Navigation = ({
                   href="/admin"
                   className={`${buttonVariants({ variant: 'default' })}`}
                 >
-                  Admin
+                  {t("Admin")}
                 </Link>
               )}
               <LocaleSwitcher />

@@ -1,5 +1,26 @@
 {
   "Index": {
-    "title": "Buna lume!"
+    "Optional subjects UVT": "Subiecte opționale UVT",
+    "Personalize your student experience one course at a time": "Personalizează-ți experiența de student câte un curs pe rând",
+    "Explore our curriculum": "Explorează curriculum-ul nostru",
+    "Fast & Easy process": "Proces rapid și ușor",
+    "See all our curriculum": "Vezi tot curriculum-ul nostru",
+    "You can find valuable information about all the subjects we offer Find out more about the teachers, the course content and the evaluation method": "Poți găsi informații valoroase despre toate subiectele pe care le oferim. Află mai multe despre profesori, conținutul cursurilor și metoda de evaluare.",
+    "Explore": "Explorează",
+    "Choose your own path": "Alege-ți propriul drum",
+    "Pick the subjects you like and create your own path to success You can choose from a wide variety of subjects of your liking offered by our university": "Alege subiectele care îți plac și creează-ți propriul drum către succes. Poți alege dintr-o varietate largă de subiecte care îți plac oferite de universitatea noastră.",
+    "Pick": "Alege",
+    "See status updates in real time": "Vezi actualizările de stare în timp real",
+    "Find out the status of your choices in real time You can see the number of available places for each subject Hurry up Places are limited": "Află starea alegerilor tale în timp real. Poți vedea numărul de locuri disponibile pentru fiecare subiect. Grăbește-te! Locurile sunt limitate.",
+    "Find out more": "Află mai multe",
+    "Always at your disposal": "Întotdeauna la dispoziția ta"
+  },
+  "Navigation": {
+    "Subjects": "Subiecte",
+    "Feedback": "Feedback",
+    "Sign out": "Deconectare",
+    "Log in": "Conectare",
+    "Admin": "Admin",
+    "My choices": "Alegerile mele"
   }
 }

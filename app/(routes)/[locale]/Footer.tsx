@@ -1,11 +1,13 @@
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
-const Footer = () => {
+const Footer = async () => {
+  const t = await getTranslations('Index');
   return (
     <section className="py-8 lg:py-14">
       <div className="container">
         <h2 className="title-font mb-4 text-2xl font-medium text-gray-900 sm:text-3xl">
-          Always at your disposal
+          {t("Always at your disposal")}
         </h2>
         <div className="mb-12 h-1 w-16 rounded bg-uvt-blue"></div>
         <div className="relative flex min-h-[600px] items-end justify-start overflow-hidden rounded-lg bg-gray-300 p-10 sm:mr-10">

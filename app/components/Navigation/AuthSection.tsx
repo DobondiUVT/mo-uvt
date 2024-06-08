@@ -5,7 +5,7 @@ import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Session } from 'next-auth'
 import { User } from '@prisma/client'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 
 const AuthSection = ({ session }: { session: Session | null }) => {
   const getInitials = (name: string) => {
@@ -19,12 +19,14 @@ const AuthSection = ({ session }: { session: Session | null }) => {
 
   const locale = useLocale() as 'en' | 'ro'
 
+  const t = useTranslations('Navigation')
+
   return (
     <div>
       {session ? (
         <div className="flex items-center gap-4">
           <Button onClick={() => signOut()} variant={'outline'}>
-            Sign out
+            {t("Sign out")}
           </Button>
           <Avatar className="hidden md:block">
             <AvatarImage
@@ -43,7 +45,7 @@ const AuthSection = ({ session }: { session: Session | null }) => {
           }
           variant={'outline'}
         >
-          Log in
+          {t("Log in")}
         </Button>
       )}
     </div>
