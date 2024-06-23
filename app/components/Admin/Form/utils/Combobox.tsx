@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/popover'
 import { cn } from '@/lib/utils'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
+import { useTranslations } from 'next-intl'
 
 type ComboboxOption = {
   label: string
@@ -32,6 +33,7 @@ type ComboboxProps = {
 }
 
 export default function Combobox({ value, setValue, options }: ComboboxProps) {
+  const t = useTranslations('General')
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -47,14 +49,14 @@ export default function Combobox({ value, setValue, options }: ComboboxProps) {
             ? options.find((option) =>
                 isEqualInsensitiveStrings(option.value, value),
               )?.label
-            : 'Select option...'}
+            : t('Select option')}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="max-h-[16rem] w-[200px] overflow-y-auto p-0">
         <Command>
-          <CommandInput placeholder="Search option..." />
-          <CommandEmpty>No option found.</CommandEmpty>
+          <CommandInput placeholder={t("Search option")} />
+          <CommandEmpty>{t("No option found")}</CommandEmpty>
           <CommandGroup>
             {options.map((option) => (
               <CommandItem

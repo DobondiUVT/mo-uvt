@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Select,
   SelectContent,
@@ -7,6 +9,7 @@ import {
 } from '@/components/ui/select'
 import InputHidden from './InputHidden'
 import InputGroup from './InputGroup'
+import { useTranslations } from 'next-intl'
 
 type InputSelectProps = {
   options: { label: string; value: string }[]
@@ -31,6 +34,8 @@ const InputSelect = ({
   disabled = false,
   options,
 }: InputSelectProps) => {
+  const t = useTranslations('General')
+
   return (
     <InputGroup label={label} error={error}>
       <Select
@@ -41,7 +46,7 @@ const InputSelect = ({
         name={name}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Select option..." />
+          <SelectValue placeholder={t("Select option")} />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (

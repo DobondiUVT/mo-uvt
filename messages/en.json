@@ -57,5 +57,18 @@
     "If you are still having issues, please contact us at": "If you are still having issues, please contact us at",
     "Go home": "Go home",
     "Try again": "Try again"
+  },
+  "Info Page": {
+    "More Info": "More Info",
+    "Faculty": "Faculty",
+    "Specialization": "Specialization",
+    "Student Number": "Student Number",
+    "Please select the year for which you want to choose the optional subjects (not the one you are currently in)": "Please select the year for which you want to choose the optional subjects (not the one you are currently in)",
+    "Submit": "Submit",
+    "In order to choose your optional subjects, please provide us with some more information regarding your academic status": "In order to choose your optional subjects, please provide us with some more information regarding your academic status"
+  },
+  "General": {
+    "Select option": "Select option",
+    "Search option": "Search option"
   }
 }

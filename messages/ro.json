@@ -1,14 +1,14 @@
 {
   "Index": {
-    "Optional subjects UVT": "Subiecte opționale UVT",
+    "Optional subjects UVT": "Materii opționale UVT",
     "Personalize your student experience one course at a time": "Personalizează-ți experiența de student câte un curs pe rând",
     "Explore our curriculum": "Explorează curriculum-ul nostru",
     "Fast & Easy process": "Proces rapid și ușor",
     "See all our curriculum": "Vezi tot curriculum-ul nostru",
-    "You can find valuable information about all the subjects we offer Find out more about the teachers, the course content and the evaluation method": "Poți găsi informații valoroase despre toate subiectele pe care le oferim. Află mai multe despre profesori, conținutul cursurilor și metoda de evaluare.",
+    "You can find valuable information about all the subjects we offer Find out more about the teachers, the course content and the evaluation method": "Poți găsi informații valoroase despre toate materiile pe care le oferim. Află mai multe despre profesori, conținutul cursurilor și metoda de evaluare.",
     "Explore": "Explorează",
     "Choose your own path": "Alege-ți propriul drum",
-    "Pick the subjects you like and create your own path to success You can choose from a wide variety of subjects of your liking offered by our university": "Alege subiectele care îți plac și creează-ți propriul drum către succes. Poți alege dintr-o varietate largă de subiecte care îți plac oferite de universitatea noastră.",
+    "Pick the subjects you like and create your own path to success You can choose from a wide variety of subjects of your liking offered by our university": "Alege materiile care îți plac și creează-ți propriul drum către succes. Poți alege dintr-o varietate largă de materii care îți plac oferite de universitatea noastră.",
     "Pick": "Alege",
     "See status updates in real time": "Vezi actualizările de stare în timp real",
     "Find out the status of your choices in real time You can see the number of available places for each subject Hurry up Places are limited": "Află starea alegerilor tale în timp real. Poți vedea numărul de locuri disponibile pentru fiecare subiect. Grăbește-te! Locurile sunt limitate.",
@@ -16,7 +16,7 @@
     "Always at your disposal": "Întotdeauna la dispoziția ta"
   },
   "Navigation": {
-    "Subjects": "Subiecte",
+    "Subjects": "Materii",
     "Feedback": "Feedback",
     "Sign out": "Deconectare",
     "Log in": "Conectare",
@@ -57,5 +57,18 @@
     "If you are still having issues, please contact us at": "Dacă întâmpini în continuare probleme, te rugăm să ne contactezi la",
     "Go home": "Mergi la pagina principală",
     "Try again": "Încearcă din nou"
+  },
+  "Info Page": {
+    "More Info": "Mai multe informații",
+    "Faculty": "Facultate",
+    "Specialization": "Specializare",
+    "Student Number": "Număr matricol",
+    "Please select the year for which you want to choose the optional subjects (not the one you are currently in)": "Te rugăm să selectezi anul pentru care dorești să alegi materiile opționale (nu anul în care te afli în prezent)",
+    "Submit": "Trimite",
+    "In order to choose your optional subjects, please provide us with some more information regarding your academic status": "Pentru a-ți alege materiile opționale, te rugăm să ne furnizezi mai multe informații despre statutul tău academic."
+  },
+  "General": {
+    "Select option": "Selectează opțiunea",
+    "Search option": "Caută opțiunea"
   }
 }

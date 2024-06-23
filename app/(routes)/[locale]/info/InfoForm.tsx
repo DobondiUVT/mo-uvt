@@ -6,9 +6,10 @@ import InputHidden from '@/components/Admin/Form/utils/InputHidden'
 import InputSelect from '@/components/Admin/Form/utils/InputSelect'
 import InputText from '@/components/Admin/Form/utils/InputText'
 import { SubmitButton } from '@/components/Admin/Form/utils/SubmitButton'
-import { YEAR_OPTIONS } from '@/utilities/utils'
+import { ENUM_TO_NUMBER, YEAR_OPTIONS } from '@/utilities/utils'
 import { Faculty, Specialization, User } from '@prisma/client'
 import { IconInfoCircle } from '@tabler/icons-react'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
@@ -42,7 +43,7 @@ const InfoForm = ({
   }))
 
   const yearOptions = Object.values(YEAR_OPTIONS).map((year) => ({
-    label: year,
+    label: ENUM_TO_NUMBER[year],
     value: year,
     id: year,
   }))
@@ -51,6 +52,9 @@ const InfoForm = ({
   const [faculty, setFaculty] = useState('')
   const [specialization, setSpecialization] = useState('')
   const [year, setYear] = useState(YEAR_OPTIONS.ONE)
+
+  const t = useTranslations('Info Page')
+
   return (
     <form id="info-form" action={formAction}>
       <InputHidden name="userId" id="userId" value={user.id} />
@@ -61,7 +65,7 @@ const InfoForm = ({
         options={facultyOptions}
         name="facultyId"
         id="facultyId"
-        label="Faculty"
+        label={t("Faculty")}
         error={state?.facultyId?.[0]}
       />
       <InputCombobox
@@ -70,14 +74,14 @@ const InfoForm = ({
         options={specializationOptions}
         name="specializationId"
         id="specializationId"
-        label="Specialization"
+        label={t("Specialization")}
         error={state?.specializationId?.[0]}
       />
       <div className="max-w-xs">
         <InputText
           name="sn"
           id="sn"
-          label="Student Number"
+          label={t("Student Number")}
           placeholder="I000"
           error={state?.sn?.[0]}
         />
@@ -85,8 +89,7 @@ const InfoForm = ({
       <div className="mb-4 inline-block rounded-lg bg-uvt-yellow p-4">
         <div className="inline-flex gap-2 text-gray-700">
           <IconInfoCircle size={24} />
-          Please select the year for which you want to choose the optional
-          subjects (not the one you are currently in)
+          {t("Please select the year for which you want to choose the optional subjects (not the one you are currently in)")}
         </div>
         <div className="-mb-6">
           <InputSelect
@@ -100,7 +103,9 @@ const InfoForm = ({
           />
         </div>
       </div>
-      <SubmitButton />
+      <SubmitButton 
+        title={t("Submit")}
+      />
     </form>
   )
 }
