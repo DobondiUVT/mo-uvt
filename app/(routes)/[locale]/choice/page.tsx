@@ -5,12 +5,14 @@ import { StudentData } from '@/utilities/types'
 import { redirect } from '%/i18n/navigation'
 import ChoiceDescription from './ChoiceDescription'
 import ChoiceSection from './ChoiceSection'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0
 
 type GroupsStudentData = Awaited<ReturnType<typeof getGroupsForStudent>>
 
 async function Subjects({ student }: { student: StudentData }) {
+  const t = await getTranslations('Choice Page')
   const groups = await getGroupsForStudent(student!)
 
   let semesters: GroupsStudentData[] = []
@@ -25,8 +27,7 @@ async function Subjects({ student }: { student: StudentData }) {
     <div className="flex flex-col gap-4">
       {!semesters.length && (
         <h1 className="mb-4 text-lg">
-          There are no optional subjects available that fit your faculty and
-          year. If that is an error, please contact us at{' '}
+          {t("There are no optional subjects available that fit your faculty and year. If that is an error, please contact us at")}{' '}
           <a className="font-bold underline" href="mailto:info.uvt@e-uvt.ro">
             info.uvt@e-uvt.ro
           </a>

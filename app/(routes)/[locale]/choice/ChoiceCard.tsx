@@ -5,17 +5,21 @@ import { Button } from '@/components/ui/button'
 import { SubjectData } from '@/utilities/types'
 import { Link } from '%/i18n/navigation'
 import { useEffect, useId, useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>
 
 const SubjectStatus = ({ numberOfStudents }: { numberOfStudents: number }) => {
+  const t = useTranslations('Choice Page')
   return (
     <div
       className={`mt-auto self-end rounded-xl border px-2 py-1 text-sm font-medium shadow-sm`}
     >
       {numberOfStudents === 0
-        ? 'No students joined yet'
-        : `${numberOfStudents} student${numberOfStudents > 1 ? 's' : ''} joined`}
+        ? t('No students joined')
+        : numberOfStudents > 1
+          ? t('n students joined', { count: numberOfStudents })
+          : t('1 student joined', { count: numberOfStudents })}
     </div>
   )
 }
@@ -56,6 +60,7 @@ const ChoiceCard = ({
   student: StudentData
   groupId: number
 }) => {
+  const t = useTranslations('Choice Page')
   const [joinLoading, setJoinLoading] = useState(false)
   const [cancelLoading, setCancelLoading] = useState(false)
 
@@ -78,7 +83,7 @@ const ChoiceCard = ({
         className="mb-6 line-clamp-3 text-sm leading-relaxed text-zinc-500"
       />
       <div className="mt-auto">
-        <div className="flex w-full items-center justify-between">
+        <div className="flex flex-wrap gap-2 w-full items-center justify-between">
           {<SubjectStatus numberOfStudents={subject.students.length} />}
           {joinable && (
             <Button
@@ -90,7 +95,7 @@ const ChoiceCard = ({
               size="sm"
               disabled={joinLoading}
             >
-              Join
+              {t('Join')}
               {joinLoading && <SvgLoader />}
             </Button>
           )}
@@ -105,7 +110,7 @@ const ChoiceCard = ({
               variant={'destructive'}
               disabled={cancelLoading}
             >
-              Unjoin
+              {t('Unjoin')}
               {cancelLoading && <SvgLoader />}
             </Button>
           )}

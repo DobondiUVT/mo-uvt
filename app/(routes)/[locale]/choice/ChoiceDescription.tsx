@@ -1,7 +1,9 @@
 import { StudentData } from '@/utilities/types'
+import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { User } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 
-const ChoiceDescription = ({
+const ChoiceDescription = async ({
   user,
   student,
   dateStart,
@@ -12,6 +14,7 @@ const ChoiceDescription = ({
   dateStart: Date
   dateEnd: Date
 }) => {
+  const t = await getTranslations('Choice Page')
   const dateNow = new Date()
   const isJoinPeriod = dateNow >= dateStart && dateNow <= dateEnd
   const willBeJoinPeriod = dateNow < dateStart
@@ -21,30 +24,32 @@ const ChoiceDescription = ({
     if (isJoinPeriod) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          Registrations are live! Please choose your optional subjects between{' '}
-          {dateStart.toLocaleDateString()} and {dateEnd.toLocaleDateString()}
+          { t("Registrations live", {
+              dateStart: dateStart.toLocaleDateString(),
+              dateEnd: dateEnd.toLocaleDateString()
+          }) }
         </h3>
       )
     } else if (willBeJoinPeriod) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          Registrations will start soon! Please check back between{' '}
-          {dateStart.toLocaleDateString()} and {dateEnd.toLocaleDateString()}
+          {
+            t("Registrations will start soon", {
+              dateStart: dateStart.toLocaleDateString(),
+              dateEnd: dateEnd.toLocaleDateString()
+            })
+          }
         </h3>
       )
     } else if (hasJoinPeriodPassed) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          Registrations have ended!
-          <br />
-          Last registration period was between {dateStart.toLocaleDateString()}{' '}
-          and {dateEnd.toLocaleDateString()}.
-          <br />
-          Please contact us at{' '}
-          <a href="mailto:info@e-uvt.ro" className="underline">
-            info@e-uvt.ro
-          </a>{' '}
-          for more information.
+          {
+            t("Registrations have ended", {
+              dateStart: dateStart.toLocaleDateString(),
+              dateEnd: dateEnd.toLocaleDateString()
+            })
+          }
         </h3>
       )
     }
@@ -52,10 +57,10 @@ const ChoiceDescription = ({
 
   return (
     <div>
-      <h1 className="mb-2 text-3xl font-bold">Hi {user.name} 👋</h1>
+      <h1 className="mb-2 text-3xl font-bold">{t("Hi")} {user.name} 👋</h1>
       <h2 className="mb-2 text-xl font-semibold">
         {student!.faculty.name} - {student!.specialization.title} -{' '}
-        {`Year ${student!.year.toLowerCase()}`}
+        {`${t("Year")} ${ENUM_TO_NUMBER[student!.year]}`}
       </h2>
       {renderJoinPeriod()}
     </div>

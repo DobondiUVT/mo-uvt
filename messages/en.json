@@ -70,5 +70,21 @@
   "General": {
     "Select option": "Select option",
     "Search option": "Search option"
+  },
+  "Choice Page": {
+    "Year": "Year",
+    "Registrations live": "Registrations are live! Please choose your optional subjects between {dateStart} and {dateEnd}",
+    "Registrations will start soon": "Registrations will start soon! Please check back between {dateStart} and {dateEnd}",
+    "Registrations have ended": "Registrations have ended! Last registration period was between {dateStart} and {dateEnd}",
+    "Hi": "Hi",
+    "There are no optional subjects available that fit your faculty and year. If that is an error, please contact us at": "There are no optional subjects available that fit your faculty and year. If that is an error, please contact us at",
+    "Semester": "Semester",
+    "Joined n": "Joined {title} 🎊",
+    "Choose n": "Choose 1 out of {count} subjects",
+    "No students joined": "No students joined",
+    "1 student joined": "1 student joined",
+    "n students joined": "{count} students joined",
+    "Join": "Join",
+    "Unjoin": "Unjoin"
   }
 }
