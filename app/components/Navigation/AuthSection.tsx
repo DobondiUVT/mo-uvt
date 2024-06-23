@@ -26,7 +26,7 @@ const AuthSection = ({ session }: { session: Session | null }) => {
       {session ? (
         <div className="flex items-center gap-4">
           <Button onClick={() => signOut()} variant={'outline'}>
-            {t("Sign out")}
+            {t('Sign out')}
           </Button>
           <Avatar className="hidden md:block">
             <AvatarImage
@@ -45,7 +45,7 @@ const AuthSection = ({ session }: { session: Session | null }) => {
           }
           variant={'outline'}
         >
-          {t("Log in")}
+          {t('Log in')}
         </Button>
       )}
     </div>

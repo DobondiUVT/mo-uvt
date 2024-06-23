@@ -3,8 +3,11 @@ import { SubjectData } from '@/utilities/types'
 import { Link } from '%/i18n/navigation'
 import { Badge } from '../ui/badge'
 import { ENUM_TO_NUMBER, SEMESTER_OPTIONS } from '@/utilities/utils'
+import { useLocale } from 'next-intl'
 
 const Tags = (subject: SubjectData) => {
+  const locale = useLocale() as 'en' | 'ro'
+
   return (
     <div className="mb-2 flex flex-wrap gap-2">
       {subject.faculty && (
@@ -18,7 +21,7 @@ const Tags = (subject: SubjectData) => {
       {subject.year && (
         <Badge
           variant={'secondary'}
-        >{`Y${ENUM_TO_NUMBER[subject.year]}`}</Badge>
+        >{`${locale == 'en' ? 'Y' : 'A'}${ENUM_TO_NUMBER[subject.year]}`}</Badge>
       )}
       {subject.semester && (
         <Badge

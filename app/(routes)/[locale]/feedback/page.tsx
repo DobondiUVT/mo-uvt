@@ -6,8 +6,11 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import prisma from '@/utilities/db'
 import { Link } from '%/i18n/navigation'
 import React, { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 const Feedback = () => {
+  const t = useTranslations('Feedback Page')
+
   const [feedBack, setFeedBack] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -26,22 +29,24 @@ const Feedback = () => {
         {submitted ? (
           <>
             <h1 className="mb-2 text-xl font-bold text-green-600">
-              Thank you for your feedback!
+              {t('Thank you for your feedback!')}
             </h1>
             <p className="mb-4 text-gray-500">
-              We appreciate your feedback and will use it to improve this app.
+              {t(
+                'We appreciate your feedback and will use it to improve this app',
+              )}
             </p>
             <Link href={'/'} className={buttonVariants({ variant: 'default' })}>
-              Go home
+              {t('Go home')}
             </Link>
           </>
         ) : (
           <>
             <h1 className="mb-1 text-xl font-bold">
-              Let us know about your experience with MO-UVT
+              {t('Let us know about your experience with MO-UVT')}
             </h1>
             <div className="text-md mb-4">
-              Don&apos;t worry, your feedback is anonymised.
+              {t("Don't worry, your feedback is anonymised")}
             </div>
             <div className="mb-4">
               <textarea
@@ -49,14 +54,14 @@ const Feedback = () => {
                 rows={6}
                 value={feedBack}
                 onChange={(e) => setFeedBack(e.target.value)}
-                placeholder="Type your feedback here"
+                placeholder={t('Type your feedback here')}
                 id="feedback"
                 name="feedback"
               />
             </div>
             <div className="flex justify-end">
               <Button onClick={submitForm} disabled={!feedBack.length}>
-                Send
+                {t('Send')}
               </Button>
             </div>
           </>

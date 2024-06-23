@@ -22,5 +22,40 @@
     "Log in": "Sign in",
     "Admin": "Admin",
     "My choices": "My choices"
+  },
+  "Subjects Page": {
+    "Check out all of our UVT optional subjects:": "Check out all of our UVT optional subjects:",
+    "Search for a subject": "Search for a subject",
+    "There are no optional subjects available If that is an error, please contact us at": "There are no optional subjects available. If that is an error, please contact us at",
+    "Filters": "Filters",
+    "Year": "Year",
+    "Semester": "Semester",
+    "Faculties": "Faculties",
+    "Specializations": "Specializations"
+  },
+  "Subject Page": {
+    "General information": "General information",
+    "Year": "Year",
+    "Semester": "Semester",
+    "Subject description": "Subject description",
+    "Subject document": "Subject document",
+    "The subject document is not available": "The subject document is not available"
+  },
+  "Feedback Page": {
+    "Thank you for your feedback!": "Thank you for your feedback!",
+    "We appreciate your feedback and will use it to improve this app": "We appreciate your feedback and will use it to improve this app",
+    "Go home": "Go home",
+    "Let us know about your experience with MO-UVT": "Let us know about your experience with MO-UVT",
+    "Don't worry, your feedback is anonymised": "Don't worry, your feedback is anonymised",
+    "Type your feedback here": "Type your feedback here",
+    "Send": "Send"
+  },
+  "Login error": {
+    "Login error": "Login error",
+    "Unfortunately, you are not allowed to login using that email address": "Unfortunately, you are not allowed to login using that email address.",
+    "Make sure you are logging in using your institutional UVT email address": "Make sure you are logging in using your institutional UVT email address.",
+    "If you are still having issues, please contact us at": "If you are still having issues, please contact us at",
+    "Go home": "Go home",
+    "Try again": "Try again"
   }
 }

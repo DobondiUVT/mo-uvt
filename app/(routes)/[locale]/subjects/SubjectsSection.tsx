@@ -1,9 +1,11 @@
 'use client'
 import SubjectCard from '@/components/Subjects/SubjectCard'
 import { SubjectsData } from '@/utilities/types'
+import { useTranslations } from 'next-intl'
 import { useState } from 'react'
 
 const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
+  const t = useTranslations('Subjects Page')
   const defaultFaculties = Array.from(
     new Set(subjects.map((subject) => subject.faculty?.abbreviation ?? '')),
   )
@@ -52,7 +54,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
       <div className="mb-6 flex items-center justify-center">
         <input
           type="text"
-          placeholder="Search for a subject"
+          placeholder={t('Search for a subject')}
           className="w-full rounded-md border border-zinc-300 px-4 py-2 text-lg focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -61,10 +63,10 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
         <div className="lg:flex-shrink-0 lg:basis-64">
           <div className="flex flex-col gap-4 rounded-sm border border-zinc-200 bg-white p-4 sm:gap-12 lg:block">
-            <div className="text-lg">Filters</div>
+            <div className="text-lg">{t('Filters')}</div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
-              <div className="text-md">Year</div>
+              <div className="text-md">{t('Year')}</div>
               <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
@@ -112,7 +114,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             </div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
-              <div className="text-md">Semester</div>
+              <div className="text-md">{t('Semester')}</div>
               <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 <label className="flex items-center gap-2">
                   <input
@@ -152,7 +154,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             </div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
-              <div className="text-md">Faculties</div>
+              <div className="text-md">{t('Faculties')}</div>
               <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 {defaultFaculties.map((faculty) => (
                   <label key={faculty} className="flex items-center gap-2">
@@ -177,7 +179,7 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             </div>
             <div className="-mx-4 my-4 hidden h-px bg-zinc-200 lg:block"></div>
             <div>
-              <div className="text-md">Specializations</div>
+              <div className="text-md">{t('Specializations')}</div>
               <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
                 {defaultSpecializations.map((specialization) => (
                   <label
@@ -218,8 +220,9 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
           </div>
         ) : (
           <h1 className="mb-4 text-lg">
-            There are no optional subjects available. If that is an error,
-            please contact us at{' '}
+            {t(
+              'There are no optional subjects available If that is an error,please contact us at',
+            )}{' '}
             <a className="font-bold underline" href="mailto:info.uvt@e-uvt.ro">
               info.uvt@e-uvt.ro
             </a>

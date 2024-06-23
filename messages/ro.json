@@ -22,5 +22,40 @@
     "Log in": "Conectare",
     "Admin": "Admin",
     "My choices": "Alegerile mele"
+  },
+  "Subjects Page": {
+    "Check out all of our UVT optional subjects:": "Materiile opționale UVT:",
+    "Search for a subject": "Caută o materie",
+    "There are no optional subjects available If that is an error, please contact us at": "Nu sunt disponibile materii opționale. Dacă aceasta este o eroare, vă rugăm să ne contactați la",
+    "Filters": "Filtre",
+    "Year": "An",
+    "Semester": "Semestru",
+    "Faculties": "Facultăți",
+    "Specializations": "Specializări"
+  },
+  "Subject Page": {
+    "General information": "Informații generale",
+    "Year": "An",
+    "Semester": "Semestru",
+    "Subject description": "Descrierea materiei",
+    "Subject document": "Fișa disciplinei",
+    "The subject document is not available": "Fișa disciplinei nu este disponibilă"
+  },
+  "Feedback Page": {
+    "Thank you for your feedback!": "Mulțumim pentru feedback!",
+    "We appreciate your feedback and will use it to improve this app": "Apreciem feedback-ul tău și îl vom folosi pentru a îmbunătăți această aplicație",
+    "Go home": "Mergi la pagina principală",
+    "Let us know about your experience with MO-UVT": "Spune-ne despre experiența ta cu MO-UVT",
+    "Don't worry, your feedback is anonymised": "Nu-ți face griji, feedback-ul tău este anonim",
+    "Type your feedback here": "Scrie feedback-ul tău aici",
+    "Send": "Trimite"
+  },
+  "Login error": {
+    "Login error": "Eroare de autentificare",
+    "Unfortunately, you are not allowed to login using that email address": "Din păcate, nu ai permisiunea să te autentifici folosind acea adresă de email.",
+    "Make sure you are logging in using your institutional UVT email address": "Asigură-te că te autentifici folosind adresa ta de email instituțională UVT.",
+    "If you are still having issues, please contact us at": "Dacă întâmpini în continuare probleme, te rugăm să ne contactezi la",
+    "Go home": "Mergi la pagina principală",
+    "Try again": "Încearcă din nou"
   }
 }
