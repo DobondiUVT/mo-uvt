@@ -10,7 +10,7 @@ import { getAuthInfo } from '@/actions/auth'
 import { getTranslations } from 'next-intl/server'
 
 const MoreInfo = async () => {
-  const t = await getTranslations("Info Page")
+  const t = await getTranslations('Info Page')
   const { session, user, student } = await getAuthInfo()
 
   if (!user) {
@@ -29,9 +29,11 @@ const MoreInfo = async () => {
   return (
     <div className="container mx-auto   px-4 py-8 lg:py-14">
       <div className="rounded-lg border bg-white p-6 shadow">
-        <h1 className="text-3xl font-bold">{t("More Info")}</h1>
+        <h1 className="text-3xl font-bold">{t('More Info')}</h1>
         <p className="mb-6">
-          {t("In order to choose your optional subjects, please provide us with some more information regarding your academic status")}
+          {t(
+            'In order to choose your optional subjects, please provide us with some more information regarding your academic status',
+          )}
         </p>
         <InfoForm
           user={user}

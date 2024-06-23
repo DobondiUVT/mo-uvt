@@ -77,7 +77,7 @@
     "Registrations will start soon": "Înscrierile vor începe în curând! Te rugăm să revii între {dateStart} și {dateEnd}",
     "Registrations have ended": "Înscrierile s-au încheiat! Ultima perioadă de înscriere a fost între {dateStart} și {dateEnd}",
     "Hi": "Bună",
-    "There are no optional subjects available that fit your faculty and year. If that is an error, please contact us at": "Nu sunt disponibile materii opționale care se potrivesc cu facultatea și anul tău. Dacă aceasta este o eroare, vă rugăm să ne contactați la",
+    "There are no optional subjects available that fit your faculty and year If that is an error, please contact us at": "Nu sunt disponibile materii opționale care se potrivesc cu facultatea și anul tău. Dacă aceasta este o eroare, vă rugăm să ne contactați la",
     "Semester": "Semestrul",
     "Joined n": "Ai ales {title} 🎊",
     "Choose n": "Alege 1 din {count} materii",

@@ -46,7 +46,7 @@ const InputSelect = ({
         name={name}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder={t("Select option")} />
+          <SelectValue placeholder={t('Select option')} />
         </SelectTrigger>
         <SelectContent>
           {options.map((option) => (

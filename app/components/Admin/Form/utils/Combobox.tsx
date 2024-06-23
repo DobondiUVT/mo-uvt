@@ -55,8 +55,8 @@ export default function Combobox({ value, setValue, options }: ComboboxProps) {
       </PopoverTrigger>
       <PopoverContent className="max-h-[16rem] w-[200px] overflow-y-auto p-0">
         <Command>
-          <CommandInput placeholder={t("Search option")} />
-          <CommandEmpty>{t("No option found")}</CommandEmpty>
+          <CommandInput placeholder={t('Search option')} />
+          <CommandEmpty>{t('No option found')}</CommandEmpty>
           <CommandGroup>
             {options.map((option) => (
               <CommandItem

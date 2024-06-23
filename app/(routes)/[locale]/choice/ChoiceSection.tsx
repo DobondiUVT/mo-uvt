@@ -32,20 +32,19 @@ const ChoiceSection = async ({
   return (
     <div className="relative mb-10 rounded-lg border border-black p-7">
       <h1 className="absolute top-0 -ms-4 mb-4 -translate-y-1/2 bg-zinc-100 px-4 py-2 text-xl font-bold">
-        {t("Semester")} {ENUM_TO_NUMBER[semester]}
+        {t('Semester')} {ENUM_TO_NUMBER[semester]}
       </h1>
       <div>
         {actionGroups.map((actionGroup, index) => (
           <div key={`group-${index}`}>
             <h1 className="text-md mb-4 font-semibold">
               {actionGroup.joined
-                ? t("Joined n", {
+                ? t('Joined n', {
                     title: actionGroup.joined.title,
-                })
-                : t("Choose n", {
+                  })
+                : t('Choose n', {
                     count: actionGroup.subjects.length,
-                  }
-                )}
+                  })}
             </h1>
             <div className="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3">
               {actionGroup.subjects.map((subject) => (

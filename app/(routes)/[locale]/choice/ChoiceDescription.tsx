@@ -24,32 +24,28 @@ const ChoiceDescription = async ({
     if (isJoinPeriod) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          { t("Registrations live", {
-              dateStart: dateStart.toLocaleDateString(),
-              dateEnd: dateEnd.toLocaleDateString()
-          }) }
+          {t('Registrations live', {
+            dateStart: dateStart.toLocaleDateString(),
+            dateEnd: dateEnd.toLocaleDateString(),
+          })}
         </h3>
       )
     } else if (willBeJoinPeriod) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          {
-            t("Registrations will start soon", {
-              dateStart: dateStart.toLocaleDateString(),
-              dateEnd: dateEnd.toLocaleDateString()
-            })
-          }
+          {t('Registrations will start soon', {
+            dateStart: dateStart.toLocaleDateString(),
+            dateEnd: dateEnd.toLocaleDateString(),
+          })}
         </h3>
       )
     } else if (hasJoinPeriodPassed) {
       return (
         <h3 className="mb-6 text-lg font-semibold">
-          {
-            t("Registrations have ended", {
-              dateStart: dateStart.toLocaleDateString(),
-              dateEnd: dateEnd.toLocaleDateString()
-            })
-          }
+          {t('Registrations have ended', {
+            dateStart: dateStart.toLocaleDateString(),
+            dateEnd: dateEnd.toLocaleDateString(),
+          })}
         </h3>
       )
     }
@@ -57,10 +53,12 @@ const ChoiceDescription = async ({
 
   return (
     <div>
-      <h1 className="mb-2 text-3xl font-bold">{t("Hi")} {user.name} 👋</h1>
+      <h1 className="mb-2 text-3xl font-bold">
+        {t('Hi')} {user.name} 👋
+      </h1>
       <h2 className="mb-2 text-xl font-semibold">
         {student!.faculty.name} - {student!.specialization.title} -{' '}
-        {`${t("Year")} ${ENUM_TO_NUMBER[student!.year]}`}
+        {`${t('Year')} ${ENUM_TO_NUMBER[student!.year]}`}
       </h2>
       {renderJoinPeriod()}
     </div>

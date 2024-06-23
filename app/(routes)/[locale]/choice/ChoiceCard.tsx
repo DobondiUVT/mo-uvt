@@ -83,7 +83,7 @@ const ChoiceCard = ({
         className="mb-6 line-clamp-3 text-sm leading-relaxed text-zinc-500"
       />
       <div className="mt-auto">
-        <div className="flex flex-wrap gap-2 w-full items-center justify-between">
+        <div className="flex w-full flex-wrap items-center justify-between gap-2">
           {<SubjectStatus numberOfStudents={subject.students.length} />}
           {joinable && (
             <Button

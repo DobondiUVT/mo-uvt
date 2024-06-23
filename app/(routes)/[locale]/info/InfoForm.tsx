@@ -43,7 +43,7 @@ const InfoForm = ({
   }))
 
   const yearOptions = Object.values(YEAR_OPTIONS).map((year) => ({
-    label: ENUM_TO_NUMBER[year],
+    label: ENUM_TO_NUMBER[year].toString(),
     value: year,
     id: year,
   }))
@@ -65,7 +65,7 @@ const InfoForm = ({
         options={facultyOptions}
         name="facultyId"
         id="facultyId"
-        label={t("Faculty")}
+        label={t('Faculty')}
         error={state?.facultyId?.[0]}
       />
       <InputCombobox
@@ -74,14 +74,14 @@ const InfoForm = ({
         options={specializationOptions}
         name="specializationId"
         id="specializationId"
-        label={t("Specialization")}
+        label={t('Specialization')}
         error={state?.specializationId?.[0]}
       />
       <div className="max-w-xs">
         <InputText
           name="sn"
           id="sn"
-          label={t("Student Number")}
+          label={t('Student Number')}
           placeholder="I000"
           error={state?.sn?.[0]}
         />
@@ -89,7 +89,9 @@ const InfoForm = ({
       <div className="mb-4 inline-block rounded-lg bg-uvt-yellow p-4">
         <div className="inline-flex gap-2 text-gray-700">
           <IconInfoCircle size={24} />
-          {t("Please select the year for which you want to choose the optional subjects (not the one you are currently in)")}
+          {t(
+            'Please select the year for which you want to choose the optional subjects (not the one you are currently in)',
+          )}
         </div>
         <div className="-mb-6">
           <InputSelect
@@ -103,9 +105,7 @@ const InfoForm = ({
           />
         </div>
       </div>
-      <SubmitButton 
-        title={t("Submit")}
-      />
+      <SubmitButton title={t('Submit')} />
     </form>
   )
 }
