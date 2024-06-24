@@ -18,6 +18,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { deleteGroup } from '@/actions/group'
 import { getFaculty } from '@/actions/faculty'
 import { GroupData } from '@/utilities/types'
+import { useTranslations } from 'next-intl'
 
 const SortButton = ({
   column,
@@ -26,13 +27,14 @@ const SortButton = ({
   column: Column<NonNullable<GroupData>>
   title: string
 }) => {
+  const t = useTranslations('Admin')
   return (
     <Button
       variant="link"
       className="px-0"
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
     >
-      {title}
+      {t(title)}
       <ArrowUpDown className="ml-2 h-4 w-4" />
     </Button>
   )
@@ -57,12 +59,13 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
+        const t = useTranslations('Admin')
         return (
           <>
             {columnItem.sortable ? (
               <SortButton column={column} title={columnItem.title} />
             ) : (
-              <div>{columnItem.title}</div>
+              <div>{t(columnItem.title)}</div>
             )}
           </>
         )
@@ -87,7 +90,10 @@ const createSpecialDefs = () => {
     },
     {
       accessorKey: 'Specializations',
-      header: 'Specializations',
+      header: () => {
+        const t = useTranslations('Admin')
+        return t('Specializations')
+      },
       cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
         return (
           <div>
@@ -98,7 +104,10 @@ const createSpecialDefs = () => {
     },
     {
       accessorKey: 'Subjects',
-      header: 'Subjects',
+      header: () => {
+        const t = useTranslations('Admin')
+        return t('Subjects')
+      },
       cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
         return (
           <div>
@@ -111,6 +120,7 @@ const createSpecialDefs = () => {
 }
 
 const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
+  const t = useTranslations('Admin')
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteGroup(id)
@@ -132,7 +142,7 @@ const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
         <Link href={`/admin/groups/edit/${group.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            Edit
+            {t('Edit')}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -142,7 +152,7 @@ const DropdownAction = ({ group }: { group: NonNullable<GroupData> }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          Delete
+          {t('Delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

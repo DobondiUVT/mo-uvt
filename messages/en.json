@@ -91,6 +91,7 @@
     "Subjects": "Subjects",
     "Subject": "Subject",
     "Faculty": "Faculty",
+    "Faculties": "Faculties",
     "Specialization": "Specialization",
     "Semester": "Semester",
     "Year": "Year",
@@ -109,6 +110,9 @@
     "All": "All",
     "Role": "Role",
     "Email": "Email",
-    "Last import": "Last import on {lastImportDate} by {lastImportAuthorName}"
+    "Last import": "Last import on {lastImportDate} by {lastImportAuthorName}",
+    "Packets": "Packets",
+    "Packet": "Packet",
+    "Settings": "Settings"
   }
 }

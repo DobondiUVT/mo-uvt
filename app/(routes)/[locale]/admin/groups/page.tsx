@@ -6,33 +6,34 @@ import { Link } from '%/i18n/navigation'
 import { Faculty, PrismaClient, Subject } from '@prisma/client'
 import { Suspense } from 'react'
 import { getGroups } from '@/actions/group'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0
 
-const TopHeader = () => (
-  <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-    <h1 className="text-2xl font-semibold">Packets</h1>
-    <Link
-      href="/admin/groups/new"
-      className={buttonVariants({ variant: 'ghost' })}
-    >
-      <Plus className="mr-2 h-4 w-4" />
-      <span className="hidden sm:block">Add packet</span>
-      <span className="sm:hidden">New</span>
-    </Link>
-  </div>
-)
-
-const SubjectsTable = async () => {
+export default async function SubjectsAdmin() {
+  const t = await getTranslations('Admin')
   const groups = await getGroups()
-  return <DataTable columns={columns} data={groups} />
-}
 
-export default function SubjectsAdmin() {
+  const TopHeader = () => (
+    <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
+      <h1 className="text-2xl font-semibold">{t('Packets')}</h1>
+      <Link
+        href="/admin/groups/new"
+        className={buttonVariants({ variant: 'ghost' })}
+      >
+        <Plus className="mr-2 h-4 w-4" />
+        <span className="hidden sm:block">
+          {t('Add')} {t('Packet').toLowerCase()}
+        </span>
+        <span className="sm:hidden">{t('New')}</span>
+      </Link>
+    </div>
+  )
+
   return (
     <>
       <TopHeader />
-      <SubjectsTable />
+      <DataTable columns={columns} data={groups} />
     </>
   )
 }

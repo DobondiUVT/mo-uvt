@@ -10,6 +10,7 @@ import {
   IconUser,
 } from '@tabler/icons-react'
 import { Link, usePathname } from '%/i18n/navigation'
+import { useTranslations } from 'next-intl'
 
 const SidebarItem = ({
   title,
@@ -22,7 +23,7 @@ const SidebarItem = ({
 }) => {
   const pathName = usePathname()
   const isActive = pathName === href
-
+  const t = useTranslations('Admin')
   return (
     <Link
       href={href}
@@ -31,15 +32,16 @@ const SidebarItem = ({
       }`}
     >
       {icon}
-      <span className="hidden xl:block">{title}</span>
+      <span className="hidden xl:block">{t(title)}</span>
     </Link>
   )
 }
 
 const Sidebar = () => {
+  const t = useTranslations('Admin')
   const links = [
     {
-      title: 'General',
+      title: 'Settings',
       href: '/admin',
       icon: <IconAdjustmentsAlt />,
     },
@@ -79,7 +81,7 @@ const Sidebar = () => {
       className={`sticky top-[64px] w-full overflow-y-auto border-r border-zinc-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8`}
     >
       <h1 className="mb-4 hidden text-lg font-bold text-zinc-800 xl:block">
-        Administration dashboard
+        Admin
       </h1>
       <nav
         aria-label="Main"

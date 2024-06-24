@@ -91,6 +91,7 @@
     "Subjects": "Materii",
     "Subject": "Materie",
     "Faculty": "Facultate",
+    "Faculties": "Facultăți",
     "Specialization": "Specializare",
     "Semester": "Semestru",
     "Year": "An",
@@ -109,6 +110,9 @@
     "All": "Toate",
     "Role": "Rol",
     "Email": "Email",
-    "Last import": "Ultimul import pe {lastImportDate} de către {lastImportAuthorName}"
+    "Last import": "Ultimul import pe {lastImportDate} de către {lastImportAuthorName}",
+    "Packets": "Pachete",
+    "Packet": "Pachet",
+    "Settings": "Setări"
   }
 }

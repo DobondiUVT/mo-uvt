@@ -16,6 +16,7 @@ import {
 import { Link } from '%/i18n/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { deleteFaculty } from '@/actions/faculty'
+import { useTranslations } from 'next-intl'
 
 const SortButton = ({
   column,
@@ -54,12 +55,13 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<Faculty> }) => {
+        const t = useTranslations('Admin')
         return (
           <>
             {columnItem.sortable ? (
-              <SortButton column={column} title={columnItem.title} />
+              <SortButton column={column} title={t(columnItem.title)} />
             ) : (
-              <div>{columnItem.title}</div>
+              <div>{t(columnItem.title)}</div>
             )}
           </>
         )
@@ -69,6 +71,7 @@ const createColumnDefs = () => {
 }
 
 const DropdownAction = ({ faculty }: { faculty: Faculty }) => {
+  const t = useTranslations('Admin')
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteFaculty(id)
@@ -90,7 +93,7 @@ const DropdownAction = ({ faculty }: { faculty: Faculty }) => {
         <Link href={`/admin/faculties/edit/${faculty.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            Edit
+            {t("Edit")}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -100,7 +103,7 @@ const DropdownAction = ({ faculty }: { faculty: Faculty }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          Delete
+          {t("Delete")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
