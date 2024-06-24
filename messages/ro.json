@@ -108,6 +108,7 @@
     "New": "Nou",
     "All": "Toate",
     "Role": "Rol",
-    "Email": "Email"
+    "Email": "Email",
+    "Last import": "Ultimul import pe {lastImportDate} de către {lastImportAuthorName}"
   }
 }

@@ -16,6 +16,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import { useTranslations } from 'next-intl'
 
 const SortButton = ({
   column,
@@ -24,13 +25,14 @@ const SortButton = ({
   column: Column<NonNullable<StudentData>>
   title: string
 }) => {
+  const t = useTranslations("Admin")
   return (
     <Button
       variant="link"
       className="px-0"
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
     >
-      {title}
+      {t(title)}
       <ArrowUpDown className="ml-2 h-4 w-4" />
     </Button>
   )
@@ -86,7 +88,8 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Subjects',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return <SortButton column={column} title="Subjects" />
+        const t = useTranslations("Admin")
+        return t("Subjects")
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return (
@@ -100,6 +103,7 @@ const createSpecialDefs = () => {
 }
 
 const DropdownAction = ({ student }: { student: StudentData }) => {
+  const t = useTranslations("Admin")
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteStudent(id)
@@ -121,7 +125,7 @@ const DropdownAction = ({ student }: { student: StudentData }) => {
         <Link href={`/admin/students/edit/${student!.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            Edit
+            {t("Edit")}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -131,7 +135,7 @@ const DropdownAction = ({ student }: { student: StudentData }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          Delete
+          {t("Delete")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

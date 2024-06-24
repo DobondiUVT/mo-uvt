@@ -108,6 +108,7 @@
     "New": "New",
     "All": "All",
     "Role": "Role",
-    "Email": "Email"
+    "Email": "Email",
+    "Last import": "Last import on {lastImportDate} by {lastImportAuthorName}"
   }
 }
