@@ -19,6 +19,7 @@ import { deleteSubject } from '@/actions/subject'
 import { getFaculty } from '@/actions/faculty'
 import { SubjectData } from '@/utilities/types'
 import { useTranslations } from 'next-intl'
+import { ENUM_TO_NUMBER } from '@/utilities/utils'
 
 const SortButton = ({
   column,
@@ -80,7 +81,11 @@ const createColumnDefs = () => {
         )
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
-        return <div>{row.original[columnItem.id]?.toString()}</div>
+        let value = row.original[columnItem.id]?.toString()
+        if (value && ["ONE", "TWO", "THREE"].includes(value)) {
+          value = ENUM_TO_NUMBER[value].toString()
+        }
+        return <div>{value}</div>
       },
     }
   })
