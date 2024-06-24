@@ -113,6 +113,19 @@
     "Last import": "Ultimul import pe {lastImportDate} de către {lastImportAuthorName}",
     "Packets": "Pachete",
     "Packet": "Pachet",
-    "Settings": "Setări"
+    "Settings": "Setări",
+    "Time range": "Interval de timp",
+    "Set up a time range when students can join the subjects": "Stabilește un interval de timp în care studenții se pot înscrie la materii",
+    "Dates are saved": "Datele sunt salvate",
+    "Dates are not saved": "Datele nu sunt salvate",
+    "Save dates": "Salvează datele",
+    "No students joined": "Niciun student",
+    "1 student joined": "1 student înscris",
+    "n students joined": "{count} studenți înscrisi",
+    "Excel student details": "Detalii studenți Excel",
+    "Ids": "Ids",
+    "Names": "Nume",
+    "Ids + Names": "Ids + Nume",
+    "Download excel": "Descarcă Excel"
   }
 }

@@ -113,6 +113,19 @@
     "Last import": "Last import on {lastImportDate} by {lastImportAuthorName}",
     "Packets": "Packets",
     "Packet": "Packet",
-    "Settings": "Settings"
+    "Settings": "Settings",
+    "Time range": "Time range",
+    "Set up a time range when students can join the subjects": "Set up a time range when students can join the subjects",
+    "Dates are saved": "Dates are saved",
+    "Dates are not saved": "Dates are not saved",
+    "Save dates": "Save dates",
+    "No students joined": "No students joined",
+    "1 student joined": "1 student joined",
+    "n students joined": "{count} students joined",
+    "Excel student details": "Excel student details",
+    "Ids": "Ids",
+    "Names": "Names",
+    "Ids + Names": "Ids + Names",
+    "Download excel": "Download excel"
   }
 }

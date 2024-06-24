@@ -14,23 +14,30 @@ import InputCombobox from '@/components/Admin/Form/utils/InputCombobox'
 import { buttonVariants } from '@/components/ui/button'
 import * as XLSX from 'xlsx'
 import InputSelect from '../Form/utils/InputSelect'
+import { useTranslations } from 'next-intl'
 
 type SubjectCardProps = {
   title: string
   students: Pick<Student, 'sn'>[]
 }
 
-const formatNoOfStudents = (students: Pick<Student, 'sn'>[]) =>
-  students.length > 0
-    ? `${students.length} student${students.length > 1 ? 's' : ''} joined.`
-    : 'No students joined yet.'
-
-const SubjectCard = ({ title, students }: SubjectCardProps) => (
-  <div className="rounded-lg border bg-white p-4 shadow">
-    <div className="mb-2 text-lg font-bold">{title}</div>
-    <div className="text-zinc-500">{formatNoOfStudents(students)}</div>
-  </div>
-)
+const SubjectCard = ({ title, students }: SubjectCardProps) => {
+  const t = useTranslations('Admin')
+  return (
+    <div className="rounded-lg border bg-white p-4 shadow">
+      <div className="mb-2 text-lg font-bold">{title}</div>
+      <div className="text-zinc-500">
+        {
+          students.length === 0
+          ? t('No students joined')
+          : students.length > 1
+            ? t('n students joined', { count: students.length })
+            : t('1 student joined', { count: students.length })
+        }
+      </div>
+    </div>
+  )
+}
 
 const Statistics = ({
   subjects,
@@ -41,6 +48,7 @@ const Statistics = ({
   faculties: Faculty[]
   specializations: Specialization[]
 }) => {
+  const t = useTranslations('Admin')
   const [faculty, setFaculty] = useState(faculties[0].name)
   const [specialization, setSpecialization] = useState(specializations[0].title)
   const [year, setYear] = useState(Year.ONE)
@@ -88,9 +96,9 @@ const Statistics = ({
 
   const excelSettingsOptions = useMemo(
     () => [
-      { label: 'Ids', value: 'ids' },
-      { label: 'Names', value: 'names' },
-      { label: 'Ids + Names', value: 'ids+names' },
+      { label: t('Ids'), value: 'ids' },
+      { label: t('Names'), value: 'names' },
+      { label: t('Ids + Names'), value: 'ids+names' },
     ],
     [],
   )
@@ -179,8 +187,10 @@ const Statistics = ({
 
   return (
     <div>
-      <div className="text-xl font-bold">Statistics</div>
-      <div className="mb-4 text-lg">Subjects & Students</div>
+      <div className="text-xl font-bold">{t('Statistics')}</div>
+      <div className="mb-4 text-lg">
+        {t('Subjects')} & {t('Students')}
+      </div>
       <div className="flex flex-wrap items-center gap-2">
         <InputCombobox
           value={faculty}
@@ -188,7 +198,7 @@ const Statistics = ({
           options={facultiesOptions}
           name="facultyId"
           id="facultyId"
-          label="Faculty"
+          label={t('Faculty')}
         />
         <InputCombobox
           value={specialization}
@@ -196,7 +206,7 @@ const Statistics = ({
           options={specializationsOptions}
           name="specializationId"
           id="specializationId"
-          label="Specialization"
+          label={t('Specialization')}
         />
         <InputSelect
           value={year}
@@ -204,7 +214,7 @@ const Statistics = ({
           options={yearsOptions}
           name="year"
           id="year"
-          label="Year"
+          label={t('Year')}
         />
         <InputSelect
           value={semester}
@@ -212,7 +222,7 @@ const Statistics = ({
           options={semestersOptions}
           name="semester"
           id="semester"
-          label="Semester"
+          label={t('Semester')}
         />
       </div>
       {filteredSubjects.length > 0 && (
@@ -221,7 +231,7 @@ const Statistics = ({
             <InputSelect
               name="excelSettings"
               id="excelSettings"
-              label="Excel student details"
+              label={t('Excel student details')}
               options={excelSettingsOptions}
               value={excelSettings}
               setValue={setExcelSettings}
@@ -230,7 +240,7 @@ const Statistics = ({
               className={buttonVariants({ variant: 'default' })}
               onClick={handleExcelDownload}
             >
-              Download excel
+              {t('Download excel')}
             </button>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

@@ -8,6 +8,7 @@ import { DateRange } from 'react-day-picker'
 import { useFormState } from 'react-dom'
 import InputHidden from '../Form/utils/InputHidden'
 import { DatePickerWithRange } from './DatePickerWithRange'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   dateStart: null,
@@ -21,6 +22,7 @@ const Settings = ({
   settings: Settings
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations('Admin')
   const [state, formAction] = useFormState(method, initialState)
   const [date, setDate] = useState<DateRange | undefined>({
     from: settings?.dateStart || new Date(),
@@ -32,10 +34,10 @@ const Settings = ({
   return (
     <form action={formAction}>
       <div className="mb-6">
-        <div className="text-xl font-bold">Settings</div>
-        <div className="text-lg">Time range</div>
+        <div className="text-xl font-bold">{t("Settings")}</div>
+        <div className="text-lg">{t("Time range")}</div>
         <p className="mb-4">
-          Set up a time range when students can join the subjects
+          {t("Set up a time range when students can join the subjects")}
         </p>
         <div className="mb-4">
           <DatePickerWithRange date={date} setDate={setDate} />
@@ -51,11 +53,11 @@ const Settings = ({
           />
         </div>
         {dateMatch ? (
-          <div className="mb-4 text-green-700">Dates are saved</div>
+          <div className="mb-4 text-green-700">{t("Dates are saved")}</div>
         ) : (
           <Fragment>
-            <div className="mb-4 text-red-700">Dates are not saved</div>
-            <Button className="mb-6 flex items-center gap-1">Save dates</Button>
+            <div className="mb-4 text-red-700">{t("Dates are not saved")}</div>
+            <Button className="mb-6 flex items-center gap-1">{t("Save dates")}</Button>
           </Fragment>
         )}
       </div>
