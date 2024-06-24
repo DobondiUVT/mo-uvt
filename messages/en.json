@@ -106,6 +106,8 @@
     "Student": "Student",
     "Students": "Students",
     "New": "New",
-    "All": "All"
+    "All": "All",
+    "Role": "Role",
+    "Email": "Email"
   }
 }
