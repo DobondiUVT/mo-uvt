@@ -14,6 +14,7 @@ import InputHidden from './utils/InputHidden'
 import Combobox from './utils/Combobox'
 import { useEffect, useState } from 'react'
 import {
+  ENUM_TO_NUMBER,
   SEMESTER_OPTIONS,
   YEAR_OPTIONS,
   isEqualInsensitiveStrings,
@@ -24,6 +25,7 @@ import FormNotification from './utils/FormNotification'
 import InputSelect from './utils/InputSelect'
 import InputMultipleCheckbox from './utils/InputMultipleCheckbox'
 import InputCheckbox from './utils/InputCheckbox'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   title: null,
@@ -50,6 +52,8 @@ const GroupForm = ({
   defaultSpecializations?: Specialization[] | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations('Admin')
+
   const facultyOptions = faculties.map((faculty) => ({
     label: faculty.abbreviation ?? '',
     value: faculty.name ?? '',
@@ -57,13 +61,13 @@ const GroupForm = ({
   }))
 
   const yearOptions = Object.values(YEAR_OPTIONS).map((year) => ({
-    label: year,
+    label: ENUM_TO_NUMBER[year].toString(),
     value: year,
     id: year,
   }))
 
   const semesterOptions = Object.values(SEMESTER_OPTIONS).map((semester) => ({
-    label: semester,
+    label: ENUM_TO_NUMBER[semester].toString(),
     value: semester,
     id: semester,
   }))
@@ -99,8 +103,7 @@ const GroupForm = ({
       {state && <FormNotification state={state} />}
       {group?.id && <InputHidden name="id" id="id" value={group?.id} />}
       <div className="mb-4 italic">
-        The subjects you can choose are based on the faculty, year and semester
-        you choose.
+        {t("The subjects you can choose are based on the faculty, year and semester you choose")}
       </div>
       <InputCombobox
         value={faculty}
@@ -109,7 +112,7 @@ const GroupForm = ({
         name="facultyId"
         defaultValue={group?.facultyId}
         id="facultyId"
-        label="Faculty"
+        label={t("Faculty")}
         error={state?.facultyId?.[0]}
       />
       <InputSelect
@@ -118,7 +121,7 @@ const GroupForm = ({
         options={yearOptions}
         name="year"
         id="year"
-        label="Year"
+        label={t("Year")}
         error={state?.year?.[0]}
       />
       <InputSelect
@@ -127,7 +130,7 @@ const GroupForm = ({
         options={semesterOptions}
         name="semester"
         id="semester"
-        label="Semester"
+        label={t("Semester")}
         error={state?.semester?.[0]}
       />
       {filteredSubjects.length > 0 ? (
@@ -147,13 +150,12 @@ const GroupForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          There are no subjects available for the selected faculty, year and
-          semester.
+          {t("There are no subjects available for the selected faculty, year and semester")}
         </div>
       )}
       {specializationOptions.length > 0 ? (
         <InputMultipleCheckbox
-          label="Specializations"
+          label={t("Specializations")}
           error={state?.specializations?.[0]}
         >
           {specializationOptions.map((specialization) => (
@@ -171,7 +173,7 @@ const GroupForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          There are no specializations available for the selected faculty.
+          {t("There are no specializations available for the selected faculty")}
         </div>
       )}
       <SubmitButton />

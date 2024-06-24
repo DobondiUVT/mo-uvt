@@ -3,12 +3,15 @@ import UsersForm from '@/components/Admin/Form/UserForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import prisma from '@/utilities/db'
 import { PrismaClient } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 export const revalidate = 0
 
 const EditUser = async ({ params }: { params: { id: number } }) => {
   const { id } = params
+
+  const t = await getTranslations('Admin')
 
   const user = await prisma.user.findUnique({
     where: {
@@ -18,7 +21,7 @@ const EditUser = async ({ params }: { params: { id: number } }) => {
 
   const breadcrumbLinks = [
     {
-      title: 'Users',
+      title: t('Users'),
       href: '/admin/users',
     },
     {

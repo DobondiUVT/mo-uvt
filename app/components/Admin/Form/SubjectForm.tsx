@@ -3,6 +3,7 @@
 import InputText from '@/components/Admin/Form/utils/InputText'
 import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
 import {
+  ENUM_TO_NUMBER,
   SEMESTER_OPTIONS,
   YEAR_OPTIONS,
   isEqualInsensitiveStrings,
@@ -17,6 +18,7 @@ import InputSelect from './utils/InputSelect'
 import { SubmitButton } from './utils/SubmitButton'
 import InputCheckbox from './utils/InputCheckbox'
 import InputMultipleCheckbox from './utils/InputMultipleCheckbox'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   title: null,
@@ -42,6 +44,7 @@ const SubjectForm = ({
   defaultSpecializations?: Specialization[] | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations("Admin")
   const facultyOptions = faculties.map((faculty) => ({
     label: faculty.abbreviation ?? '',
     value: faculty.name ?? '',
@@ -49,13 +52,13 @@ const SubjectForm = ({
   }))
 
   const yearOptions = Object.values(YEAR_OPTIONS).map((year) => ({
-    label: year,
+    label: ENUM_TO_NUMBER[year].toString(),
     value: year,
     id: year,
   }))
 
   const semesterOptions = Object.values(SEMESTER_OPTIONS).map((semester) => ({
-    label: semester,
+    label: ENUM_TO_NUMBER[semester].toString(),
     value: semester,
     id: semester,
   }))
@@ -83,21 +86,21 @@ const SubjectForm = ({
       {state && <FormNotification state={state} />}
       {subject?.id && <InputHidden name="id" id="id" value={subject?.id} />}
       <InputText
-        label="Title"
+        label={t("Title")}
         name="title"
         id="title"
         value={subject?.title}
         error={state?.title?.[0]}
       />
       <InputText
-        label="Abbreviation"
+        label={t("Abbreviation")}
         name="abbreviation"
         id="abbreviation"
         value={subject?.abbreviation}
         error={state?.abbreviation?.[0]}
       />
       <InputTextArea
-        label="Description"
+        label={t("Description")}
         name="description"
         id="description"
         value={subject?.description}
@@ -110,12 +113,12 @@ const SubjectForm = ({
         name="facultyId"
         defaultValue={subject?.facultyId}
         id="facultyId"
-        label="Faculty"
+        label={t("Faculty")}
         error={state?.facultyId?.[0]}
       />
       {specializationOptions.length > 0 ? (
         <InputMultipleCheckbox
-          label="Specializations"
+          label={t("Specializations")}
           error={state?.specializations?.[0]}
         >
           {specializationOptions.map((specialization) => (
@@ -133,7 +136,7 @@ const SubjectForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          No specializations available for this faculty
+          {t("No specializations available for this faculty")}
         </div>
       )}
       <InputSelect
@@ -142,7 +145,7 @@ const SubjectForm = ({
         options={yearOptions}
         name="year"
         id="year"
-        label="Year"
+        label={t("Year")}
         error={state?.year?.[0]}
       />
       <InputSelect
@@ -151,12 +154,12 @@ const SubjectForm = ({
         options={semesterOptions}
         name="semester"
         id="semester"
-        label="Semester"
+        label={t("Semester")}
         error={state?.semester?.[0]}
       />
       {/* create text input for file url name file */}
       <InputText
-        label="Subject description file URL"
+        label={t("Subject description file URL")}
         name="file"
         id="file"
         value={subject?.file}

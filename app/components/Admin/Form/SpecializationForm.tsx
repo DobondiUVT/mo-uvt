@@ -8,6 +8,7 @@ import FormNotification from './utils/FormNotification'
 import InputCombobox from './utils/InputCombobox'
 import InputHidden from './utils/InputHidden'
 import { SubmitButton } from './utils/SubmitButton'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   title: null,
@@ -26,6 +27,7 @@ const SpecializationForm = ({
   defaultFaculty?: Faculty | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations('Admin')
   const facultyOptions = faculties.map((faculty) => ({
     label: faculty.abbreviation ?? '',
     value: faculty.name ?? '',
@@ -41,14 +43,14 @@ const SpecializationForm = ({
         <InputHidden name="id" id="id" value={specialization?.id} />
       )}
       <InputText
-        label="Title"
+        label={t("Title")}
         name="title"
         id="title"
         value={specialization?.title}
         error={state?.title?.[0]}
       />
       <InputText
-        label="Abbreviation"
+        label={t("Abbreviation")}
         name="abbreviation"
         id="abbreviation"
         value={specialization?.abbreviation}
@@ -61,7 +63,7 @@ const SpecializationForm = ({
         name="facultyId"
         defaultValue={specialization?.facultyId}
         id="facultyId"
-        label="Faculty"
+        label={t("Faculty")}
         error={state?.facultyId?.[0]}
       />
       <SubmitButton />

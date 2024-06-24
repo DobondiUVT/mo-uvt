@@ -4,17 +4,19 @@ import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveSpecialization } from '@/actions/specialization'
 import { PrismaClient } from '@prisma/client'
 import prisma from '@/utilities/db'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0
 
 const NewSpecialization = async () => {
+  const t = await getTranslations('Admin')
   const breadcrumbLinks = [
     {
-      title: 'Specializations',
+      title: t('Specializations'),
       href: '/admin/specializations',
     },
     {
-      title: 'New Specialization',
+      title: t('New'),
       href: '/admin/specializations/new',
     },
   ]

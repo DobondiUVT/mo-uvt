@@ -7,6 +7,7 @@ import { DataTable } from '@/components/Admin/Tables/DataTable'
 import { buttonVariants } from '@/components/ui/button'
 import { saveStudentsFromFile } from '@/actions/student'
 import { SvgLoader } from '@/(routes)/[locale]/choice/ChoiceCard'
+import { useTranslations } from 'next-intl'
 
 export type FileStudent = {
   sn: string
@@ -66,10 +67,12 @@ export default function AddStudents() {
     XLSX.writeFile(wb, 'students_template.xlsx')
   }
 
+  const t = useTranslations('Admin')
+
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold">Add students from file</h1>
+        <h1 className="text-2xl font-semibold">{t("Add students from file")}</h1>
       </div>
       <div className="mb-4 flex items-center gap-2">
         <button
@@ -77,11 +80,11 @@ export default function AddStudents() {
           className={buttonVariants({ variant: 'outline' })}
           onClick={handleDownloadTemplate}
         >
-          Download excel template
+          {t("Download excel template")}
         </button>
         <label className="block cursor-pointer" htmlFor="excel-upload">
           <div className={buttonVariants({ variant: 'outline' })}>
-            Upload Excel
+            {t("Upload Excel")}
           </div>
           <input
             hidden
@@ -104,7 +107,7 @@ export default function AddStudents() {
             className={buttonVariants({ variant: 'default' })}
             disabled={saveLoading}
           >
-            Save students to database
+            {t("Save students to database")}
             {saveLoading && <SvgLoader />}
           </button>
         </>

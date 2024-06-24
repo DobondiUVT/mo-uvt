@@ -13,6 +13,7 @@ import { SubmitButton } from './utils/SubmitButton'
 import InputSelect from './utils/InputSelect'
 import Banner from './utils/Banner'
 import FormNotifiction from './utils/FormNotification'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   title: null,
@@ -27,6 +28,7 @@ const UserForm = ({
   user?: User | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations('Admin')
   const options = Object.values(USER_ROLES).map((role) => ({
     label: role,
     value: role,
@@ -40,7 +42,7 @@ const UserForm = ({
       {state && <FormNotifiction state={state} />}
       {user?.id && <InputHidden name="id" id="id" value={user?.id} />}
       <InputText
-        label="Name"
+        label={t("Name")}
         name="name"
         id="name"
         value={user?.name}
@@ -56,7 +58,7 @@ const UserForm = ({
         disabled
       />
       <InputSelect
-        label="Role"
+        label={t("Role")}
         name="role"
         id="role"
         value={role}

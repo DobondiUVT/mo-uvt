@@ -105,7 +105,7 @@ const InfoForm = ({
           />
         </div>
       </div>
-      <SubmitButton title={t('Submit')} />
+      <SubmitButton />
     </form>
   )
 }

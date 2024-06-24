@@ -126,6 +126,17 @@
     "Ids": "Ids",
     "Names": "Nume",
     "Ids + Names": "Ids + Nume",
-    "Download excel": "Descarcă Excel"
+    "Download excel": "Descarcă Excel",
+    "No specializations available for this faculty": "Nu sunt disponibile specializări pentru această facultate",
+    "Subject description file URL": "URL fișă disciplină",
+    "Description": "Descriere",
+    "Save": "Salvează",
+    "The subjects you can choose are based on the faculty, year and semester you choose": "Materiile pe care le poți alege sunt bazate pe facultatea, anul și semestrul pe care le alegi.",
+    "There are no subjects available for the selected faculty, year and semester": "Nu sunt disponibile materii pentru facultatea, anul și semestrul selectate.",
+    "There are no specializations available for the selected faculty": "Nu sunt disponibile specializări pentru facultatea selectată.",
+    "Add students from file": "Adaugă studenți din fișier",
+    "Download excel template": "Descarcă șablonul Excel",
+    "Upload Excel": "Încarcă Excel",
+    "Save students to database": "Salvează studenți în baza de date"
   }
 }

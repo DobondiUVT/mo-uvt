@@ -10,6 +10,7 @@ import InputHidden from './utils/InputHidden'
 import Combobox from './utils/Combobox'
 import { SubmitButton } from './utils/SubmitButton'
 import FormNotifiction from './utils/FormNotification'
+import { useTranslations } from 'next-intl'
 
 const initialState = {
   title: null,
@@ -23,20 +24,21 @@ const FacultyForm = ({
   faculty?: Faculty | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
+  const t = useTranslations('Admin')
   const [state, formAction] = useFormState(method, initialState)
   return (
     <form id="facultys-form" action={formAction}>
       {state && <FormNotifiction state={state} />}
       {faculty?.id && <InputHidden name="id" id="id" value={faculty?.id} />}
       <InputText
-        label="Name"
+        label={t("Name")}
         name="name"
         id="name"
         value={faculty?.name}
         error={state?.name?.[0]}
       />
       <InputTextArea
-        label="Abbreviation"
+        label={t("Abbreviation")}
         name="abbreviation"
         id="abbreviation"
         value={faculty?.abbreviation}

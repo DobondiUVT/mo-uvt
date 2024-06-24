@@ -126,6 +126,17 @@
     "Ids": "Ids",
     "Names": "Names",
     "Ids + Names": "Ids + Names",
-    "Download excel": "Download excel"
+    "Download excel": "Download excel",
+    "No specializations available for this faculty": "No specializations available for this faculty",
+    "Subject description file URL": "Subject description file URL",
+    "Description": "Description",
+    "Save": "Save",
+    "The subjects you can choose are based on the faculty, year and semester you choose": "The subjects you can choose are based on the faculty, year and semester you choose.",
+    "There are no subjects available for the selected faculty, year and semester": "There are no subjects available for the selected faculty, year and semester.",
+    "There are no specializations available for the selected faculty": "There are no specializations available for the selected faculty.",
+    "Add students from file": "Add students from file",
+    "Download excel template": "Download excel template",
+    "Upload Excel": "Upload Excel",
+    "Save students to database": "Save students to database"
   }
 }
