@@ -31,14 +31,14 @@ const FacultyForm = ({
       {state && <FormNotifiction state={state} />}
       {faculty?.id && <InputHidden name="id" id="id" value={faculty?.id} />}
       <InputText
-        label={t("Name")}
+        label={t('Name')}
         name="name"
         id="name"
         value={faculty?.name}
         error={state?.name?.[0]}
       />
       <InputTextArea
-        label={t("Abbreviation")}
+        label={t('Abbreviation')}
         name="abbreviation"
         id="abbreviation"
         value={faculty?.abbreviation}

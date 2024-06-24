@@ -25,7 +25,7 @@ const SortButton = ({
   column: Column<NonNullable<StudentData>>
   title: string
 }) => {
-  const t = useTranslations("Admin")
+  const t = useTranslations('Admin')
   return (
     <Button
       variant="link"
@@ -43,7 +43,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'User',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return <SortButton column={column} title="Name" />
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t('Name')} />
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.user?.name}</div>
@@ -61,7 +63,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Faculty',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return <SortButton column={column} title="Faculty" />
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t('Faculty')} />
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.faculty?.abbreviation}</div>
@@ -70,7 +74,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Specialization',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return <SortButton column={column} title="Specialization" />
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t('Specialization')} />
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{row.original.specialization?.title}</div>
@@ -79,7 +85,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Year',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        return <SortButton column={column} title="Year" />
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t('Year')} />
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return <div>{ENUM_TO_NUMBER[row.original.year]}</div>
@@ -88,8 +96,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Subjects',
       header: ({ column }: { column: Column<NonNullable<StudentData>> }) => {
-        const t = useTranslations("Admin")
-        return t("Subjects")
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return t('Subjects')
       },
       cell: ({ row }: { row: Row<NonNullable<StudentData>> }) => {
         return (
@@ -103,7 +112,7 @@ const createSpecialDefs = () => {
 }
 
 const DropdownAction = ({ student }: { student: StudentData }) => {
-  const t = useTranslations("Admin")
+  const t = useTranslations('Admin')
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteStudent(id)
@@ -125,7 +134,7 @@ const DropdownAction = ({ student }: { student: StudentData }) => {
         <Link href={`/admin/students/edit/${student!.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            {t("Edit")}
+            {t('Edit')}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -135,7 +144,7 @@ const DropdownAction = ({ student }: { student: StudentData }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          {t("Delete")}
+          {t('Delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

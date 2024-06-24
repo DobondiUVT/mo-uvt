@@ -10,11 +10,11 @@ const NewGroup = async () => {
   const t = await getTranslations('Admin')
   const breadcrumbLinks = [
     {
-      title: t("Packets"),
+      title: t('Packets'),
       href: '/admin/groups',
     },
     {
-      title: t("New"),
+      title: t('New'),
       href: '/admin/groups/new',
     },
   ]

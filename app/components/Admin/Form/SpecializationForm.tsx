@@ -43,14 +43,14 @@ const SpecializationForm = ({
         <InputHidden name="id" id="id" value={specialization?.id} />
       )}
       <InputText
-        label={t("Title")}
+        label={t('Title')}
         name="title"
         id="title"
         value={specialization?.title}
         error={state?.title?.[0]}
       />
       <InputText
-        label={t("Abbreviation")}
+        label={t('Abbreviation')}
         name="abbreviation"
         id="abbreviation"
         value={specialization?.abbreviation}
@@ -63,7 +63,7 @@ const SpecializationForm = ({
         name="facultyId"
         defaultValue={specialization?.facultyId}
         id="facultyId"
-        label={t("Faculty")}
+        label={t('Faculty')}
         error={state?.facultyId?.[0]}
       />
       <SubmitButton />

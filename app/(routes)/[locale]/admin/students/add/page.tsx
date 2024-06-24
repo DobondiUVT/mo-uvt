@@ -72,7 +72,9 @@ export default function AddStudents() {
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold">{t("Add students from file")}</h1>
+        <h1 className="text-2xl font-semibold">
+          {t('Add students from file')}
+        </h1>
       </div>
       <div className="mb-4 flex items-center gap-2">
         <button
@@ -80,11 +82,11 @@ export default function AddStudents() {
           className={buttonVariants({ variant: 'outline' })}
           onClick={handleDownloadTemplate}
         >
-          {t("Download excel template")}
+          {t('Download excel template')}
         </button>
         <label className="block cursor-pointer" htmlFor="excel-upload">
           <div className={buttonVariants({ variant: 'outline' })}>
-            {t("Upload Excel")}
+            {t('Upload Excel')}
           </div>
           <input
             hidden
@@ -107,7 +109,7 @@ export default function AddStudents() {
             className={buttonVariants({ variant: 'default' })}
             disabled={saveLoading}
           >
-            {t("Save students to database")}
+            {t('Save students to database')}
             {saveLoading && <SvgLoader />}
           </button>
         </>

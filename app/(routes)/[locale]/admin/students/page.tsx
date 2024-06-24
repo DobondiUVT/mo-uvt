@@ -25,20 +25,22 @@ const TopHeader = async () => {
   return (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold">{t("Students")}</h1>
+        <h1 className="text-2xl font-semibold">{t('Students')}</h1>
         <Link
           href="/admin/students/add"
           className={buttonVariants({ variant: 'ghost' })}
         >
           <Plus className="mr-2 h-4 w-4" />
-          <span className="hidden sm:block">{t("Add")} {t("Students").toLowerCase()}</span>
-          <span className="sm:hidden">{t("New")}</span>
+          <span className="hidden sm:block">
+            {t('Add')} {t('Students').toLowerCase()}
+          </span>
+          <span className="sm:hidden">{t('New')}</span>
         </Link>
       </div>
       {hadImport && (
         <div className="mb-4">
           <div className="text-sm text-gray-500">
-            {t("Last import", {
+            {t('Last import', {
               lastImportDate: lastImportDate.toLocaleString(),
               lastImportAuthorName,
             })}

@@ -28,7 +28,7 @@ function Table({
   const facultiesOptions = useMemo(
     () => [
       {
-        label: t("All"),
+        label: t('All'),
         value: 'All',
         id: 0,
       },
@@ -38,13 +38,13 @@ function Table({
         id: faculty.id,
       })),
     ],
-    [faculties],
+    [faculties, t],
   )
 
   const specializationsOptions = useMemo(
     () => [
       {
-        label: t("All"),
+        label: t('All'),
         value: 'All',
         id: 0,
       },
@@ -54,22 +54,22 @@ function Table({
         id: specialization.id,
       })),
     ],
-    [specializations],
+    [specializations, t],
   )
 
   const semesterOptions = [
     {
-      label: t("All"),
+      label: t('All'),
       value: 'All',
       id: 0,
     },
     {
-      label: "1",
+      label: '1',
       value: 'ONE',
       id: 1,
     },
     {
-      label: "2",
+      label: '2',
       value: 'TWO',
       id: 2,
     },
@@ -77,22 +77,22 @@ function Table({
 
   const yearOptions = [
     {
-      label: t("All"),
+      label: t('All'),
       value: 'All',
       id: 0,
     },
     {
-      label: "1",
+      label: '1',
       value: 'ONE',
       id: 1,
     },
     {
-      label: "2",
+      label: '2',
       value: 'TWO',
       id: 2,
     },
     {
-      label: "3",
+      label: '3',
       value: 'THREE',
       id: 3,
     },
@@ -146,7 +146,7 @@ function Table({
           options={facultiesOptions}
           name="facultyId"
           id="facultyId"
-          label={t("Faculty")}
+          label={t('Faculty')}
         />
         <InputCombobox
           value={specialization}
@@ -154,7 +154,7 @@ function Table({
           options={specializationsOptions}
           name="specializationId"
           id="specializationId"
-          label={t("Specialization")}
+          label={t('Specialization')}
         />
         <InputCombobox
           value={semester}
@@ -162,7 +162,7 @@ function Table({
           options={semesterOptions}
           name="semester"
           id="semester"
-          label={t("Semester")}
+          label={t('Semester')}
         />
         <InputCombobox
           value={year}
@@ -170,7 +170,7 @@ function Table({
           options={yearOptions}
           name="year"
           id="year"
-          label={t("Year")}
+          label={t('Year')}
         />
       </div>
       <DataTable columns={columns} data={filteredSubjects} />

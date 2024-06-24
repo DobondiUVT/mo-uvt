@@ -63,6 +63,7 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<SpecializationData> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return (
           <>
@@ -85,8 +86,9 @@ const createSpecialDefs = () => {
   return {
     accessorKey: 'Faculty',
     header: ({ column }: { column: Column<SpecializationData> }) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const t = useTranslations('Admin')
-      return <SortButton column={column} title={t("Faculty")} />
+      return <SortButton column={column} title={t('Faculty')} />
     },
     cell: ({ row }: { row: Row<SpecializationData> }) => {
       return <div>{row.original.faculty?.abbreviation}</div>
@@ -121,7 +123,7 @@ const DropdownAction = ({
         <Link href={`/admin/specializations/edit/${specialization.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            {t("Edit")}
+            {t('Edit')}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -131,7 +133,7 @@ const DropdownAction = ({
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          {t("Delete")}
+          {t('Delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

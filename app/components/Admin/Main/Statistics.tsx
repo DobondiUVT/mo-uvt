@@ -27,13 +27,11 @@ const SubjectCard = ({ title, students }: SubjectCardProps) => {
     <div className="rounded-lg border bg-white p-4 shadow">
       <div className="mb-2 text-lg font-bold">{title}</div>
       <div className="text-zinc-500">
-        {
-          students.length === 0
+        {students.length === 0
           ? t('No students joined')
           : students.length > 1
             ? t('n students joined', { count: students.length })
-            : t('1 student joined', { count: students.length })
-        }
+            : t('1 student joined', { count: students.length })}
       </div>
     </div>
   )
@@ -100,7 +98,7 @@ const Statistics = ({
       { label: t('Names'), value: 'names' },
       { label: t('Ids + Names'), value: 'ids+names' },
     ],
-    [],
+    [t],
   )
 
   const selectedFacultyEntity = faculties.find((f) =>

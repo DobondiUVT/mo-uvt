@@ -42,7 +42,7 @@ const UserForm = ({
       {state && <FormNotifiction state={state} />}
       {user?.id && <InputHidden name="id" id="id" value={user?.id} />}
       <InputText
-        label={t("Name")}
+        label={t('Name')}
         name="name"
         id="name"
         value={user?.name}
@@ -58,7 +58,7 @@ const UserForm = ({
         disabled
       />
       <InputSelect
-        label={t("Role")}
+        label={t('Role')}
         name="role"
         id="role"
         value={role}

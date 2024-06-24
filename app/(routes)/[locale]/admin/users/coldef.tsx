@@ -65,6 +65,7 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<User> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return (
           <>
@@ -106,7 +107,7 @@ const DropdownAction = ({ user }: { user: User }) => {
         <Link href={`/admin/users/edit/${user.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            {t("Edit")}
+            {t('Edit')}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -116,7 +117,7 @@ const DropdownAction = ({ user }: { user: User }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          {t("Delete")}
+          {t('Delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

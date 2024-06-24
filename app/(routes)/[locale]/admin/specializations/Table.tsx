@@ -23,7 +23,7 @@ function Table({
   const facultiesOptions = useMemo(
     () => [
       {
-        label: t("All"),
+        label: t('All'),
         value: 'All',
         id: 0,
       },
@@ -33,7 +33,7 @@ function Table({
         id: faculty.id,
       })),
     ],
-    [faculties],
+    [faculties, t],
   )
 
   const selectedFaculty = isEqualInsensitiveStrings(faculty, 'all')

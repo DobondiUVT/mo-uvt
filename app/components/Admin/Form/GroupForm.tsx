@@ -103,7 +103,9 @@ const GroupForm = ({
       {state && <FormNotification state={state} />}
       {group?.id && <InputHidden name="id" id="id" value={group?.id} />}
       <div className="mb-4 italic">
-        {t("The subjects you can choose are based on the faculty, year and semester you choose")}
+        {t(
+          'The subjects you can choose are based on the faculty, year and semester you choose',
+        )}
       </div>
       <InputCombobox
         value={faculty}
@@ -112,7 +114,7 @@ const GroupForm = ({
         name="facultyId"
         defaultValue={group?.facultyId}
         id="facultyId"
-        label={t("Faculty")}
+        label={t('Faculty')}
         error={state?.facultyId?.[0]}
       />
       <InputSelect
@@ -121,7 +123,7 @@ const GroupForm = ({
         options={yearOptions}
         name="year"
         id="year"
-        label={t("Year")}
+        label={t('Year')}
         error={state?.year?.[0]}
       />
       <InputSelect
@@ -130,7 +132,7 @@ const GroupForm = ({
         options={semesterOptions}
         name="semester"
         id="semester"
-        label={t("Semester")}
+        label={t('Semester')}
         error={state?.semester?.[0]}
       />
       {filteredSubjects.length > 0 ? (
@@ -150,12 +152,14 @@ const GroupForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          {t("There are no subjects available for the selected faculty, year and semester")}
+          {t(
+            'There are no subjects available for the selected faculty, year and semester',
+          )}
         </div>
       )}
       {specializationOptions.length > 0 ? (
         <InputMultipleCheckbox
-          label={t("Specializations")}
+          label={t('Specializations')}
           error={state?.specializations?.[0]}
         >
           {specializationOptions.map((specialization) => (
@@ -173,7 +177,7 @@ const GroupForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          {t("There are no specializations available for the selected faculty")}
+          {t('There are no specializations available for the selected faculty')}
         </div>
       )}
       <SubmitButton />

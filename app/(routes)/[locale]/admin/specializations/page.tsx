@@ -17,14 +17,16 @@ export default async function SpecializationsAdmin() {
 
   const TopHeader = () => (
     <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-      <h1 className="text-2xl font-semibold">{t("Specializations")}</h1>
+      <h1 className="text-2xl font-semibold">{t('Specializations')}</h1>
       <Link
         href="/admin/specializations/new"
         className={buttonVariants({ variant: 'ghost' })}
       >
         <Plus className="mr-2 h-4 w-4" />
-        <span className="hidden sm:block">{t("Add")} {t("Specialization").toLowerCase()}</span>
-        <span className="sm:hidden">{t("New")}</span>
+        <span className="hidden sm:block">
+          {t('Add')} {t('Specialization').toLowerCase()}
+        </span>
+        <span className="sm:hidden">{t('New')}</span>
       </Link>
     </div>
   )

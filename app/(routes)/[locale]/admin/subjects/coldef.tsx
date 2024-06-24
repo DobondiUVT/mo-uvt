@@ -69,6 +69,7 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<SubjectData> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return (
           <>
@@ -82,7 +83,7 @@ const createColumnDefs = () => {
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
         let value = row.original[columnItem.id]?.toString()
-        if (value && ["ONE", "TWO", "THREE"].includes(value)) {
+        if (value && ['ONE', 'TWO', 'THREE'].includes(value)) {
           value = ENUM_TO_NUMBER[value].toString()
         }
         return <div>{value}</div>
@@ -96,8 +97,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Faculty',
       header: ({ column }: { column: Column<SubjectData> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
-        return <SortButton column={column} title={t("Faculty")} />
+        return <SortButton column={column} title={t('Faculty')} />
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
         return <div>{row.original.faculty?.abbreviation}</div>
@@ -106,8 +108,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Specializations',
       header: ({ column }: { column: Column<SubjectData> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
-        return <div>{t("Specializations")}</div>
+        return <div>{t('Specializations')}</div>
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
         return (
@@ -145,7 +148,7 @@ const DropdownAction = ({ subject }: { subject: SubjectData }) => {
         <Link href={`/admin/subjects/edit/${subject.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            {t("Edit")}
+            {t('Edit')}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -155,7 +158,7 @@ const DropdownAction = ({ subject }: { subject: SubjectData }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          {t("Delete")}
+          {t('Delete')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

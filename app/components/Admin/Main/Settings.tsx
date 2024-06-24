@@ -34,10 +34,10 @@ const Settings = ({
   return (
     <form action={formAction}>
       <div className="mb-6">
-        <div className="text-xl font-bold">{t("Settings")}</div>
-        <div className="text-lg">{t("Time range")}</div>
+        <div className="text-xl font-bold">{t('Settings')}</div>
+        <div className="text-lg">{t('Time range')}</div>
         <p className="mb-4">
-          {t("Set up a time range when students can join the subjects")}
+          {t('Set up a time range when students can join the subjects')}
         </p>
         <div className="mb-4">
           <DatePickerWithRange date={date} setDate={setDate} />
@@ -53,11 +53,13 @@ const Settings = ({
           />
         </div>
         {dateMatch ? (
-          <div className="mb-4 text-green-700">{t("Dates are saved")}</div>
+          <div className="mb-4 text-green-700">{t('Dates are saved')}</div>
         ) : (
           <Fragment>
-            <div className="mb-4 text-red-700">{t("Dates are not saved")}</div>
-            <Button className="mb-6 flex items-center gap-1">{t("Save dates")}</Button>
+            <div className="mb-4 text-red-700">{t('Dates are not saved')}</div>
+            <Button className="mb-6 flex items-center gap-1">
+              {t('Save dates')}
+            </Button>
           </Fragment>
         )}
       </div>

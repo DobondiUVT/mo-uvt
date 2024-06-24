@@ -44,7 +44,7 @@ const SubjectForm = ({
   defaultSpecializations?: Specialization[] | null
   method: (prevState: any, formData: FormData) => Promise<any>
 }) => {
-  const t = useTranslations("Admin")
+  const t = useTranslations('Admin')
   const facultyOptions = faculties.map((faculty) => ({
     label: faculty.abbreviation ?? '',
     value: faculty.name ?? '',
@@ -86,21 +86,21 @@ const SubjectForm = ({
       {state && <FormNotification state={state} />}
       {subject?.id && <InputHidden name="id" id="id" value={subject?.id} />}
       <InputText
-        label={t("Title")}
+        label={t('Title')}
         name="title"
         id="title"
         value={subject?.title}
         error={state?.title?.[0]}
       />
       <InputText
-        label={t("Abbreviation")}
+        label={t('Abbreviation')}
         name="abbreviation"
         id="abbreviation"
         value={subject?.abbreviation}
         error={state?.abbreviation?.[0]}
       />
       <InputTextArea
-        label={t("Description")}
+        label={t('Description')}
         name="description"
         id="description"
         value={subject?.description}
@@ -113,12 +113,12 @@ const SubjectForm = ({
         name="facultyId"
         defaultValue={subject?.facultyId}
         id="facultyId"
-        label={t("Faculty")}
+        label={t('Faculty')}
         error={state?.facultyId?.[0]}
       />
       {specializationOptions.length > 0 ? (
         <InputMultipleCheckbox
-          label={t("Specializations")}
+          label={t('Specializations')}
           error={state?.specializations?.[0]}
         >
           {specializationOptions.map((specialization) => (
@@ -136,7 +136,7 @@ const SubjectForm = ({
         </InputMultipleCheckbox>
       ) : (
         <div className="mb-6 italic">
-          {t("No specializations available for this faculty")}
+          {t('No specializations available for this faculty')}
         </div>
       )}
       <InputSelect
@@ -145,7 +145,7 @@ const SubjectForm = ({
         options={yearOptions}
         name="year"
         id="year"
-        label={t("Year")}
+        label={t('Year')}
         error={state?.year?.[0]}
       />
       <InputSelect
@@ -154,12 +154,12 @@ const SubjectForm = ({
         options={semesterOptions}
         name="semester"
         id="semester"
-        label={t("Semester")}
+        label={t('Semester')}
         error={state?.semester?.[0]}
       />
       {/* create text input for file url name file */}
       <InputText
-        label={t("Subject description file URL")}
+        label={t('Subject description file URL')}
         name="file"
         id="file"
         value={subject?.file}

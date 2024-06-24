@@ -2,6 +2,7 @@
 
 import { ColumnDef, Row } from '@tanstack/react-table'
 import { FileStudent } from './page'
+import { useTranslations } from 'next-intl'
 
 const createSpecialDefs = () => {
   return [
@@ -17,7 +18,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'name',
       header: () => {
-        return <div>Name</div>
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <div>{t('Name')}</div>
       },
       cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
         return <div>{row.original.name}</div>
@@ -35,6 +38,8 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'faculty',
       header: () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
         return <div>Faculty</div>
       },
       cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
@@ -44,7 +49,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'specialization',
       header: () => {
-        return <div>Specialization</div>
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <div>{t('Specialization')}</div>
       },
       cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
         return <div>{row.original.specialization}</div>
@@ -53,7 +60,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'year',
       header: () => {
-        return <div>Year</div>
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <div>{t('Year')}</div>
       },
       cell: ({ row }: { row: Row<NonNullable<FileStudent>> }) => {
         return <div>{row.original.year}</div>

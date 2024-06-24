@@ -59,6 +59,7 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return (
           <>
@@ -82,7 +83,9 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Faculty',
       header: ({ column }: { column: Column<NonNullable<GroupData>> }) => {
-        return <SortButton column={column} title="Faculty" />
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t('Faculty')} />
       },
       cell: ({ row }: { row: Row<NonNullable<GroupData>> }) => {
         return <div>{row.original.faculty?.abbreviation}</div>
@@ -91,6 +94,7 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Specializations',
       header: () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return t('Specializations')
       },
@@ -105,6 +109,7 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Subjects',
       header: () => {
+        // eslint-disable-next-line react-hooks/rules-of-hooks
         const t = useTranslations('Admin')
         return t('Subjects')
       },
