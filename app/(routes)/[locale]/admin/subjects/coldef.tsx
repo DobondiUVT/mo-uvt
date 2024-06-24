@@ -18,6 +18,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { deleteSubject } from '@/actions/subject'
 import { getFaculty } from '@/actions/faculty'
 import { SubjectData } from '@/utilities/types'
+import { useTranslations } from 'next-intl'
 
 const SortButton = ({
   column,
@@ -67,12 +68,13 @@ const createColumnDefs = () => {
     return {
       accessorKey: columnItem.id,
       header: ({ column }: { column: Column<SubjectData> }) => {
+        const t = useTranslations('Admin')
         return (
           <>
             {columnItem.sortable ? (
-              <SortButton column={column} title={columnItem.title} />
+              <SortButton column={column} title={t(columnItem.title)} />
             ) : (
-              <div>{columnItem.title}</div>
+              <div>{t(columnItem.title)}</div>
             )}
           </>
         )
@@ -89,7 +91,8 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Faculty',
       header: ({ column }: { column: Column<SubjectData> }) => {
-        return <SortButton column={column} title="Faculty" />
+        const t = useTranslations('Admin')
+        return <SortButton column={column} title={t("Faculty")} />
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
         return <div>{row.original.faculty?.abbreviation}</div>
@@ -98,7 +101,8 @@ const createSpecialDefs = () => {
     {
       accessorKey: 'Specializations',
       header: ({ column }: { column: Column<SubjectData> }) => {
-        return <div>Specializations</div>
+        const t = useTranslations('Admin')
+        return <div>{t("Specializations")}</div>
       },
       cell: ({ row }: { row: Row<SubjectData> }) => {
         return (
@@ -114,6 +118,7 @@ const createSpecialDefs = () => {
 }
 
 const DropdownAction = ({ subject }: { subject: SubjectData }) => {
+  const t = useTranslations('Admin')
   const { toast } = useToast()
   const handleDelete = async (id: number) => {
     const response = await deleteSubject(id)
@@ -135,7 +140,7 @@ const DropdownAction = ({ subject }: { subject: SubjectData }) => {
         <Link href={`/admin/subjects/edit/${subject.id}`}>
           <DropdownMenuItem className="cursor-pointer">
             <Edit className="mr-1 h-4 w-4" />
-            Edit
+            {t("Edit")}
           </DropdownMenuItem>
         </Link>
         <DropdownMenuItem
@@ -145,7 +150,7 @@ const DropdownAction = ({ subject }: { subject: SubjectData }) => {
           }}
         >
           <Trash className="mr-1 h-4 w-4" />
-          Delete
+          {t("Delete")}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

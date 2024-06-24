@@ -11,13 +11,13 @@ export const revalidate = 0
 
 const TopHeader = () => (
   <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-    <h1 className="text-2xl font-semibold">Groups</h1>
+    <h1 className="text-2xl font-semibold">Packets</h1>
     <Link
       href="/admin/groups/new"
       className={buttonVariants({ variant: 'ghost' })}
     >
       <Plus className="mr-2 h-4 w-4" />
-      <span className="hidden sm:block">Add a new group</span>
+      <span className="hidden sm:block">Add packet</span>
       <span className="sm:hidden">New</span>
     </Link>
   </div>

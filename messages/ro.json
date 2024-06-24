@@ -86,5 +86,26 @@
     "n students joined": "{count} studenți înscrisi",
     "Join": "Înscrie-te",
     "Unjoin": "Părăsește"
+  },
+  "Admin": {
+    "Subjects": "Materii",
+    "Subject": "Materie",
+    "Faculty": "Facultate",
+    "Specialization": "Specializare",
+    "Semester": "Semestru",
+    "Year": "An",
+    "Specializations": "Specializări",
+    "Add": "Adaugă",
+    "Edit": "Editează",
+    "Delete": "Șterge",
+    "Title": "Titlu",
+    "Name": "Nume",
+    "Abbreviation": "Abreviere",
+    "User": "Utilizator",
+    "Users": "Utilizatori",
+    "Student": "Student",
+    "Students": "Studenți",
+    "New": "Nou",
+    "All": "Toate"
   }
 }

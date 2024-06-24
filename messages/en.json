@@ -86,5 +86,26 @@
     "n students joined": "{count} students joined",
     "Join": "Join",
     "Unjoin": "Unjoin"
+  },
+  "Admin": {
+    "Subjects": "Subjects",
+    "Subject": "Subject",
+    "Faculty": "Faculty",
+    "Specialization": "Specialization",
+    "Semester": "Semester",
+    "Year": "Year",
+    "Specializations": "Specializations",
+    "Add": "Add",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "Title": "Title",
+    "Name": "Name",
+    "Abbreviation": "Abbreviation",
+    "User": "User",
+    "Users": "Users",
+    "Student": "Student",
+    "Students": "Students",
+    "New": "New",
+    "All": "All"
   }
 }

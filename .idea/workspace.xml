@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bced01b-895d-4796-80cd-c8123126819f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/components/Admin/External/Excel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(routes)/admin/students/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/admin/students/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/faculties/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/faculties/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/groups/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/groups/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/specializations/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/specializations/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/students/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/students/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/subjects/coldef.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/subjects/coldef.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/subjects/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/subjects/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(routes)/[locale]/admin/users/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(routes)/[locale]/admin/users/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/messages/ro.json" beforeDir="false" afterPath="$PROJECT_DIR$/messages/ro.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +79,7 @@
       <workItem from="1715710290589" duration="669000" />
       <workItem from="1715710978510" duration="565000" />
       <workItem from="1715937550326" duration="5000" />
+      <workItem from="1719221787323" duration="29000" />
     </task>
     <servers />
   </component>

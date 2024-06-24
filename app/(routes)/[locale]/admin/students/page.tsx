@@ -28,7 +28,7 @@ const TopHeader = async () => {
           className={buttonVariants({ variant: 'ghost' })}
         >
           <Plus className="mr-2 h-4 w-4" />
-          <span className="hidden sm:block">Import students</span>
+          <span className="hidden sm:block">Add students</span>
           <span className="sm:hidden">New</span>
         </Link>
       </div>

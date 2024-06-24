@@ -6,6 +6,7 @@ import { SubjectData } from '@/utilities/types'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
 import { Faculty, Specialization } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
+import { useTranslations } from 'next-intl'
 import { Fragment, useMemo, useState } from 'react'
 
 function Table({
@@ -19,6 +20,7 @@ function Table({
   faculties: Faculty[]
   specializations: Specialization[]
 }) {
+  const t = useTranslations('Admin')
   const [faculty, setFaculty] = useState('All')
   const [specialization, setSpecialization] = useState('All')
   const [semester, setSemester] = useState('All')
@@ -26,7 +28,7 @@ function Table({
   const facultiesOptions = useMemo(
     () => [
       {
-        label: 'All',
+        label: t("All"),
         value: 'All',
         id: 0,
       },
@@ -42,7 +44,7 @@ function Table({
   const specializationsOptions = useMemo(
     () => [
       {
-        label: 'All',
+        label: t("All"),
         value: 'All',
         id: 0,
       },
@@ -57,17 +59,17 @@ function Table({
 
   const semesterOptions = [
     {
-      label: 'All',
+      label: t("All"),
       value: 'All',
       id: 0,
     },
     {
-      label: 'ONE',
+      label: "1",
       value: 'ONE',
       id: 1,
     },
     {
-      label: 'TWO',
+      label: "2",
       value: 'TWO',
       id: 2,
     },
@@ -75,22 +77,22 @@ function Table({
 
   const yearOptions = [
     {
-      label: 'All',
+      label: t("All"),
       value: 'All',
       id: 0,
     },
     {
-      label: 'ONE',
+      label: "1",
       value: 'ONE',
       id: 1,
     },
     {
-      label: 'TWO',
+      label: "2",
       value: 'TWO',
       id: 2,
     },
     {
-      label: 'THREE',
+      label: "3",
       value: 'THREE',
       id: 3,
     },
@@ -144,7 +146,7 @@ function Table({
           options={facultiesOptions}
           name="facultyId"
           id="facultyId"
-          label="Faculty"
+          label={t("Faculty")}
         />
         <InputCombobox
           value={specialization}
@@ -152,7 +154,7 @@ function Table({
           options={specializationsOptions}
           name="specializationId"
           id="specializationId"
-          label="Specialization"
+          label={t("Specialization")}
         />
         <InputCombobox
           value={semester}
@@ -160,7 +162,7 @@ function Table({
           options={semesterOptions}
           name="semester"
           id="semester"
-          label="Semester"
+          label={t("Semester")}
         />
         <InputCombobox
           value={year}
@@ -168,7 +170,7 @@ function Table({
           options={yearOptions}
           name="year"
           id="year"
-          label="Year"
+          label={t("Year")}
         />
       </div>
       <DataTable columns={columns} data={filteredSubjects} />
