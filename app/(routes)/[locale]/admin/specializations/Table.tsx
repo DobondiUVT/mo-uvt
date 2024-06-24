@@ -6,6 +6,7 @@ import { SpecializationData } from '@/utilities/types'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
 import { Faculty } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
+import { useTranslations } from 'next-intl'
 import { Fragment, useMemo, useState } from 'react'
 
 function Table({
@@ -17,11 +18,12 @@ function Table({
   data: SpecializationData[]
   faculties: Faculty[]
 }) {
+  const t = useTranslations('Admin')
   const [faculty, setFaculty] = useState('All')
   const facultiesOptions = useMemo(
     () => [
       {
-        label: 'All',
+        label: t("All"),
         value: 'All',
         id: 0,
       },
