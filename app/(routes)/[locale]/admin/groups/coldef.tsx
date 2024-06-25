@@ -34,7 +34,7 @@ const SortButton = ({
       className="px-0"
       onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
     >
-      {t(title)}
+      {title}
       <ArrowUpDown className="ml-2 h-4 w-4" />
     </Button>
   )
@@ -64,7 +64,7 @@ const createColumnDefs = () => {
         return (
           <>
             {columnItem.sortable ? (
-              <SortButton column={column} title={columnItem.title} />
+              <SortButton column={column} title={t(columnItem.title)} />
             ) : (
               <div>{t(columnItem.title)}</div>
             )}

@@ -11,6 +11,7 @@ import {
 } from '@tabler/icons-react'
 import { Link, usePathname } from '%/i18n/navigation'
 import { useTranslations } from 'next-intl'
+import { User } from '@prisma/client'
 
 const SidebarItem = ({
   title,
@@ -37,11 +38,11 @@ const SidebarItem = ({
   )
 }
 
-const Sidebar = () => {
+const Sidebar = ({user}: {user:User}) => {
   const t = useTranslations('Admin')
   const links = [
     {
-      title: 'Settings',
+      title: user.role === "ADMIN" ? 'Settings' : "Statistics",
       href: '/admin',
       icon: <IconAdjustmentsAlt />,
     },
@@ -66,16 +67,20 @@ const Sidebar = () => {
       icon: <IconPencil />,
     },
     {
-      title: 'Users',
-      href: '/admin/users',
-      icon: <IconUser />,
-    },
-    {
       title: 'Students',
       href: '/admin/students',
       icon: <IconSchool />,
     },
   ]
+
+  if (user.role === 'ADMIN') {
+    links.push({
+      title: 'Users',
+      href: '/admin/users',
+      icon: <IconUser />,
+    })
+  }
+
   return (
     <div
       className={`sticky top-[64px] w-full overflow-y-auto border-r border-zinc-300 bg-zinc-200 px-4 py-2 sm:block sm:h-[calc(100vh-64px)] sm:px-4 sm:py-8`}

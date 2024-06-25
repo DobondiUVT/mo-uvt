@@ -80,7 +80,7 @@ const Navigation = ({
           </nav>
           <div className="hidden gap-6 md:flex">
             <AuthSection session={session} />
-            {user?.role === 'ADMIN' && (
+            {['ADMIN', 'EDITOR'].includes(user?.role || '') && (
               <Link
                 href="/admin"
                 className={`${buttonVariants({ variant: 'default' })}`}
@@ -113,7 +113,7 @@ const Navigation = ({
                 <NavItem key={item.title} title={item.title} link={item.link} />
               ))}
               <AuthSection session={session} />
-              {user?.role === 'ADMIN' && (
+              {['ADMIN', 'EDITOR'].includes(user?.role || '') && (
                 <Link
                   href="/admin"
                   className={`${buttonVariants({ variant: 'default' })}`}

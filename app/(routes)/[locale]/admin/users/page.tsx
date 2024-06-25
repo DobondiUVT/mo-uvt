@@ -2,10 +2,17 @@ import { columns } from './coldef'
 import { DataTable } from '../../../../components/Admin/Tables/DataTable'
 import { getUsers } from '@/actions/user'
 import { getTranslations } from 'next-intl/server'
+import { getAuthInfo } from '@/actions/auth'
+import { redirect } from '%/i18n/navigation'
 
 export const revalidate = 0
 
 export default async function UsersAdmin() {
+  const {user} = await getAuthInfo()
+  if (!user || !(['ADMIN'].includes(user.role))) {
+    redirect('/admin')
+    return
+  }
   const t = await getTranslations('Admin')
   const users = await getUsers()
   return (

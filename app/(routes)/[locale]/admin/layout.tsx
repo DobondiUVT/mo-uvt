@@ -8,7 +8,7 @@ export default async function AdminLayout({
   children: React.ReactNode
 }) {
   const { session, user } = await getAuthInfo()
-  if (!session || !user || !(user.role === 'ADMIN')) {
+  if (!session || !user || !(['ADMIN', 'EDITOR'].includes(user.role))) {
     redirect('/')
     return
   }
@@ -16,7 +16,9 @@ export default async function AdminLayout({
   return (
     <div className="flex flex-col sm:flex-row">
       <div className="flex-shrink-0 xl:w-96">
-        <Sidebar />
+        <Sidebar 
+          user={user} 
+        />
       </div>
       <div className="flex-1 p-4 sm:p-8">{children}</div>
     </div>
