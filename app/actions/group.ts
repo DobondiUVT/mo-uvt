@@ -70,13 +70,13 @@ export async function deleteGroup(id: number) {
     await prisma.group.delete({ where: { id } })
     return {
       title: 'Hooray!',
-      description: 'Successfully deleted group',
+      description: 'Successfully deleted',
       status: 'success',
     }
   } catch (e) {
     console.error(e)
     return {
-      title: `Error deleting group`,
+      title: `Error deleting`,
       description: `${e}`,
       status: 'error',
     }

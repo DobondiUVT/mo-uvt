@@ -138,6 +138,9 @@
     "Download excel template": "Descarcă șablonul Excel",
     "Upload Excel": "Încarcă Excel",
     "Save students to database": "Salvează studenți în baza de date",
-    "Statistics": "Statistici"
+    "Statistics": "Statistici",
+    "Hooray!": "Ura!",
+    "Successfully deleted": "Șters cu succes",
+    "Error deleting": "Eroare la ștergere"
   }
 }

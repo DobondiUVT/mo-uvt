@@ -30,13 +30,13 @@ export async function deleteFaculty(id: number) {
     await prisma.faculty.delete({ where: { id } })
     return {
       title: 'Hooray!',
-      description: 'Successfully deleted faculty',
+      description: 'Successfully deleted',
       status: 'success',
     }
   } catch (e) {
     console.error(e)
     return {
-      title: `Error deleting faculty`,
+      title: `Error deleting`,
       description: `${e}`,
       status: 'error',
     }

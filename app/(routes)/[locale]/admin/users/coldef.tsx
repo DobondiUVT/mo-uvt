@@ -91,8 +91,8 @@ const DropdownAction = ({ user }: { user: User }) => {
     const response = await deleteUser(id)
     toast({
       variant: response.status as 'success' | 'error',
-      title: response.title,
-      description: response.description,
+      title: t(response.title),
+      description: response.status == 'success' ? t(response.description) : response.description,
     })
   }
   return (

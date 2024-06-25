@@ -89,13 +89,13 @@ export async function deleteSpecialization(id: number) {
     await prisma.specialization.delete({ where: { id } })
     return {
       title: 'Hooray!',
-      description: 'Successfully deleted specialization',
+      description: 'Successfully deleted',
       status: 'success',
     }
   } catch (e) {
     return {
       title: 'Oops!',
-      description: 'Failed to delete specialization',
+      description: 'Failed to delete',
       status: 'error',
     }
   }

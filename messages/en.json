@@ -138,6 +138,9 @@
     "Download excel template": "Download excel template",
     "Upload Excel": "Upload Excel",
     "Save students to database": "Save students to database",
-    "Statistics": "Statistics"
+    "Statistics": "Statistics",
+    "Hooray!": "Hooray!",
+    "Successfully deleted": "Successfully deleted",
+    "Error deleting": "Error deleting"
   }
 }

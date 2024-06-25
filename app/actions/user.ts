@@ -25,13 +25,13 @@ export async function deleteUser(id: number) {
     await prisma.user.delete({ where: { id } })
     return {
       title: 'Hooray!',
-      description: 'Successfully deleted user',
+      description: 'Successfully deleted',
       status: 'success',
     }
   } catch (e) {
     console.error(e)
     return {
-      title: `Error deleting user`,
+      title: `Error deleting`,
       description: `${e}`,
       status: 'error',
     }

@@ -58,13 +58,13 @@ export async function deleteSubject(id: number) {
     await prisma.subject.delete({ where: { id } })
     return {
       title: 'Hooray!',
-      description: 'Successfully deleted subject',
+      description: 'Successfully deleted',
       status: 'success',
     }
   } catch (e) {
     console.error(e)
     return {
-      title: `Error deleting subject`,
+      title: `Error deleting`,
       description: `${e}`,
       status: 'error',
     }
