@@ -27,9 +27,12 @@ const Settings = ({
     from: settings?.dateStart || new Date(),
     to: settings?.dateEnd || addDays(new Date(), 7),
   })
-  const dateMatch =
-    date?.from?.toLocaleString() === settings?.dateStart?.toLocaleString() &&
-    date?.to?.toLocaleString() === settings?.dateEnd?.toLocaleString()
+
+  const fromMatch = date?.from?.getTime() == settings?.dateStart?.getTime()
+  const toMatch = date?.to?.getTime() == settings?.dateEnd?.getTime()
+
+  const dateMatch = fromMatch && toMatch
+
   return (
     <form action={formAction}>
       <div className="mb-6">
