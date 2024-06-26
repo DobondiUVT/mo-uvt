@@ -23,6 +23,20 @@ export async function getStudent(id: number) {
   return student
 }
 
+export async function getStudentFromUserId(userId: number) {
+  if (!userId) return null
+  const student = await prisma.student.findFirst({
+    where: { userId },
+    include: {
+      subjects: true,
+      faculty: true,
+      specialization: true,
+      user: true,
+    },
+  })
+  return student
+}
+
 export async function getStudents() {
   const students = await prisma.student.findMany({
     include: {
