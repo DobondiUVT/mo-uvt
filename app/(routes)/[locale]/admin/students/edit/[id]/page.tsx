@@ -13,7 +13,7 @@ export const revalidate = 0
 const EditStudent = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
-  const t = await getTranslations("Admin")
+  const t = await getTranslations('Admin')
 
   const student = await getStudent(Number(id))
 

@@ -1,11 +1,6 @@
 'use client'
 
-import {
-  Faculty,
-  Group,
-  Subject,
-  Specialization,
-} from '@prisma/client'
+import { Faculty, Group, Subject, Specialization } from '@prisma/client'
 import { useFormState } from 'react-dom'
 import InputHidden from './utils/InputHidden'
 import { useState } from 'react'
@@ -132,7 +127,10 @@ const GroupForm = ({
         error={state?.semester?.[0]}
       />
       {filteredSubjects.length > 0 ? (
-        <InputMultipleCheckbox label={t("Subjects")} error={state?.subjects?.[0]}>
+        <InputMultipleCheckbox
+          label={t('Subjects')}
+          error={state?.subjects?.[0]}
+        >
           {filteredSubjects.map((subject) => (
             <InputCheckbox
               key={subject.id}

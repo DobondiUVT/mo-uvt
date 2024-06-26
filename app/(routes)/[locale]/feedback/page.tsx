@@ -37,7 +37,10 @@ const Feedback = () => {
                   'We appreciate your feedback and will use it to improve this app',
                 )}
               </p>
-              <Link href={'/'} className={buttonVariants({ variant: 'default' })}>
+              <Link
+                href={'/'}
+                className={buttonVariants({ variant: 'default' })}
+              >
                 {t('Go home')}
               </Link>
             </>

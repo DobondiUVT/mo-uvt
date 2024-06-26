@@ -13,7 +13,7 @@ export const revalidate = 0
 const EditSubject = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
-  const t = await getTranslations("Admin")
+  const t = await getTranslations('Admin')
 
   const subject = await getSubject(Number(id))
 

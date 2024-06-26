@@ -10,7 +10,7 @@ export const revalidate = 0
 const EditSpecialization = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
-  const t = await getTranslations("Admin")
+  const t = await getTranslations('Admin')
 
   const specialization = await prisma.specialization.findUnique({
     where: {

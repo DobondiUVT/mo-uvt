@@ -10,13 +10,13 @@ export const revalidate = 0
 const EditGroup = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
-  const t = await getTranslations("Admin")
+  const t = await getTranslations('Admin')
 
   const group = await getGroup(Number(id))
 
   const breadcrumbLinks = [
     {
-      title: t("Packets"),
+      title: t('Packets'),
       href: '/admin/groups',
     },
     {

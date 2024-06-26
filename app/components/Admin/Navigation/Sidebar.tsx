@@ -23,7 +23,8 @@ const SidebarItem = ({
   icon: React.ReactNode
 }) => {
   const pathName = usePathname()
-  const isActive = href !== '/admin' ? pathName.includes(href) : pathName === href
+  const isActive =
+    href !== '/admin' ? pathName.includes(href) : pathName === href
   const t = useTranslations('Admin')
   return (
     <Link
