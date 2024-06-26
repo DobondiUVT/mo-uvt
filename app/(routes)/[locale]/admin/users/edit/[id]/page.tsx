@@ -2,9 +2,7 @@ import { updateUser } from '@/actions/user'
 import UsersForm from '@/components/Admin/Form/UserForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import prisma from '@/utilities/db'
-import { PrismaClient } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
-import React from 'react'
 
 export const revalidate = 0
 

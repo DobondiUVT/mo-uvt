@@ -4,7 +4,7 @@ import { getStudent, joinStudent, unJoinStudent } from '@/actions/student'
 import { Button } from '@/components/ui/button'
 import { SubjectData } from '@/utilities/types'
 import { Link } from '%/i18n/navigation'
-import { useEffect, useId, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 type StudentData = Awaited<ReturnType<typeof getStudent>>

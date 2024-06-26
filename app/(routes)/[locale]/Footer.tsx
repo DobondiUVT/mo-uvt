@@ -1,5 +1,4 @@
 import { getTranslations } from 'next-intl/server'
-import React from 'react'
 
 const Footer = async () => {
   const t = await getTranslations('Index')

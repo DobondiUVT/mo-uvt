@@ -2,7 +2,7 @@
 
 import { FileStudent } from '@/(routes)/[locale]/admin/students/add/page'
 import prisma from '@/utilities/db'
-import { NUMBER_TO_ENUM, YEAR_OPTIONS } from '@/utilities/utils'
+import { NUMBER_TO_ENUM } from '@/utilities/utils'
 import { Year } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from '%/i18n/navigation'

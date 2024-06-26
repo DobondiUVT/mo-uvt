@@ -2,11 +2,8 @@ import { getFaculty } from '@/actions/faculty'
 import { getSubject, updateSubject } from '@/actions/subject'
 import SubjectsForm from '@/components/Admin/Form/SubjectForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
-import { Skeleton } from '@/components/ui/skeleton'
 import prisma from '@/utilities/db'
-import { PrismaClient } from '@prisma/client'
 import { getTranslations } from 'next-intl/server'
-import React from 'react'
 
 export const revalidate = 0
 

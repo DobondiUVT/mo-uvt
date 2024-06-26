@@ -1,8 +1,6 @@
-import React from 'react'
 import SpecializationsForm from '../../../../../components/Admin/Form/SpecializationForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveSpecialization } from '@/actions/specialization'
-import { PrismaClient } from '@prisma/client'
 import prisma from '@/utilities/db'
 import { getTranslations } from 'next-intl/server'
 

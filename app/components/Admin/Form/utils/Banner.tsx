@@ -1,5 +1,5 @@
-import { IconUxCircle, IconX } from '@tabler/icons-react'
-import React, { useState } from 'react'
+import { IconX } from '@tabler/icons-react'
+import { useState } from 'react'
 
 type BannerProps = {
   title: string

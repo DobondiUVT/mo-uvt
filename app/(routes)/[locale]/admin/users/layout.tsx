@@ -1,5 +1,4 @@
 import { getAuthInfo } from '@/actions/auth'
-import Sidebar from '@/components/Admin/Navigation/Sidebar'
 import { redirect } from '%/i18n/navigation'
 
 export default async function UsersLayout({

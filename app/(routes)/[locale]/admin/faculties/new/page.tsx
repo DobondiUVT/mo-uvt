@@ -1,4 +1,3 @@
-import React from 'react'
 import FacultiesForm from '../../../../../components/Admin/Form/FacultyForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveFaculty } from '@/actions/faculty'

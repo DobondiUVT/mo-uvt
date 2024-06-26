@@ -3,8 +3,6 @@ import { DataTable } from '../../../../components/Admin/Tables/DataTable'
 import { buttonVariants } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { Link } from '%/i18n/navigation'
-import { Faculty, PrismaClient, Subject } from '@prisma/client'
-import { Suspense } from 'react'
 import { getGroups } from '@/actions/group'
 import { getTranslations } from 'next-intl/server'
 

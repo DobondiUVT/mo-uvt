@@ -1,5 +1,4 @@
 'use client'
-
 import {
   Select,
   SelectContent,
@@ -7,7 +6,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import InputHidden from './InputHidden'
 import InputGroup from './InputGroup'
 import { useTranslations } from 'next-intl'
 

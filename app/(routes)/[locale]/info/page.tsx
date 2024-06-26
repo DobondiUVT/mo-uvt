@@ -1,11 +1,6 @@
 import prisma from '@/utilities/db'
-import { getSession, useSession } from 'next-auth/react'
-import React from 'react'
 import InfoForm from './InfoForm'
-import { getServerSession } from 'next-auth'
 import { redirect } from '%/i18n/navigation'
-import { getStudent } from '@/actions/student'
-import { getCurrentUser } from '@/actions/user'
 import { getAuthInfo } from '@/actions/auth'
 import { getTranslations } from 'next-intl/server'
 

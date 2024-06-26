@@ -1,5 +1,4 @@
 'use client'
-
 import {
   ColumnDef,
   SortingState,
@@ -18,9 +17,6 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { useState } from 'react'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { useToast } from '@/components/ui/use-toast'
-import { Button } from '@/components/ui/button'
 import Spinner from '../Form/utils/Spinner'
 
 interface DataTableProps<TData, TValue> {

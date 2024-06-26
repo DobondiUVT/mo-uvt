@@ -1,4 +1,3 @@
-import React from 'react'
 import InputGroup from './InputGroup'
 import { isEqualInsensitiveStrings } from '@/utilities/utils'
 import InputHidden from './InputHidden'

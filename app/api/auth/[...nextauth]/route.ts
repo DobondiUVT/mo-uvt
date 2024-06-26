@@ -1,5 +1,4 @@
 import prisma from '@/utilities/db'
-import { PrismaClient } from '@prisma/client'
 import NextAuth, { AuthOptions } from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 

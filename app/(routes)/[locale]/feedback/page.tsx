@@ -1,11 +1,8 @@
 'use client'
-
 import { submitFeedback } from '@/actions/extra'
-import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
 import { Button, buttonVariants } from '@/components/ui/button'
-import prisma from '@/utilities/db'
 import { Link } from '%/i18n/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useTranslations } from 'next-intl'
 
 const Feedback = () => {

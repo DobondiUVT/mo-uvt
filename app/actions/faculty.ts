@@ -1,7 +1,5 @@
 'use server'
-
 import prisma from '@/utilities/db'
-import { PrismaClient, Faculty } from '@prisma/client'
 import { revalidatePath } from 'next/cache'
 import { redirect } from '%/i18n/navigation'
 import { z } from 'zod'

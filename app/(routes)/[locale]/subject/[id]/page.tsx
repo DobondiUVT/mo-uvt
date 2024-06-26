@@ -1,5 +1,4 @@
 import { getSubject } from '@/actions/subject'
-import prisma from '@/utilities/db'
 import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { getTranslations } from 'next-intl/server'
 import { notFound } from 'next/navigation'

@@ -1,10 +1,8 @@
 'use client'
-
 import { deleteStudent } from '@/actions/student'
-import { deleteSubject } from '@/actions/subject'
 import { Button } from '@/components/ui/button'
 import { useToast } from '@/components/ui/use-toast'
-import { StudentData, SubjectData } from '@/utilities/types'
+import { StudentData } from '@/utilities/types'
 import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown, Edit, MoreHorizontal, Trash } from 'lucide-react'
@@ -13,7 +11,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { useTranslations } from 'next-intl'

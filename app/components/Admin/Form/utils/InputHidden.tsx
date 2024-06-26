@@ -1,5 +1,3 @@
-import React from 'react'
-
 type InputHiddenProps = {
   name: string
   id: string

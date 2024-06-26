@@ -4,7 +4,6 @@ import { getFaculties } from '@/actions/faculty'
 import { buttonVariants } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { Link } from '%/i18n/navigation'
-import { Suspense } from 'react'
 import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0

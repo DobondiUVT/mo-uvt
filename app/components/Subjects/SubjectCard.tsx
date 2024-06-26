@@ -2,7 +2,7 @@
 import { SubjectData } from '@/utilities/types'
 import { Link } from '%/i18n/navigation'
 import { Badge } from '../ui/badge'
-import { ENUM_TO_NUMBER, SEMESTER_OPTIONS } from '@/utilities/utils'
+import { ENUM_TO_NUMBER } from '@/utilities/utils'
 import { useLocale } from 'next-intl'
 
 const Tags = (subject: SubjectData) => {

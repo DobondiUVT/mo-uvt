@@ -1,8 +1,5 @@
-import SubjectCard from '@/components/Subjects/SubjectCard'
 import { getSubjects } from '@/actions/subject'
-import { $Enums, Faculty, Subject } from '@prisma/client'
 import SubjectsSection from './SubjectsSection'
-import prisma from '@/utilities/db'
 import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0

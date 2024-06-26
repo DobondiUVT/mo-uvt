@@ -4,7 +4,6 @@ import {
   IconBook,
   IconSchool,
 } from '@tabler/icons-react'
-import Image from 'next/image'
 import { Link } from '%/i18n/navigation'
 import Footer from './Footer'
 import { getAuthInfo } from '@/actions/auth'

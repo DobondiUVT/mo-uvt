@@ -1,7 +1,5 @@
 'use client'
-
 import { Button } from '@/components/ui/button'
-import { PrismaClient, Group } from '@prisma/client'
 import { Column, ColumnDef, Row } from '@tanstack/react-table'
 import { ArrowUpDown, Edit, Trash } from 'lucide-react'
 import { MoreHorizontal } from 'lucide-react'
@@ -10,13 +8,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Link } from '%/i18n/navigation'
 import { useToast } from '@/components/ui/use-toast'
 import { deleteGroup } from '@/actions/group'
-import { getFaculty } from '@/actions/faculty'
 import { GroupData } from '@/utilities/types'
 import { useTranslations } from 'next-intl'
 

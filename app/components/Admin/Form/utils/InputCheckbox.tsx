@@ -1,5 +1,3 @@
-import React from 'react'
-import InputGroup from './InputGroup'
 import { Checkbox } from '@/components/ui/checkbox'
 
 type InputCheckboxProps = {

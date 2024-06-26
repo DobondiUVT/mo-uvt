@@ -1,11 +1,5 @@
-import {
-  Link,
-  locales,
-  redirect,
-  usePathname,
-  useRouter,
-} from '%/i18n/navigation'
-import { useLocale, useTranslations } from 'next-intl'
+import { usePathname, useRouter } from '%/i18n/navigation'
+import { useLocale } from 'next-intl'
 import {
   Select,
   SelectContent,
@@ -24,7 +18,7 @@ export default function LocaleSwitcher() {
   return (
     <Select
       value={locale}
-      onValueChange={(newLocale) =>
+      onValueChange={(newLocale: 'en' | 'ro') =>
         router.replace(pathname, {
           locale: newLocale,
         })

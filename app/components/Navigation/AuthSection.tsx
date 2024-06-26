@@ -1,10 +1,8 @@
 'use client'
-
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
 import { Button } from '../ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
 import { Session } from 'next-auth'
-import { User } from '@prisma/client'
 import { useLocale, useTranslations } from 'next-intl'
 
 const AuthSection = ({ session }: { session: Session | null }) => {

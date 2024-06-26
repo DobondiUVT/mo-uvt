@@ -1,8 +1,6 @@
-import React from 'react'
 import SubjectsForm from '../../../../../components/Admin/Form/SubjectForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { saveSubject } from '@/actions/subject'
-import { PrismaClient } from '@prisma/client'
 import prisma from '@/utilities/db'
 import { getTranslations } from 'next-intl/server'
 
