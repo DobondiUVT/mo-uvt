@@ -1,18 +1,14 @@
 'use client'
 
-import InputText from '@/components/Admin/Form/utils/InputText'
-import InputTextArea from '@/components/Admin/Form/utils/InputTextArea'
 import {
   Faculty,
-  PrismaClient,
   Group,
   Subject,
   Specialization,
 } from '@prisma/client'
 import { useFormState } from 'react-dom'
 import InputHidden from './utils/InputHidden'
-import Combobox from './utils/Combobox'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   ENUM_TO_NUMBER,
   SEMESTER_OPTIONS,
@@ -136,7 +132,7 @@ const GroupForm = ({
         error={state?.semester?.[0]}
       />
       {filteredSubjects.length > 0 ? (
-        <InputMultipleCheckbox label="Subjects" error={state?.subjects?.[0]}>
+        <InputMultipleCheckbox label={t("Subjects")} error={state?.subjects?.[0]}>
           {filteredSubjects.map((subject) => (
             <InputCheckbox
               key={subject.id}

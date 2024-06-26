@@ -4,12 +4,15 @@ import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { Skeleton } from '@/components/ui/skeleton'
 import prisma from '@/utilities/db'
 import { PrismaClient } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 export const revalidate = 0
 
 const EditFaculty = async ({ params }: { params: { id: number } }) => {
   const { id } = params
+
+  const t = await getTranslations("Admin")
 
   const faculty = await prisma.faculty.findUnique({
     where: {
@@ -19,7 +22,7 @@ const EditFaculty = async ({ params }: { params: { id: number } }) => {
 
   const breadcrumbLinks = [
     {
-      title: 'Faculties',
+      title: t('Faculties'),
       href: '/admin/faculties',
     },
     {

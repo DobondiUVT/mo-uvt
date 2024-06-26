@@ -5,6 +5,7 @@ import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import { Skeleton } from '@/components/ui/skeleton'
 import prisma from '@/utilities/db'
 import { PrismaClient } from '@prisma/client'
+import { getTranslations } from 'next-intl/server'
 import React from 'react'
 
 export const revalidate = 0
@@ -12,11 +13,13 @@ export const revalidate = 0
 const EditSubject = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
+  const t = await getTranslations("Admin")
+
   const subject = await getSubject(Number(id))
 
   const breadcrumbLinks = [
     {
-      title: 'Subjects',
+      title: t('Subjects'),
       href: '/admin/subjects',
     },
     {

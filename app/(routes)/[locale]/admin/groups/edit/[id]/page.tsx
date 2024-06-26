@@ -3,17 +3,20 @@ import { getGroup, updateGroup } from '@/actions/group'
 import GroupsForm from '@/components/Admin/Form/GroupForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import prisma from '@/utilities/db'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0
 
 const EditGroup = async ({ params }: { params: { id: number } }) => {
   const { id } = params
 
+  const t = await getTranslations("Admin")
+
   const group = await getGroup(Number(id))
 
   const breadcrumbLinks = [
     {
-      title: 'Groups',
+      title: t("Packets"),
       href: '/admin/groups',
     },
     {
@@ -34,6 +37,7 @@ const EditGroup = async ({ params }: { params: { id: number } }) => {
     <>
       <Breadcrumb links={breadcrumbLinks} />
       <GroupsForm
+        group={group}
         method={updateGroup}
         faculties={faculties}
         subjects={subjects}

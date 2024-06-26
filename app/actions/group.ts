@@ -86,8 +86,6 @@ export async function deleteGroup(id: number) {
 }
 
 export async function saveGroup(prevState: any, formData: FormData) {
-  console.log(formData)
-
   const adjustedFormData = {
     facultyId: formData.get('facultyId'),
     subjects: formData.getAll('subjects'),

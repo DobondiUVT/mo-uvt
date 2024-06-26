@@ -69,7 +69,8 @@
   },
   "General": {
     "Select option": "Selectează opțiunea",
-    "Search option": "Caută opțiunea"
+    "Search option": "Caută opțiunea",
+    "No option found": "Opțiunea nu a fost găsită"
   },
   "Choice Page": {
     "Year": "An",

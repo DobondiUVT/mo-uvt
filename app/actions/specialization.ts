@@ -64,8 +64,6 @@ export async function updateSpecialization(prevState: any, formData: FormData) {
     facultyId: z.coerce.number().positive('Faculty must be selected'),
   })
 
-  console.log(formData)
-
   const parsed = schema.safeParse(Object.fromEntries(formData))
   if (!parsed.success) {
     console.log(parsed.error.flatten())
@@ -94,8 +92,8 @@ export async function deleteSpecialization(id: number) {
     }
   } catch (e) {
     return {
-      title: 'Oops!',
-      description: 'Failed to delete',
+      title: `Error deleting`,
+      description: `${e}`,
       status: 'error',
     }
   }

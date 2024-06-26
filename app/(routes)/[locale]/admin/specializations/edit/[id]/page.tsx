@@ -3,11 +3,14 @@ import { updateSpecialization } from '@/actions/specialization'
 import SpecializationsForm from '@/components/Admin/Form/SpecializationForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import prisma from '@/utilities/db'
+import { getTranslations } from 'next-intl/server'
 
 export const revalidate = 0
 
 const EditSpecialization = async ({ params }: { params: { id: number } }) => {
   const { id } = params
+
+  const t = await getTranslations("Admin")
 
   const specialization = await prisma.specialization.findUnique({
     where: {
@@ -17,7 +20,7 @@ const EditSpecialization = async ({ params }: { params: { id: number } }) => {
 
   const breadcrumbLinks = [
     {
-      title: 'Specializations',
+      title: t('Specializations'),
       href: '/admin/specializations',
     },
     {
