@@ -18,6 +18,31 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
 
   let defaultSpecializations = Array.from(uniqueSpecializations)
 
+  let groupedSpecializations = [] as {
+    faculty: string
+    specializations: string[]
+  }[]
+
+  defaultSpecializations.forEach((specialization) => {
+    let faculty =
+      subjects.find((subject) => {
+        return subject.specializations.some(
+          (s) => s.abbreviation === specialization,
+        )
+      })?.faculty?.abbreviation ?? ''
+
+    if (!groupedSpecializations.some((group) => group.faculty === faculty)) {
+      groupedSpecializations.push({
+        faculty: faculty,
+        specializations: [specialization],
+      })
+    } else {
+      groupedSpecializations
+        .find((group) => group.faculty === faculty)
+        ?.specializations.push(specialization)
+    }
+  })
+
   const [year, setYear] = useState<string[]>(['ONE', 'TWO', 'THREE'])
   const [semesters, setSemesters] = useState<string[]>(['ONE', 'TWO'])
   const [faculties, setFaculties] = useState<string[]>(defaultFaculties)
@@ -181,32 +206,39 @@ const SubjectsSection = ({ subjects }: { subjects: SubjectsData }) => {
             <div>
               <div className="text-md">{t('Specializations')}</div>
               <div className="flex flex-row gap-3 lg:flex-col lg:gap-1">
-                {defaultSpecializations.map((specialization) => (
-                  <label
-                    key={specialization}
-                    className="flex items-center gap-2"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={specializations.includes(specialization)}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          if (!specializations.includes(specialization))
-                            setSpecializations([
-                              ...specializations,
-                              specialization,
-                            ])
-                        } else {
-                          setSpecializations(
-                            specializations.filter(
-                              (spec) => spec !== specialization,
-                            ),
-                          )
-                        }
-                      }}
-                    />
-                    {specialization}
-                  </label>
+                {groupedSpecializations.map((group) => (
+                  <div key={group.faculty}>
+                    <div className="mt-1 text-sm text-gray-500">
+                      {group.faculty}
+                    </div>
+                    {group.specializations.map((specialization) => (
+                      <label
+                        key={specialization}
+                        className="flex items-center gap-2"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={specializations.includes(specialization)}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              if (!specializations.includes(specialization))
+                                setSpecializations([
+                                  ...specializations,
+                                  specialization,
+                                ])
+                            } else {
+                              setSpecializations(
+                                specializations.filter(
+                                  (spec) => spec !== specialization,
+                                ),
+                              )
+                            }
+                          }}
+                        />
+                        {specialization}
+                      </label>
+                    ))}
+                  </div>
                 ))}
               </div>
             </div>
