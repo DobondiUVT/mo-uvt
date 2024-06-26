@@ -9,7 +9,7 @@ const Redirect = async () => {
     redirect('/')
     return
   }
-  if ([ 'ADMIN', 'EDITOR' ].includes(user.role)) {
+  if (['ADMIN', 'EDITOR'].includes(user.role)) {
     redirect('/admin')
   }
   if (user.role === 'STUDENT') {

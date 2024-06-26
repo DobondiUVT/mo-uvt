@@ -8,8 +8,8 @@ import { redirect } from '%/i18n/navigation'
 export const revalidate = 0
 
 export default async function UsersAdmin() {
-  const {user} = await getAuthInfo()
-  if (!user || !(['ADMIN'].includes(user.role))) {
+  const { user } = await getAuthInfo()
+  if (!user || !['ADMIN'].includes(user.role)) {
     redirect('/admin')
     return
   }

@@ -38,11 +38,11 @@ const SidebarItem = ({
   )
 }
 
-const Sidebar = ({user}: {user:User}) => {
+const Sidebar = ({ user }: { user: User }) => {
   const t = useTranslations('Admin')
   const links = [
     {
-      title: user.role === "ADMIN" ? 'Settings' : "Statistics",
+      title: user.role === 'ADMIN' ? 'Settings' : 'Statistics',
       href: '/admin',
       icon: <IconAdjustmentsAlt />,
     },

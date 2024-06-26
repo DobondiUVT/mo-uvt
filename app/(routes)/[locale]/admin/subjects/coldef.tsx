@@ -133,7 +133,10 @@ const DropdownAction = ({ subject }: { subject: SubjectData }) => {
     toast({
       variant: response.status as 'success' | 'error',
       title: t(response.title),
-      description: response.status == 'success' ? t(response.description) : response.description,
+      description:
+        response.status == 'success'
+          ? t(response.description)
+          : response.description,
     })
   }
   return (
