@@ -65,12 +65,12 @@ export default async function Home() {
                     'You can find valuable information about all the subjects we offer Find out more about the teachers, the course content and the evaluation method',
                   )}
                 </p>
-                <a
+                <Link
                   href="/subjects"
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   {t('Explore')}
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex p-4 lg:w-1/3">
@@ -86,7 +86,7 @@ export default async function Home() {
                     'Pick the subjects you like and create your own path to success You can choose from a wide variety of subjects of your liking offered by our university',
                   )}
                 </p>
-                <a
+                <Link
                   href={
                     session && user?.role === 'STUDENT'
                       ? `/choice`
@@ -95,7 +95,7 @@ export default async function Home() {
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   {t('Pick')}
-                </a>
+                </Link>
               </div>
             </div>
             <div className="flex p-4 lg:w-1/3">
@@ -111,12 +111,12 @@ export default async function Home() {
                     'Find out the status of your choices in real time You can see the number of available places for each subject Hurry up Places are limited',
                   )}
                 </p>
-                <a
+                <Link
                   href="/subjects"
                   className="mt-3 inline-flex items-center text-uvt-blue"
                 >
                   {t('Find out more')}
-                </a>
+                </Link>
               </div>
             </div>
           </div>
