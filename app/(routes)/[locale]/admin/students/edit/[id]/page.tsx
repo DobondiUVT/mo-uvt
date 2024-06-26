@@ -1,5 +1,5 @@
 import { getStudent, updateStudent } from '@/actions/student'
-import StudentsForm from '@/components/Admin/Form/StudentForm'
+import StudentForm from '@/components/Admin/Form/StudentForm'
 import Breadcrumb from '@/components/Admin/Navigation/Breadcrumb'
 import prisma from '@/utilities/db'
 import { getTranslations } from 'next-intl/server'
@@ -12,10 +12,6 @@ const EditStudent = async ({ params }: { params: { id: number } }) => {
   const t = await getTranslations('Admin')
 
   const student = await getStudent(Number(id))
-
-  if (!student) {
-    return 'No student found'
-  }
 
   const breadcrumbLinks = [
     {
@@ -33,7 +29,7 @@ const EditStudent = async ({ params }: { params: { id: number } }) => {
   return (
     <>
       <Breadcrumb links={breadcrumbLinks} />
-      <StudentsForm
+      <StudentForm
         student={student}
         method={updateStudent}
         faculties={faculties}

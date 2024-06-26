@@ -38,11 +38,9 @@ const InputCombobox = ({
         name={name}
         id={id}
         value={
-          defaultValue ??
           options.find((option) =>
             isEqualInsensitiveStrings(option.value, value),
-          )?.id ??
-          ''
+          )?.id ?? ''
         }
       />
     </InputGroup>

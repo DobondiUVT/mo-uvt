@@ -9,10 +9,10 @@ import { redirect } from '%/i18n/navigation'
 import { z } from 'zod'
 import { getAuthInfo } from './auth'
 
-export async function getStudent(userId: number) {
-  if (!userId) return null
+export async function getStudent(id: number) {
+  if (!id) return null
   const student = await prisma.student.findUnique({
-    where: { userId: userId },
+    where: { id },
     include: {
       subjects: true,
       faculty: true,
@@ -252,10 +252,34 @@ export async function updateStudent(prevState: any, formData: FormData) {
     return parsed.error.flatten().fieldErrors
   }
 
+  let faculty = await prisma.faculty.findFirst({
+    where: { id: parsed.data.facultyId },
+  })
+
+  let specialization = await prisma.specialization.findFirst({
+    where: { id: parsed.data.specializationId },
+  })
+
+  console.log(specialization, faculty)
+
   try {
     await prisma.student.update({
       where: { id: parsed.data.id },
-      data: parsed.data,
+      data: {
+        faculty: {
+          connect: {
+            id: faculty?.id,
+          },
+        },
+        specialization: {
+          connect: {
+            id: specialization?.id,
+          },
+        },
+        sn: parsed.data.sn,
+        year: parsed.data.year,
+        verified: parsed.data.verified,
+      },
     })
   } catch (e) {
     console.error(e)
